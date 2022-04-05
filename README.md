@@ -1,1 +1,1 @@
-<h1>Mobil Programming TermProject FrontEnd Study</h1>
+<h1>Mobile Programming TermProject FrontEnd Study</h1>
