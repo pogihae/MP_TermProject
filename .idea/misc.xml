@@ -4,12 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable-v24/login_blue_border_rounded_cornwe.xml" value="0.292" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable-v24/login_blue_fill__rounded_color.xml" value="0.292" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable-v24/login_cursor_color.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/edittext_border.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_baseline_list_alt_24.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_baseline_textsms_24.xml" value="0.192" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_menu_camera.xml" value="0.192" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.282" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/menu_selector_color.xml" value="0.1" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/profile_image_border.xml" value="0.282" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/drawable/side_nav_bar.xml" value="0.282" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/activity_drawer.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/activity_initial_setup.xml" value="0.3" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/activity_login.xml" value="0.3666666666666667" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/app_bar_drawer.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/content_drawer.xml" value="0.18489583333333334" />
@@ -19,13 +33,13 @@
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/fragment_memo.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/fragment_notifications.xml" value="0.28351449275362317" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/nav_header_drawer.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/layout/settings_activity.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/menu/activity_main_drawer.xml" value="0.18489583333333334" />
-        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/menu/drawer.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
-        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82102/AndroidStudioProjects/WiUH/app/src/main/res/xml/root_preferences.xml" value="0.3619791666666667" />
       </map>
     </option>
   </component>

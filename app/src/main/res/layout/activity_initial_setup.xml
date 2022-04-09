@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InitialSetupActivity">
+
+
+    <ImageView
+        android:id="@+id/wave_background"
+        android:layout_width="415dp"
+        android:layout_height="310dp"
+        android:translationZ="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_blue_bg" />
+
+    <ImageView
+        android:id="@+id/userProfile"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="131dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/profile_image_border"
+        android:padding="10dp"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/nickname_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_blue_user" />
+
+    <EditText
+        android:id="@+id/nickname_edit"
+        android:layout_width="186dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="41dp"
+        android:background="@drawable/edittext_border"
+        android:gravity="center"
+        android:text="@string/nickname"
+        android:textColor='@color/black'
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/set_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userProfile" />
+
+
+    <TextView
+        android:id="@+id/set_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="17dp"
+        android:text="알림설정"
+        android:textColor="@color/darkgrey"
+        android:textSiez="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/line1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_edit" />
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/app_blue"
+        app:layout_constraintBottom_toTopOf="@+id/push_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_notification" />
+
+
+    <TextView
+        android:id="@+id/push_notification"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="67dp"
+        android:text="푸시알림"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/notification_list"
+        app:layout_constraintEnd_toStartOf="@+id/push_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/set_notification" />
+
+    <Switch
+        android:id="@+id/push_switch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="12dp"
+        android:checked="false"
+        android:theme="@style/PushSwitch"
+        app:layout_constraintBottom_toTopOf="@+id/notification_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toEndOf="@+id/push_notification"
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+    <Button
+        android:id="@+id/notification_list"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="14dp"
+        android:backgroundTint="@color/white"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:paddingLeft="0dp"
+        android:text="알림목록"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/appinfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/push_switch" />
+
+
+    <TextView
+        android:id="@+id/appinfo"
+        android:layout_width="51dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="9dp"
+        android:text="앱 정보"
+        android:textColor="@color/darkgrey"
+        android:textSiez="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/line2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notification_list" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="135dp"
+        android:background="@color/app_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appinfo" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
