@@ -29,8 +29,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
             android:text="아이디"
             android:textColor="@color/black" />
 
@@ -74,8 +74,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:text="비밀번호"
             android:textColor="@color/black" />
 
@@ -102,8 +102,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:text="비밀번호 확인"
             android:textColor="@color/black" />
 
@@ -130,8 +130,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:text="이메일"
             android:textColor="@color/black" />
 
@@ -158,8 +158,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:text="닉네임"
             android:textColor="@color/black" />
 
@@ -191,8 +191,9 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/login_blue_fill__rounded_color"
             android:gravity="center"
-            android:text="회원가입 확인"
+            android:onClick="clickSignin_confirm"
             android:padding="10dp"
+            android:text="회원가입 확인"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 

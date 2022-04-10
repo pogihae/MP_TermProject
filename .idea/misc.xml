@@ -45,14 +45,16 @@
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2265" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/drawable/profile_image_border.xml" value="0.2265" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/drawable/signin_grey_edge.xml" value="0.2265" />
-        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_initial_setup.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_initial_setup.xml" value="0.1" />
+        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_sign_in.xml" value="0.2390625" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/activity_signin.xml" value="0.264" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/content_activity_sign_in.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/fragment_community.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/fragment_first.xml" value="0.1157548125633232" />
         <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/fragment_memo.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KIM YAECHAN/Documents/GitHub/MP_TermProject_FrontStudy/app/src/main/res/layout/fragment_second.xml" value="0.1157548125633232" />
       </map>
     </option>
   </component>
