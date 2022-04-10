@@ -56,7 +56,7 @@
         android:layout_marginBottom="17dp"
         android:text="알림설정"
         android:textColor="@color/darkgrey"
-        android:textSiez="20dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/line1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nickname_edit" />
@@ -132,7 +132,7 @@
         android:layout_marginBottom="9dp"
         android:text="앱 정보"
         android:textColor="@color/darkgrey"
-        android:textSiez="20dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/line2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notification_list" />
