@@ -17,8 +17,7 @@
 
         </activity>
         <activity
-            android:name=".InitialSetupActivity"
-            android:exported="false" />
+            android:name=".InitialSetupActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
