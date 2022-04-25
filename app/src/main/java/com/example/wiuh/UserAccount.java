@@ -9,6 +9,7 @@ public class UserAccount {
     private String emailId;
     private String password;
     private String idToken;     // ID 고유정보
+    private String nickname;
 
     public UserAccount() { }
 

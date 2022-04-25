@@ -97,7 +97,9 @@
                 android:maxLines="1"
                 android:textCursorDrawable="@drawable/login_cursor_color"
                 android:textSize="15sp" />
+
         </RelativeLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,6 +128,14 @@
                 android:textCursorDrawable="@drawable/login_cursor_color"
                 android:textSize="15sp" />
         </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/setImage"
+            android:layout_width="67dp"
+            android:layout_height="45dp"
+            android:layout_weight="1.5"
+            android:scaleType="fitStart" />
 
         <TextView
             android:layout_width="wrap_content"
