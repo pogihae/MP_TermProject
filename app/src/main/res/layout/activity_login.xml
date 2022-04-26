@@ -43,7 +43,7 @@
             android:background="@drawable/login_blue_border_rounded_cornwe">
             <!--INPUT-->
             <EditText
-                android:id="@+id/userID"
+                android:id="@+id/et_userID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/username_icon"
@@ -75,7 +75,7 @@
             android:background="@drawable/login_blue_border_rounded_cornwe">
             <!--INPUT-->
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/icon"
@@ -101,7 +101,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/login_request"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -127,7 +127,7 @@
             android:textSize="10.5sp" />
 
         <TextView
-            android:id="@+id/signin"
+            android:id="@+id/btn_signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
