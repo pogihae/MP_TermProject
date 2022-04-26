@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InitialSetupActivity"
+    tools:context=".SetupActivity"
     >
 
 
@@ -40,7 +40,7 @@
         android:layout_marginBottom="41dp"
         android:background="@drawable/edittext_border"
         android:gravity="center"
-        android:text="@string/nickname"
+        android:hint="@string/nickname"
         android:textColor='@color/black'
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/set_notification"

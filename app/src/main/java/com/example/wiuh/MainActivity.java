@@ -1,5 +1,6 @@
 package com.example.wiuh;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.wiuh.util.FirebaseUtil;
@@ -19,10 +20,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * todo: 초기 닉네임이면 닉네임 변경 창 띄우고 변경
  * */
 public class MainActivity extends AppCompatActivity {
+    static final int RQ_NICKNAME = 111;
 
     private FirebaseUser curUser;
     private ActivityMainBinding binding;
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        curUser = FirebaseAuth.getInstance().getCurrentUser();
+        setNickName();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -43,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        curUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     private void setNickName() {
@@ -54,14 +60,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.getValue(User.class).hasInitialNickName()) {
-                            //alert
-                            //save in user and put to db
+                            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
+                            startActivityForResult(intent, RQ_NICKNAME);
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) { }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RQ_NICKNAME && resultCode == SetupActivity.RS_SUCCESS) {
+            String nickname = data.getStringExtra(SetupActivity.NICKNAME);
+            Map<String, Object> map = new HashMap<>();
+            map.put("nickname", nickname);
+            FirebaseUtil.getUserRef().child(curUser.getUid()).updateChildren(map);
+        }
     }
 
 }
