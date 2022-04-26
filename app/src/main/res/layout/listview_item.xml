@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/image_post"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/login_blue_user"
+        />
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="유저가 작성한 글의 제목이 들어감"
+        android:textSize="14sp"
+        android:layout_toRightOf="@+id/image_post"
+        />
+    <TextView
+        android:id="@+id/contents_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="글의 내용"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/title_textview"
+        android:layout_alignLeft="@+id/title_textview"
+        android:textSize="12sp"/>
+
+
+</RelativeLayout>

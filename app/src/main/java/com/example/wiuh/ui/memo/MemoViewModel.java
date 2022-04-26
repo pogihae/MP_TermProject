@@ -10,7 +10,7 @@ public class MemoViewModel extends ViewModel {
 
     public MemoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("메모 창");
+        mText.setValue("메모 탭");
     }
 
     public LiveData<String> getText() {

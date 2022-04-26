@@ -1,5 +1,6 @@
 package com.example.wiuh;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,6 +24,9 @@ public class InitialSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial_setup);
 
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         Button button = findViewById(R.id.GoToMain);
         EditText nickname = findViewById(R.id.nickname_edit);
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -32,16 +36,15 @@ public class InitialSetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String nick = nickname.getText().toString();
-                if(nick == null){
+                if(nick.equals("닉네임을 입력하세요")){
                     Toast.makeText(getApplicationContext(),"닉네임을 입력하세요", Toast.LENGTH_SHORT);
                 }
                 else{
 
                 }
 
-                Intent intent = new Intent(InitialSetupActivity.this,MainActivity.class);
+                Intent intent = new Intent(getApplicationContext() ,MainActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

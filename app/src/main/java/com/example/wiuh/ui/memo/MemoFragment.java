@@ -24,8 +24,6 @@ public class MemoFragment extends Fragment {
         binding = FragmentMemoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textMemo;
-        memoViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

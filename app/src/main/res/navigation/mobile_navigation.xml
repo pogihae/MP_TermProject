@@ -8,13 +8,11 @@
     <fragment
         android:id="@+id/navigation_memo"
         android:name="com.example.wiuh.ui.memo.MemoFragment"
-        android:label="@string/title_memo"
         tools:layout="@layout/fragment_memo" />
 
     <fragment
         android:id="@+id/navigation_community"
         android:name="com.example.wiuh.ui.community.CommunityFragment"
-        android:label="@string/title_community"
         tools:layout="@layout/fragment_community" />
 
 </navigation>
