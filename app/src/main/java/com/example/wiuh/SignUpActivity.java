@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
@@ -31,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signin);
+        setContentView(R.layout.activity_signup);
 
         mFirebaseAuth   = FirebaseAuth.getInstance();
         mUserRef        = FirebaseUtil.getUserRef();
@@ -44,13 +43,14 @@ public class SignUpActivity extends AppCompatActivity {
         findViewById(R.id.sighin_submit).setOnClickListener(v -> register());
     }
 
+    //todo
     private boolean isCompleteForm() {
         return true;
     }
 
     private void register() {
         if (!isCompleteForm()) {
-            Toast.makeText(this, "모든 칸을 채워주세요", Toast.LENGTH_SHORT).show();
+            ToastUtil.showText(this, "Please Complete form");
             return;
         }
 

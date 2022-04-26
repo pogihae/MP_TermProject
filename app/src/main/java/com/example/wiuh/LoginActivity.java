@@ -1,15 +1,13 @@
 package com.example.wiuh;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
@@ -51,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void emailLogin() {
         String strEmail = mEtEmail.getText().toString();
-        String strPwd = mEtPwd.getText().toString();
+        String strPwd   = mEtPwd.getText().toString();
 
         mFirebaseAuth.signInWithEmailAndPassword(strEmail,strPwd).addOnCompleteListener(LoginActivity.this, task -> {
             if(task.isSuccessful()) startMain();
