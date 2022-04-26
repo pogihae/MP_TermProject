@@ -3,6 +3,7 @@ package com.example.wiuh;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.wiuh.model.User;
 import com.example.wiuh.util.FirebaseUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,42 +25,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * todo: 초기 닉네임이면 닉네임 변경 창 띄우고 변경
+ *
  * */
 public class MainActivity extends AppCompatActivity {
     static final int RQ_NICKNAME = 111;
 
     private FirebaseUser curUser;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         curUser = FirebaseAuth.getInstance().getCurrentUser();
-        setNickName();
+        setUpUser();
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_memo, R.id.navigation_community)
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(R.id.navigation_memo, R.id.navigation_community)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    private void setNickName() {
+    private void setUpUser() {
         FirebaseUtil.getUserRef()
                 .child(curUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.getValue(User.class).hasInitialNickName()) {
+                        User.userSingleTon = snapshot.getValue(User.class);
+                        if(User.userSingleTon.hasInitialNickName()) {
                             Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
                             startActivityForResult(intent, RQ_NICKNAME);
                         }
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> map = new HashMap<>();
             map.put("nickname", nickname);
             FirebaseUtil.getUserRef().child(curUser.getUid()).updateChildren(map);
+            User.userSingleTon.nickname = nickname;
         }
     }
 

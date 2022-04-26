@@ -1,51 +1,66 @@
 package com.example.wiuh.ui.community;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wiuh.AddPostActivity;
 import com.example.wiuh.R;
-import com.example.wiuh.databinding.FragmentCommunityBinding;
+import com.example.wiuh.model.Post;
+import com.example.wiuh.util.FirebaseUtil;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityFragment extends ListFragment {
+public class CommunityFragment extends Fragment {
 
-    ListViewAdapter adapter ;
+    private PostAdapter recycleAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_community, container, false);
 
-        // Adapter 생성 및 Adapter 지정.
-        adapter = new ListViewAdapter() ;
-        setListAdapter(adapter) ;
+        recycleAdapter = new PostAdapter(new ArrayList<>());
+        recycleAdapter.setContext(getContext());
 
-        // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.login_blue_user),
-                "title1", "content1") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.login_blue_user),
-                "title2", "content2") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.login_blue_user),
-                "title3", "content3") ;
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(recycleAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        FirebaseUtil.getPostRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Post> list = new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    list.add(ds.getValue(Post.class));
+                }
+                recycleAdapter.updateList(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+
+        root.findViewById(R.id.btn_addPost).setOnClickListener(v -> startAddPost());
+
+        return root;
+    }
+
+    private void startAddPost() {
+        Intent intent = new Intent(getContext(), AddPostActivity.class);
+        startActivity(intent);
     }
 }
 

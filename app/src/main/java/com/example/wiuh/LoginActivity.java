@@ -51,9 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         String strEmail = mEtEmail.getText().toString();
         String strPwd   = mEtPwd.getText().toString();
 
-        mFirebaseAuth.signInWithEmailAndPassword(strEmail,strPwd).addOnCompleteListener(LoginActivity.this, task -> {
-            if(task.isSuccessful()) startMain();
-            else ToastUtil.showText(this, "Login Fail");
-        });
+        mFirebaseAuth.signInWithEmailAndPassword(strEmail,strPwd)
+                     .addOnCompleteListener(LoginActivity.this, task -> {
+                        if(task.isSuccessful()) startMain();
+                        else ToastUtil.showText(this, "Login Fail");
+                        });
     }
 }
