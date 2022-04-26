@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,10 +29,13 @@
                 android:paddingRight="10dp"
                 android:text="제목:"
                 android:textSize="20sp"/>
+
             <EditText
+                android:id="@+id/et_postTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="게시글 제목을 입력해주세요."/>
+                android:height="48dp"
+                android:hint="게시글 제목을 입력해주세요." />
 
         </LinearLayout>
         <TextView
@@ -44,18 +46,21 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="20sp"/>
+
         <EditText
+            android:id="@+id/et_postBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="내용을 입력하세요"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine"
+            android:minHeight="48dp" />
 
         <TextView
-            android:id="@+id/postContents_btn"
+            android:id="@+id/btn_submitPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
             android:layout_marginLeft="62dp"
+            android:layout_marginTop="400dp"
             android:layout_marginRight="62dp"
             android:background="@drawable/login_blue_fill__rounded_color"
             android:gravity="center"
@@ -64,7 +69,6 @@
             android:text="완료"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-
     </LinearLayout>
 
 

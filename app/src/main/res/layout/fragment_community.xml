@@ -1,58 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.community.CommunityFragment">
+    tools:context=".MainActivity">
 
 
-    <!--원래 있던 textview, 없애도될듯 없앨라면 CommunityFragment도 고쳐야하는듯-->
-    <TextView
-        android:id="@+id/community_memo"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_addPost"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_addPost"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이곳에서 \n작성된 게시판이에요!"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingTop="30dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:background="#1566e0"
-        android:textColor="#ffffff"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--게시판 글 리스트 -->
-        <ListView
-            android:id="@+id/community_listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="120dp"
+        android:contentDescription="@string/add_post"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/plus" />
 
-
-        <!-- 플로팅 버튼 -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addPost_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/plus"
-            android:layout_margin="16dp" />
-    </FrameLayout>
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

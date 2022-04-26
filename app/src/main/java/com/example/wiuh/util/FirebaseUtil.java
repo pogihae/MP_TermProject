@@ -5,7 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseUtil {
     private enum FRef {
-        USER
+        USER, POST
     }
 
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -13,4 +13,5 @@ public class FirebaseUtil {
     public static DatabaseReference getUserRef() {
         return rootRef.child(FRef.USER.name());
     }
+    public static DatabaseReference getPostRef() {return rootRef.child(FRef.POST.name());}
 }

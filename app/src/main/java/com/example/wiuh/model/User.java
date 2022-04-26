@@ -1,4 +1,4 @@
-package com.example.wiuh;
+package com.example.wiuh.model;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -10,9 +10,11 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class User {
     @Exclude
     public static final String INITIAL_NICKNAME = "SAMPLE";
+    @Exclude
+    public static User userSingleTon;
 
-    private String email;
-    private String nickname;
+    public String email;
+    public String nickname;
 
     public User() {}
 
@@ -20,11 +22,6 @@ public class User {
         this.email = email;
         this.nickname = INITIAL_NICKNAME;
     }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getNickname() { return nickname; }
-    public void setNickname(String nickname) { this.nickname = nickname; }
 
     @Exclude
     public boolean hasInitialNickName() {
