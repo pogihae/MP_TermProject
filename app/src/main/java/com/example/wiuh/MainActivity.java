@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.wiuh.model.User;
 import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.util.ToastUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -30,13 +31,13 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     static final int RQ_NICKNAME = 111;
 
-    private FirebaseUser curUser;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        curUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         setUpUser();
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -54,21 +55,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpUser() {
-        FirebaseUtil.getUserRef()
-                .child(curUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User.setUserSingleTon(snapshot.getValue(User.class));
-                        if(User.getUserSingleTon().hasInitialNickName()) {
-                            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-                            startActivityForResult(intent, RQ_NICKNAME);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) { }
-                });
+        if(User.getCurUserInstance().hasInitialNickName()) {
+            Intent intent = new Intent(this, SetupActivity.class);
+            startActivityForResult(intent, RQ_NICKNAME);
+        }
     }
 
     @Override
@@ -79,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
             String nickname = data.getStringExtra(SetupActivity.NICKNAME);
             Map<String, Object> map = new HashMap<>();
             map.put("nickname", nickname);
-            FirebaseUtil.getUserRef().child(curUser.getUid()).updateChildren(map);
-            User.getUserSingleTon().nickname = nickname;
+            FirebaseUtil.getUserRef().child(firebaseUser.getUid()).updateChildren(map);
+            User.getCurUserInstance().nickname = nickname;
         }
     }
 

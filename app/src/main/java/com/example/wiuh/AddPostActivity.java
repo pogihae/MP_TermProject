@@ -1,9 +1,9 @@
 package com.example.wiuh;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.widget.EditText;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.model.Post;
 import com.example.wiuh.model.User;
@@ -32,15 +32,8 @@ public class AddPostActivity extends AppCompatActivity {
         String title = etPostTitle.getText().toString();
         String body = etPostBody.getText().toString();
 
-        Post post = new Post(FirebaseAuth.getInstance().getUid(),
-                title,
-                User.getUserSingleTon().nickname,
-                body);
-
-        FirebaseUtil.getPostRef()
-                    .push()
-                    .setValue(post);
-
+        Post post = new Post(FirebaseAuth.getInstance().getUid(), title, User.getCurUserInstance().nickname, body);
+        FirebaseUtil.getPostRef().push().setValue(post);
         finish();
     }
 }

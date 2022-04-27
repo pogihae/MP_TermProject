@@ -16,6 +16,7 @@ import com.example.wiuh.AddPostActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -50,7 +51,9 @@ public class CommunityFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onCancelled(@NonNull DatabaseError error) {
+                ToastUtil.showText(getContext(), error.getMessage());
+            }
         });
 
         root.findViewById(R.id.btn_addPost).setOnClickListener(v -> startAddPost());

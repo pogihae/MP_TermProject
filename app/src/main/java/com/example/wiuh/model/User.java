@@ -9,9 +9,9 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
     @Exclude
-    public static final String INITIAL_NICKNAME = "SAMPLE";
+    public static final String INITIAL_NICKNAME = "0";
     @Exclude
-    private static User userSingleTon;
+    private static User CUR_USER_INSTANCE;
 
     public String email;
     public String nickname;
@@ -22,12 +22,13 @@ public class User {
         this.email = email;
         this.nickname = INITIAL_NICKNAME;
     }
-    @Exclude
-    public static User getUserSingleTon() { return userSingleTon; }
-    @Exclude
-    public static void setUserSingleTon(User user) { userSingleTon = user; }
+
     @Exclude
     public boolean hasInitialNickName() {
         return nickname.equals(INITIAL_NICKNAME);
     }
+    @Exclude
+    public static User getCurUserInstance() { return CUR_USER_INSTANCE; }
+    @Exclude
+    public static void setCurUserInstance(User user) { CUR_USER_INSTANCE = user; }
 }
