@@ -58,7 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.name);
-            itemView.setOnClickListener(v -> Toast.makeText(context, textView.getText(), Toast.LENGTH_LONG).show());
+            itemView.setOnClickListener(v -> Toast.makeText(context, textView.getText(), Toast.LENGTH_SHORT).show());
         }
 
         public void onBind(Post p) {

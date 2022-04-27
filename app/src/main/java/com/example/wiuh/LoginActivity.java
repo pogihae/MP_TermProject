@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wiuh.model.User;
+import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
@@ -32,8 +39,27 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        if(firebaseUser == null) return;
+
         //already login
-        if(mFirebaseAuth.getCurrentUser() != null) startMain();
+        FirebaseUtil.getUserRef()
+                .child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User.setCurUserInstance(snapshot.getValue(User.class));
+                        if(User.getCurUserInstance() == null) {
+                            ToastUtil.showText(getApplicationContext(), " 재로그인 필요");
+                        }
+                        else startMain();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        ToastUtil.showText(getApplicationContext(), error.getMessage());
+                    }
+                });
     }
 
     private void startMain() {

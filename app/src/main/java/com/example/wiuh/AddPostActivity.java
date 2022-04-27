@@ -32,7 +32,7 @@ public class AddPostActivity extends AppCompatActivity {
         String title = etPostTitle.getText().toString();
         String body = etPostBody.getText().toString();
 
-        Post post = new Post(FirebaseAuth.getInstance().getUid(), title, User.userSingleTon.nickname, body);
+        Post post = new Post(FirebaseAuth.getInstance().getUid(), title, User.getCurUserInstance().nickname, body);
         FirebaseUtil.getPostRef().push().setValue(post);
         finish();
     }
