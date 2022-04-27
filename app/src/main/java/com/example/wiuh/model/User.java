@@ -9,7 +9,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
     @Exclude
-    public static final String INITIAL_NICKNAME = "SAMPLE";
+    public static final String INITIAL_NICKNAME = "0";
     @Exclude
     private static User CUR_USER_INSTANCE;
 

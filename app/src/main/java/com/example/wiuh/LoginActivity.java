@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User.setCurUserInstance(snapshot.getValue(User.class));
                         if(User.getCurUserInstance() == null) {
-                            ToastUtil.showText(getApplicationContext(), " 재로그인 필요");
+                            ToastUtil.showText(getApplicationContext(), "회원가입 필요");
                         }
                         else startMain();
                     }
