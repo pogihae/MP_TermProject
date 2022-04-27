@@ -1,6 +1,9 @@
 package com.example.wiuh;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -39,6 +42,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(!FirebaseUtil.isAvailable() || !isNetworkAvailable()) {
+            ToastUtil.showText(this, "connection error");
+            return;
+        }
+
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         if(firebaseUser == null) return;
 
@@ -62,6 +70,20 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    private boolean isNetworkAvailable() {
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+            if (networkInfo != null && networkInfo.isConnected()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -80,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseAuth.signInWithEmailAndPassword(strEmail,strPwd)
                      .addOnCompleteListener(LoginActivity.this, task -> {
                         if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, "Login Fail");
+                        else ToastUtil.showText(this, "Login Failed");
                         });
     }
 }
