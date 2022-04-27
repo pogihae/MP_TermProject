@@ -11,7 +11,7 @@ public class User {
     @Exclude
     public static final String INITIAL_NICKNAME = "SAMPLE";
     @Exclude
-    public static User userSingleTon;
+    private static User userSingleTon;
 
     public String email;
     public String nickname;
@@ -22,7 +22,10 @@ public class User {
         this.email = email;
         this.nickname = INITIAL_NICKNAME;
     }
-
+    @Exclude
+    public static User getUserSingleTon() { return userSingleTon; }
+    @Exclude
+    public static void setUserSingleTon(User user) { userSingleTon = user; }
     @Exclude
     public boolean hasInitialNickName() {
         return nickname.equals(INITIAL_NICKNAME);

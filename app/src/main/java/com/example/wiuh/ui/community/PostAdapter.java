@@ -57,12 +57,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.name);
+            textView = itemView.findViewById(R.id.name);
             itemView.setOnClickListener(v -> Toast.makeText(context, textView.getText(), Toast.LENGTH_LONG).show());
         }
 
         public void onBind(Post p) {
-            textView.setText(p.body);
+            textView.setText(p.title);
         }
     }
 }

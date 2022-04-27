@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User.userSingleTon = snapshot.getValue(User.class);
-                        if(User.userSingleTon.hasInitialNickName()) {
+                        User.setUserSingleTon(snapshot.getValue(User.class));
+                        if(User.getUserSingleTon().hasInitialNickName()) {
                             Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
                             startActivityForResult(intent, RQ_NICKNAME);
                         }
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> map = new HashMap<>();
             map.put("nickname", nickname);
             FirebaseUtil.getUserRef().child(curUser.getUid()).updateChildren(map);
-            User.userSingleTon.nickname = nickname;
+            User.getUserSingleTon().nickname = nickname;
         }
     }
 
