@@ -51,16 +51,11 @@ public class SignUpActivity extends AppCompatActivity {
         mEtPwd          = findViewById(R.id.signin_password);
         mEtSecondPwd    = findViewById(R.id.signin_check_password);
         idCheck         = findViewById(R.id.signin_id_check);
-        setImage        = (ImageView)findViewById(R.id.setImage);
+        setImage        = findViewById(R.id.setImage);
 
         findViewById(R.id.sighin_submit).setOnClickListener(v -> register());
 
-        idCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastUtil.showText(getApplicationContext(), "아이디 중복 버튼 눌림");
-            }
-        });
+        idCheck.setOnClickListener(view -> ToastUtil.showText(getApplicationContext(), "아이디 중복 버튼 눌림"));
 
         mEtSecondPwd.addTextChangedListener(new TextWatcher() {
             @Override
@@ -106,8 +101,10 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
+            FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+
             User user = new User(email);
-            mUserRef.child(email).setValue(user);
+            mUserRef.child(currentUser.getUid()).setValue(user);
 
             Log.d(TAG, "Sign up success");
             finish();
