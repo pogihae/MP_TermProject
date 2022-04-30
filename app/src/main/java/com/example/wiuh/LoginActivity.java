@@ -51,23 +51,24 @@ public class LoginActivity extends AppCompatActivity {
         if(firebaseUser == null) return;
 
         //already login
-//        FirebaseUtil.getUserRef()
-//                .child(firebaseUser.getUid())
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        User.setCurUserInstance(snapshot.getValue(User.class));
-//                        if(User.getCurUserInstance() == null) {
-//                            ToastUtil.showText(getApplicationContext(), "회원가입 필요");
-//                        }
-//                        else startMain();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        ToastUtil.showText(getApplicationContext(), error.getMessage());
-//                    }
-//                });
+        FirebaseUtil.getUserRef()
+                .child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User.setCurUserInstance(snapshot.getValue(User.class));
+                        if(User.getCurUserInstance() == null) {
+                            ToastUtil.showText(getApplicationContext(), "회원가입 필요");
+                        }
+                        else startMain();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        ToastUtil.showText(getApplicationContext(), error.getMessage());
+                    }
+                });
+
     }
 
     private boolean isNetworkAvailable() {
