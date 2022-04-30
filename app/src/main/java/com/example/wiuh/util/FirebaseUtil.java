@@ -15,6 +15,7 @@ public class FirebaseUtil {
         return rootRef.child(FRef.USER.name());
     }
     public static DatabaseReference getPostRef() {return rootRef.child(FRef.POST.name());}
+
     public static boolean isAvailable() {
         try {
             FirebaseApp.getInstance();
