@@ -36,7 +36,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mEtEmail;
     private EditText mEtPwd;
     private EditText mEtSecondPwd;
-    private TextView idCheck;
     private ImageView setImage;
 
     @Override
@@ -50,12 +49,9 @@ public class SignUpActivity extends AppCompatActivity {
         mEtEmail        = findViewById(R.id.signin_id);
         mEtPwd          = findViewById(R.id.signin_password);
         mEtSecondPwd    = findViewById(R.id.signin_check_password);
-        idCheck         = findViewById(R.id.signin_id_check);
         setImage        = findViewById(R.id.setImage);
 
         findViewById(R.id.sighin_submit).setOnClickListener(v -> register());
-
-        idCheck.setOnClickListener(view -> ToastUtil.showText(getApplicationContext(), "아이디 중복 버튼 눌림"));
 
         mEtSecondPwd.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,14 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    //todo
-    private boolean isCompleteForm() {
-        return true;
-    }
-
     private void register() {
-        if (!isCompleteForm()) {
-            ToastUtil.showText(this, "Please Complete form");
+        if (!mEtPwd.getText().equals(mEtSecondPwd.getText())) {
+            ToastUtil.showText(this, "비밀번호가 일치하지 않습니다.");
             return;
         }
 
@@ -96,15 +87,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(SignUpActivity.this, task -> {
             if (!task.isSuccessful()) {
-                ToastUtil.showText(this, "Sign up fail");
-                Log.d(TAG, "Sign up fail");
+                ToastUtil.showText(this, task.getException().getMessage());
                 return;
             }
 
-            FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
-
+            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
             User user = new User(email);
-            mUserRef.child(currentUser.getUid()).setValue(user);
+
+            assert firebaseUser != null;
+            mUserRef.child(firebaseUser.getUid()).setValue(user);
 
             Log.d(TAG, "Sign up success");
             finish();
