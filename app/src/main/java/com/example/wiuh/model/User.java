@@ -24,8 +24,8 @@ public class User {
     }
 
     @Exclude
-    public boolean hasInitialNickName() {
-        return nickname.equals(INITIAL_NICKNAME);
+    public static boolean hasInitialNickName() {
+        return CUR_USER_INSTANCE.nickname.equals(INITIAL_NICKNAME);
     }
     @Exclude
     public static User getCurUserInstance() { return CUR_USER_INSTANCE; }

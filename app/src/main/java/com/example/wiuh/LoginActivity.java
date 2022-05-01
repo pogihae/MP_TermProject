@@ -47,7 +47,28 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if(mFirebaseAuth.getCurrentUser() != null) startMain();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if(firebaseUser == null) return;
+
+        FirebaseUtil.getUserRef()
+                .child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User.setCurUserInstance(snapshot.getValue(User.class));
+                        if(User.getCurUserInstance() == null) {
+                            User nUser = new User(firebaseUser.getEmail());
+                            FirebaseUtil.getUserRef().child(firebaseUser.getUid()).setValue(nUser);
+                            User.setCurUserInstance(nUser);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        ToastUtil.showText(getApplicationContext(), error.getMessage());
+                    }
+                });
     }
 
     private boolean isNetworkAvailable() {
