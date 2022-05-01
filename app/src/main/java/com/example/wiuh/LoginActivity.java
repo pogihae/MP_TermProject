@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -21,7 +20,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,8 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         mEtPwd      = findViewById(R.id.et_password);
 
         findViewById(R.id.btn_login).setOnClickListener(v -> emailLogin());
-        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
-        findViewById(R.id.btn_signin).setOnClickListener(v -> startSignUp());
+        findViewById(R.id.btn_google_login).setOnClickListener(
+                v -> startActivityForResult(client.getSignInIntent(), RC_GOOGLE_SIGN_IN)
+        );
+        findViewById(R.id.btn_signin).setOnClickListener(
+                v -> startActivity(new Intent(this, SignUpActivity.class))
+        );
     }
 
     @Override
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if( auth.getCurrentUser() != null) startMain();
+        if(auth.getCurrentUser() != null) startMain();
     }
 
     private boolean isNetworkAvailable() {
@@ -83,16 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    private void startSignUp() {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
-
-    private void googleLogin() {
-        Intent signInIntent = client.getSignInIntent();
-        startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
