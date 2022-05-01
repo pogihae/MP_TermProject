@@ -108,13 +108,6 @@
                 android:layout_height="wrap_content">
 
 
-            <ImageView
-                android:id="@+id/setImage"
-                android:layout_width="67dp"
-                android:layout_height="45dp"
-                android:layout_toRightOf="@id/signin_check_password"
-                android:scaleType="fitStart" />
-
 
             <EditText
                 android:id="@+id/signin_check_password"
