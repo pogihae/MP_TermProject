@@ -1,5 +1,6 @@
 package com.example.wiuh.ui.memo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,28 +8,61 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.databinding.FragmentMemoBinding;
+import com.example.wiuh.AddMemoActivity;
+import com.example.wiuh.R;
+import com.example.wiuh.model.Memo;
+import com.example.wiuh.model.Post;
+import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.util.ToastUtil;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemoFragment extends Fragment {
+    private MemoAdapter recycleAdapter;
 
-    private FragmentMemoBinding binding;
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MemoViewModel memoViewModel =
-                new ViewModelProvider(this).get(MemoViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_memo, container, false);
 
-        binding = FragmentMemoBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        recycleAdapter = new MemoAdapter(new ArrayList<>());
+        recycleAdapter.setContext(getContext());
+
+        RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
+        recyclerView.setAdapter(recycleAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Memo> list = new ArrayList<>();
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    list.add(ds.getValue(Memo.class));
+                }
+                recycleAdapter.updateList(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                ToastUtil.showText(getContext(), error.getMessage());
+            }
+        });
+
+        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startaddMemo());
 
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void startaddMemo() {
+        Intent intent = new Intent(getContext(), AddMemoActivity.class);
+        startActivity(intent);
     }
 }

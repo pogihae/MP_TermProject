@@ -35,7 +35,7 @@ public class CommunityFragment extends Fragment {
         recycleAdapter = new PostAdapter(new ArrayList<>());
         recycleAdapter.setContext(getContext());
 
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = root.findViewById(R.id.community_recyclerView);
         recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

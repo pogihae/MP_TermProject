@@ -1,5 +1,11 @@
 package com.example.wiuh;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,7 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         mFirebaseAuth   = FirebaseAuth.getInstance();
         mUserRef        = FirebaseUtil.getUserRef();
 

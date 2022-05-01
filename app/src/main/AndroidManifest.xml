@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".AddPostActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".AddMemoActivity" />
+
     </application>
 
 </manifest>
