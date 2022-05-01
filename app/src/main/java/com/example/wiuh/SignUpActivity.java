@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void register() {
-        if (!mEtPwd.getText().equals(mEtSecondPwd.getText())) {
+        if (!mEtPwd.getText().toString().equals(mEtSecondPwd.getText().toString())) {
             ToastUtil.showText(this, "비밀번호가 일치하지 않습니다.");
             return;
         }
