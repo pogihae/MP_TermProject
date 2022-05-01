@@ -3,12 +3,6 @@ package com.example.wiuh;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.wiuh.model.User;
-import com.example.wiuh.util.FirebaseUtil;
-import com.example.wiuh.util.ToastUtil;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,14 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.wiuh.databinding.ActivityMainBinding;
+import com.example.wiuh.util.ToastUtil;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 /**
  *
@@ -31,14 +22,19 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     static final int RQ_NICKNAME = 111;
 
-    private FirebaseUser firebaseUser;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        setUpUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        if(user.getDisplayName() == null) {
+            ToastUtil.showText(this, "닉네임을 설정하세요");
+            startActivityForResult(new Intent(this, SetupActivity.class), RQ_NICKNAME);
+        }
+        else ToastUtil.showText(this, user.getDisplayName() + " 환영");
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -54,41 +50,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    private void setUpUser() {
-        FirebaseUtil.getUserRef()
-                .child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User.setCurUserInstance(snapshot.getValue(User.class));
-                        if(User.getCurUserInstance() == null) {
-                            User nUser = new User(firebaseUser.getEmail());
-                            FirebaseUtil.getUserRef().child(firebaseUser.getUid()).setValue(nUser);
-                            User.setCurUserInstance(nUser);
-                        }
-                        if(User.hasInitialNickName()) {
-                            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-                            startActivityForResult(intent, RQ_NICKNAME);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        ToastUtil.showText(getApplicationContext(), error.getMessage());
-                    }
-                });
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == RQ_NICKNAME && resultCode == SetupActivity.RS_SUCCESS) {
             String nickname = data.getStringExtra(SetupActivity.NICKNAME);
-            Map<String, Object> map = new HashMap<>();
-            map.put("nickname", nickname);
-            FirebaseUtil.getUserRef().child(firebaseUser.getUid()).updateChildren(map);
-            User.getCurUserInstance().nickname = nickname;
+
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(nickname)
+                    .build();
+
+            user.updateProfile(profileUpdates);
         }
     }
 

@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-            User user = new User(email);
+            User user = new User();
 
             assert firebaseUser != null;
             mUserRef.child(firebaseUser.getUid()).setValue(user);
