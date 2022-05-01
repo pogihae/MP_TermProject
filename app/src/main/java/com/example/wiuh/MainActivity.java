@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
-        if(user.getDisplayName() == null) {
+        if(user.getDisplayName() == null || user.getDisplayName().matches("")) {
             ToastUtil.showText(this, "닉네임을 설정하세요");
             startActivityForResult(new Intent(this, SetupActivity.class), RQ_NICKNAME);
         }

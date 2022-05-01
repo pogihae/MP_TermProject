@@ -59,12 +59,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(!FirebaseUtil.isAvailable() || !isNetworkAvailable()) {
+        if(!FirebaseUtil.isAvailable() || !isNetworkAvailable())
             ToastUtil.showText(this, "connection error");
-            return;
-        }
-
-        if(auth.getCurrentUser() != null) startMain();
+        else if(auth.getCurrentUser() != null)
+            startMain();
     }
 
     private boolean isNetworkAvailable() {

@@ -77,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
         String email    = mEtEmail.getText().toString();
         String pw       = mEtPwd.getText().toString();
 
-        mFirebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(SignUpActivity.this, task -> {
+        mFirebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(this, task -> {
             if (!task.isSuccessful()) {
                 ToastUtil.showText(this, task.getException().getMessage());
                 return;
