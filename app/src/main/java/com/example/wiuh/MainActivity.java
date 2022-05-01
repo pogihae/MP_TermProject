@@ -55,10 +55,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpUser() {
-        if(User.hasInitialNickName()) {
-            Intent intent = new Intent(this, SetupActivity.class);
-            startActivityForResult(intent, RQ_NICKNAME);
-        }
+        FirebaseUtil.getUserRef()
+                .child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User.setCurUserInstance(snapshot.getValue(User.class));
+                        if(User.getCurUserInstance() == null) {
+                            User nUser = new User(firebaseUser.getEmail());
+                            FirebaseUtil.getUserRef().child(firebaseUser.getUid()).setValue(nUser);
+                            User.setCurUserInstance(nUser);
+                        }
+                        if(User.hasInitialNickName()) {
+                            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
+                            startActivityForResult(intent, RQ_NICKNAME);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        ToastUtil.showText(getApplicationContext(), error.getMessage());
+                    }
+                });
     }
 
     @Override
