@@ -1,12 +1,11 @@
 package com.example.wiuh;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.util.ToastUtil;
 
@@ -18,7 +17,7 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         Button btnNicknameSubmit    = findViewById(R.id.GoToMain);
         EditText etNickname         = findViewById(R.id.nickname_edit);

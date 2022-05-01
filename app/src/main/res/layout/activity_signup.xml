@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -58,16 +56,6 @@
             </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/signin_id_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/login_blue_fill__rounded_color"
-                android:padding="10dp"
-                android:text="중복확인"
-                android:textColor="#ffffff"
-                android:textSize="15sp" />
         </LinearLayout>
 
         <TextView
@@ -114,9 +102,20 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:background="@drawable/login_blue_border_rounded_cornwe">
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/setImage"
+                android:layout_width="67dp"
+                android:layout_height="45dp"
+                android:layout_toRightOf="@id/signin_check_password"
+                android:scaleType="fitStart" />
+
+
             <EditText
                 android:id="@+id/signin_check_password"
                 android:layout_width="250dp"
@@ -138,6 +137,7 @@
                     android:scaleType="fitStart" />
             </FrameLayout>
         </RelativeLayout>
+
 
 
         <TextView
