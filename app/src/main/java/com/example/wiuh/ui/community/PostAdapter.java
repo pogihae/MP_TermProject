@@ -1,6 +1,8 @@
 package com.example.wiuh.ui.community;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wiuh.BulletinActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.ToastUtil;
@@ -64,7 +67,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public void onBind(Post p) {
             textView.setText(p.title);
-            itemView.setOnClickListener(v -> ToastUtil.showText(context, p.body));
+            itemView.setOnClickListener(new View.OnClickListener(){
+               @Override
+               public void onClick(View view){
+                   Intent intent = new Intent(context, BulletinActivity.class);
+                   Bundle bundle = new Bundle();
+
+                   bundle.putString("title",p.title);
+                   bundle.putString("body",p.body);
+                   bundle.putString("author",p.author);
+                   bundle.putString("uid",p.uid);
+
+                   intent.putExtras(bundle);
+                   context.startActivity(intent);
+
+               }
+            });
         }
     }
 }
