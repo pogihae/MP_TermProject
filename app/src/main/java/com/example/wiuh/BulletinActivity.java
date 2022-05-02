@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.community;
+package com.example.wiuh;
 
 import androidx.appcompat.app.AppCompatActivity;
 

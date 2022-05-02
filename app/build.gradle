@@ -35,6 +35,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-database'
+
+    implementation("se.warting.permissionsui:permissionsui:0.1.13")
+    implementation 'com.github.pwittchen:reactivewifi-rx2:0.3.0'
+
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

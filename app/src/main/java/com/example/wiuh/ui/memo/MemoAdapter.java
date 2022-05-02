@@ -11,12 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.BulletinActivity;
 import com.example.wiuh.MemoActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
-import com.example.wiuh.model.Post;
-import com.example.wiuh.ui.community.PostAdapter;
 
 import java.util.List;
 
@@ -69,19 +66,16 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
         public void onBind(Memo m) {
             textView.setText(m.title);
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    Intent intent = new Intent(context, MemoActivity.class);
-                    Bundle bundle = new Bundle();
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(context, MemoActivity.class);
+                Bundle bundle = new Bundle();
 
-                    bundle.putString("title",m.title);
-                    bundle.putString("body",m.body);
+                bundle.putString("title",m.title);
+                bundle.putString("body",m.body);
 
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
 
-                }
             });
         }
     }

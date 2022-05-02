@@ -38,5 +38,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_post">ADD POST</string>
+    <string name="channel_name">WIFI_INFO</string>
+    <string name="channel_description">WIFI_DESC</string>
 
 </resources>
