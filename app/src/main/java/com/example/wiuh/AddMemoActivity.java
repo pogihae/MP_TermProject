@@ -7,9 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.model.Memo;
-import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

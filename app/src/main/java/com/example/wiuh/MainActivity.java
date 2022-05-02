@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.wiuh.databinding.ActivityMainBinding;
+import com.example.wiuh.model.WifiInformation;
 import com.example.wiuh.util.ToastUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         }
         else ToastUtil.showText(this, user.getDisplayName() + " 환영");
 
+        //wifi 정보 action bar 표시
+        getSupportActionBar().setTitle(WifiInformation.getSSID());
+
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -56,13 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == RQ_NICKNAME && resultCode == SetupActivity.RS_SUCCESS) {
             String nickname = data.getStringExtra(SetupActivity.NICKNAME);
-
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(nickname)
-                    .build();
-
-            user.updateProfile(profileUpdates);
+            updateNickname(nickname);
         }
+    }
+
+    private void updateNickname(String nickname) {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(nickname)
+                .build();
+
+        user.updateProfile(profileUpdates);
     }
 
 }

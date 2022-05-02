@@ -60,7 +60,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.memo_title);
+            textView = itemView.findViewById(R.id.memo_title);
             this.context = context;
         }
 
@@ -75,7 +75,6 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);
-
             });
         }
     }

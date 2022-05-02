@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wiuh.AddMemoActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
-import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -43,6 +43,8 @@ public class MemoFragment extends Fragment {
         FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                 List<Memo> list = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     list.add(ds.getValue(Memo.class));
@@ -56,12 +58,12 @@ public class MemoFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startaddMemo());
+        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startAddMemo());
 
         return root;
     }
 
-    private void startaddMemo() {
+    private void startAddMemo() {
         Intent intent = new Intent(getContext(), AddMemoActivity.class);
         startActivity(intent);
     }

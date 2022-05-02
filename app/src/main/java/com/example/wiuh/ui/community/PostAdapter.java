@@ -62,7 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.name);
+            textView = itemView.findViewById(R.id.name);
             this.context = context;
         }
 
