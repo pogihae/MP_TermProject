@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH" >
         <activity
-            android:name=".BulletinActivity"
+            android:name=".ui.community.BulletinActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

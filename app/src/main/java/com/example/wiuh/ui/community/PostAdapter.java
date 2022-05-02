@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.BulletinActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
-import com.example.wiuh.util.ToastUtil;
 
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+    static final String POST = "post";
+
     private final List<Post> localData;
 
     private Context context;
@@ -67,21 +67,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public void onBind(Post p) {
             textView.setText(p.title);
-            itemView.setOnClickListener(new View.OnClickListener(){
-               @Override
-               public void onClick(View view){
-                   Intent intent = new Intent(context, BulletinActivity.class);
-                   Bundle bundle = new Bundle();
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(context, BulletinActivity.class);
+                Bundle bundle = new Bundle();
 
-                   bundle.putString("title",p.title);
-                   bundle.putString("body",p.body);
-                   bundle.putString("author",p.author);
-                   bundle.putString("uid",p.uid);
+                bundle.putString("title",p.title);
+                bundle.putString("body",p.body);
+                bundle.putString("author",p.author);
+                bundle.putString("uid",p.uid);
 
-                   intent.putExtras(bundle);
-                   context.startActivity(intent);
-
-               }
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             });
         }
     }
