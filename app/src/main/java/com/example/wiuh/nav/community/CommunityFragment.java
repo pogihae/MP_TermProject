@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.memo;
+package com.example.wiuh.nav.community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,17 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.AddMemoActivity;
 import com.example.wiuh.R;
-import com.example.wiuh.model.Memo;
+import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -25,29 +23,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoFragment extends Fragment {
-    private MemoAdapter recycleAdapter;
+public class CommunityFragment extends Fragment {
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_memo, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_community, container, false);
 
-        recycleAdapter = new MemoAdapter(new ArrayList<>());
+        PostAdapter recycleAdapter = new PostAdapter(new ArrayList<>());
         recycleAdapter.setContext(getContext());
 
-        RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
+        RecyclerView recyclerView = root.findViewById(R.id.community_recyclerView);
         recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
+        FirebaseUtil.getPostRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                List<Memo> list = new ArrayList<>();
+                List<Post> list = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    list.add(ds.getValue(Memo.class));
+                    list.add(ds.getValue(Post.class));
                 }
                 recycleAdapter.updateList(list);
             }
@@ -58,13 +53,17 @@ public class MemoFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startAddMemo());
+        root.findViewById(R.id.btn_addPost).setOnClickListener(v -> startAddPost());
 
         return root;
     }
 
-    private void startAddMemo() {
-        Intent intent = new Intent(getContext(), AddMemoActivity.class);
+    private void startAddPost() {
+        Intent intent = new Intent(getContext(), AddPostActivity.class);
         startActivity(intent);
     }
 }
+
+
+
+

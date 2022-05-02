@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.memo;
+package com.example.wiuh.nav.memo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.MemoActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
 

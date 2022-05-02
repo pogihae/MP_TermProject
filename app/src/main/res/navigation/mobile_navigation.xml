@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_memo"
-        android:name="com.example.wiuh.ui.memo.MemoFragment"
+        android:name="com.example.wiuh.nav.memo.MemoFragment"
         tools:layout="@layout/fragment_memo" />
 
     <fragment
         android:id="@+id/navigation_community"
-        android:name="com.example.wiuh.ui.community.CommunityFragment"
+        android:name="com.example.wiuh.nav.community.CommunityFragment"
         tools:layout="@layout/fragment_community" />
 
 </navigation>

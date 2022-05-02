@@ -1,9 +1,9 @@
 package com.example.wiuh.util;
 
 import com.example.wiuh.model.WifiInformation;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -13,24 +13,34 @@ import com.google.firebase.database.FirebaseDatabase;
  * */
 public class FirebaseUtil {
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    private static FirebaseUser curUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")
                 .child(WifiInformation.getMAC());
     }
     public static DatabaseReference getMemoRef() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return rootRef.child("MEMO")
-                .child(user.getUid())
+                .child(curUser.getUid())
                 .child(WifiInformation.getMAC());
     }
 
-    public static boolean isAvailable() {
-        try {
-            FirebaseApp.getInstance();
-            return true;
-        } catch (IllegalStateException e) {
-            return false;
-        }
+    public static String getCurUserUid() {
+        return curUser.getUid();
+    }
+    public static String getCurUserNickname() {
+        return curUser.getDisplayName();
+    }
+    public static void updateCurUserNickname(String nickname) {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(nickname)
+                .build();
+
+        curUser.updateProfile(profileUpdates);
+    }
+    public static void logout() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signOut();
+        curUser = auth.getCurrentUser();
     }
 }

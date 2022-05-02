@@ -1,4 +1,4 @@
-package com.example.wiuh;
+package com.example.wiuh.nav.community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BulletinActivity extends AppCompatActivity {
+import com.example.wiuh.R;
+
+public class PostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
