@@ -19,9 +19,9 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_add_memo"
-        android:layout_below="@+id/top_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/top_text"
         android:background="@color/white">
 
         <EditText
@@ -43,7 +43,8 @@
         android:background="#faf7f7"
         android:gravity="top|left"
         android:hint="이곳에 내용을 입력해주세요"
-        android:padding="15dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="20dp"
         android:textColor="@color/black"
         android:textSize="15sp" />
    <Button

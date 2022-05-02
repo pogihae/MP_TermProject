@@ -28,8 +28,8 @@ public class AddMemoActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        add_title_memo = findViewById(R.id.et_postTitle);
-        add_content_memo  = findViewById(R.id.et_postBody);
+        add_title_memo = findViewById(R.id.add_title_memo);
+        add_content_memo  = findViewById(R.id.add_content_memo);
 
         findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());
     }
