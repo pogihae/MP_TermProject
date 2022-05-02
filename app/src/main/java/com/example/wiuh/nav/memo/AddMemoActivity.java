@@ -21,7 +21,7 @@ public class AddMemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_memo);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        findViewById(R.id.addMemo_btn).setOnClickListener(v -> addMemo());
+        findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());
     }
 
     private void addMemo() {

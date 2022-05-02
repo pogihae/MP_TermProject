@@ -40,7 +40,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(this, task -> {
-            if (!task.isSuccessful())
+            if (task.isSuccessful())
+                ToastUtil.showText(this, "회원가입 성공");
+            else
                 ToastUtil.showText(this, task.getException().getMessage());
         });
 
