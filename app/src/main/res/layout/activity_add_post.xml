@@ -4,31 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddPostActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="게시글 작성"
-            android:textSize="25sp"
+            android:background="#1566e0"
             android:gravity="center_horizontal"
             android:padding="20dp"
-            android:background="#1566e0"
+            android:text="게시글 작성"
+            android:textStyle="bold"
             android:textColor="#ffffff"
-            />
+            android:textSize="25sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="제목:"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/et_postTitle"
@@ -38,31 +41,29 @@
                 android:hint="게시글 제목을 입력해주세요." />
 
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="내용"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="20sp"/>
+
+
 
         <EditText
             android:id="@+id/et_postBody"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:hint="내용을 입력하세요"
+            android:gravity="top|left"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:background="#faf7f7"
             android:inputType="textMultiLine"
             android:minHeight="48dp" />
 
-        <TextView
+        <Button
             android:id="@+id/btn_submitPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="62dp"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="62dp"
-            android:background="@drawable/login_blue_fill__rounded_color"
+            android:backgroundTint="#1566e0"
             android:gravity="center"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"

@@ -48,8 +48,8 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:background="@android:color/transparent"
-                    android:hint="아이디를 입력해주세요"
-                    android:inputType="text"
+                    android:hint="이메일을 입력해주세요"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textCursorDrawable="@drawable/login_cursor_color"
                     android:textSize="15sp" />
@@ -103,12 +103,11 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/login_blue_border_rounded_cornwe">
 
-            <ImageView
-                android:id="@+id/setImage"
-                android:layout_width="67dp"
-                android:layout_height="45dp"
-                android:layout_toRightOf="@id/signin_check_password"
-                android:scaleType="fitStart" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
 
             <EditText
                 android:id="@+id/signin_check_password"
@@ -122,20 +121,17 @@
                 android:maxLines="1"
                 android:textCursorDrawable="@drawable/login_cursor_color"
                 android:textSize="15sp" />
+                <ImageView
+                    android:id="@+id/setImage"
+                    android:layout_width="67dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginLeft="200dp"
+                    android:scaleType="fitStart" />
+            </FrameLayout>
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/login_blue_border_rounded_cornwe"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/login_blue_border_rounded_cornwe"/>
 
         <TextView
             android:id="@+id/sighin_submit"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AddMemoActivity">
+
+    <TextView
+        android:id="@+id/top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1566e0"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="메모 작성"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_add_memo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_text"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/add_title_memo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="이곳에 제목을 입력해주세요"
+            android:paddingTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/add_content_memo"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/toolbar_add_memo"
+        android:background="#faf7f7"
+        android:gravity="top|left"
+        android:hint="이곳에 내용을 입력해주세요"
+        android:paddingTop="15dp"
+        android:paddingLeft="20dp"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+   <Button
+       android:id="@+id/submit_memo_btn"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/add_content_memo"
+       android:layout_centerHorizontal="true"
+       android:backgroundTint="#1566e0"
+       android:text="작성 완료"
+       />
+
+
+
+</RelativeLayout>
