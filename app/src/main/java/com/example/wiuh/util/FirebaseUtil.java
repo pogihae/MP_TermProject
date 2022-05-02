@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
  * */
 public class FirebaseUtil {
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    private static FirebaseUser curUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")
@@ -21,26 +20,29 @@ public class FirebaseUtil {
     }
     public static DatabaseReference getMemoRef() {
         return rootRef.child("MEMO")
-                .child(curUser.getUid())
+                .child(getCurUser().getUid())
                 .child(WifiInformation.getMAC());
     }
 
+
+    public static FirebaseUser getCurUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
     public static String getCurUserUid() {
-        return curUser.getUid();
+        return getCurUser().getUid();
     }
     public static String getCurUserNickname() {
-        return curUser.getDisplayName();
+        return getCurUser().getDisplayName();
     }
     public static void updateCurUserNickname(String nickname) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(nickname)
                 .build();
 
-        curUser.updateProfile(profileUpdates);
+        getCurUser().updateProfile(profileUpdates);
     }
     public static void logout() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
-        curUser = auth.getCurrentUser();
     }
 }

@@ -2,7 +2,6 @@ package com.example.wiuh;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -44,13 +43,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //permission
+        //permission & wifi info observation
         registerForActivityResult(
                 new PermissionsUiContracts.RequestBackgroundLocation(),
-                success -> Log.d(TAG, "Permission success")
+                success -> startWifiInfoSubscription()
         ).launch(null);
 
-        //observe wifi information
         startWifiInfoSubscription();
 
         //already login
@@ -59,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_login).setOnClickListener(v->emailLogin());
         findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
-        findViewById(R.id.btn_signin).setOnClickListener(v->startSignUp());
+        findViewById(R.id.btn_signup).setOnClickListener(v->startSignUp());
     }
 
     private void startWifiInfoSubscription() {
@@ -88,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(strEmail,strPwd)
                      .addOnCompleteListener(LoginActivity.this, task -> {
                         if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, "Login Failed");
+                        else ToastUtil.showText(this, task.getException().getMessage());
                         });
     }
     private void googleLogin() {
