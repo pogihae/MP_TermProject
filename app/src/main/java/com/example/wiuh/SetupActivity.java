@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.util.ToastUtil;
 
+import java.util.Objects;
+
 public class SetupActivity extends AppCompatActivity {
     static final int RS_SUCCESS = 1;
     static final String NICKNAME = "NICKNAME";
@@ -17,12 +19,12 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        //getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         Button btnNicknameSubmit    = findViewById(R.id.GoToMain);
         EditText etNickname         = findViewById(R.id.nickname_edit);
 
-        btnNicknameSubmit.setOnClickListener(view -> {
+        btnNicknameSubmit.setOnClickListener(v -> {
             String nick = etNickname.getText().toString();
             if(nick.matches("")){
                 ToastUtil.showText(getApplicationContext(), "닉네임을 입력하세요");

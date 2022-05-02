@@ -1,23 +1,13 @@
 package com.example.wiuh;
 
-import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.model.WifiInformation;
 import com.example.wiuh.util.ToastUtil;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,94 +20,108 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import java.util.Objects;
+
 import io.reactivex.schedulers.Schedulers;
-import kotlin.Unit;
 import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
 
+/**
+ * LoginActivity
+ *
+ * 시작 활동
+ * 권한, 로그인 확인
+ *
+ * */
 public class LoginActivity extends AppCompatActivity {
-    static final int RC_GOOGLE_SIGN_IN = 123;
-    static final String CHANNEL_ID = "WIFI_INFO";
+    private static final String TAG         = LoginActivity.class.getSimpleName();
+    private static final String CHANNEL_ID  = "WIFI_INFO";
 
     private FirebaseAuth auth;
-    private GoogleSignInClient client;
-
-    private EditText mEtEmail;
-    private EditText mEtPwd;
-
-    @SuppressLint("SetTextI18n")
-    private final ActivityResultLauncher<Unit> mGetPermission = registerForActivityResult(
-            new PermissionsUiContracts.RequestBackgroundLocation(),
-            success -> {
-                //createNotificationChannel();
-                startWifiInfoSubscription();
-            }
-    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        auth = FirebaseAuth.getInstance();
+        //permission & wifi info observation
+        registerForActivityResult(
+                new PermissionsUiContracts.RequestBackgroundLocation(),
+                success -> startWifiInfoSubscription()
+        ).launch(null);
 
+        startWifiInfoSubscription();
+
+        //already login
+        auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null) startMain();
+
+        findViewById(R.id.btn_login).setOnClickListener(v->emailLogin());
+        findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
+        findViewById(R.id.btn_signup).setOnClickListener(v->startSignUp());
+    }
+
+    private void startWifiInfoSubscription() {
+        ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
+                .subscribeOn(Schedulers.io())
+                .subscribe(res -> {
+                    WifiInformation.setInfo(res.getSSID(), res.getBSSID());
+                    //notifyContent(ssid + " " + mac);
+                }).isDisposed();
+    }
+
+    private void startMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void startSignUp() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void emailLogin() {
+        String strEmail = ((EditText)findViewById(R.id.et_userID)).getText().toString();
+        String strPwd   = ((EditText)findViewById(R.id.et_password)).getText().toString();
+
+        auth.signInWithEmailAndPassword(strEmail,strPwd)
+                     .addOnCompleteListener(LoginActivity.this, task -> {
+                        if(task.isSuccessful()) startMain();
+                        else ToastUtil.showText(this, task.getException().getMessage());
+                        });
+    }
+    private void googleLogin() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        client = GoogleSignIn.getClient(this, gso);
-
-        mEtEmail    = findViewById(R.id.et_userID);
-        mEtPwd      = findViewById(R.id.et_password);
-
-        findViewById(R.id.btn_login).setOnClickListener(v -> emailLogin());
-        findViewById(R.id.btn_google_login).setOnClickListener(
-                v -> startActivityForResult(client.getSignInIntent(), RC_GOOGLE_SIGN_IN)
-        );
-        findViewById(R.id.btn_signin).setOnClickListener(
-                v -> startActivity(new Intent(this, SignUpActivity.class))
-        );
-
-        mGetPermission.launch(null);
+        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+        startActivityForResult(client.getSignInIntent(), 123);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        if(!FirebaseUtil.isAvailable() || !isNetworkAvailable())
-            ToastUtil.showText(this, "connection error");
-        else if(auth.getCurrentUser() != null)
-            startMain();
-    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    private boolean isNetworkAvailable() {
-        try {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-
-            if (networkInfo != null && networkInfo.isConnected()) {
-                return true;
+        if(requestCode == 123) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInAccount account;
+            try {
+                account = task.getResult(ApiException.class);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                auth.signInWithCredential(credential)
+                        .addOnCompleteListener(this, t -> {
+                            if (t.isSuccessful()) startMain();
+                            else ToastUtil.showText(this, Objects.requireNonNull(t.getException()).getMessage());
+                        });
+            } catch (ApiException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
-    @SuppressLint("CheckResult")
-    private void startWifiInfoSubscription() {
-        ReactiveWifi.observeWifiAccessPointChanges(this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(res -> {
-                    String ssid = res.getSSID();
-                    String mac = res.getBSSID();
-                    //notifyContent(ssid + " " + mac);
-                });
-    }
+    /* notification code */
 
-    /*
-    private void createNotificationChannel() {
+    /* private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
@@ -138,51 +142,5 @@ public class LoginActivity extends AppCompatActivity {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, builder.build());
-    }
-    */
-
-    private void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            firebaseAuthWithGoogle(account.getIdToken());
-        } catch (ApiException e) {
-            ToastUtil.showText(this, "Login failed");
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) startMain();
-                    else ToastUtil.showText(this, "Login failed");
-                });
-    }
-
-    private void emailLogin() {
-        String strEmail = mEtEmail.getText().toString();
-        String strPwd   = mEtPwd.getText().toString();
-
-        auth.signInWithEmailAndPassword(strEmail,strPwd)
-                     .addOnCompleteListener(LoginActivity.this, task -> {
-                        if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, "Login Failed");
-                        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == RC_GOOGLE_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
+    } */
 }

@@ -43,7 +43,7 @@
                 android:background="@drawable/login_blue_border_rounded_cornwe">
 
                 <EditText
-                    android:id="@+id/signin_id"
+                    android:id="@+id/signup_id"
                     android:layout_width="250dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
@@ -74,7 +74,7 @@
             android:background="@drawable/login_blue_border_rounded_cornwe">
 
             <EditText
-                android:id="@+id/signin_password"
+                android:id="@+id/signup_pw"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
@@ -110,7 +110,7 @@
 
 
             <EditText
-                android:id="@+id/signin_check_password"
+                android:id="@+id/signup_pw2"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
@@ -134,7 +134,7 @@
 
 
         <TextView
-            android:id="@+id/sighin_submit"
+            android:id="@+id/signup_register"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

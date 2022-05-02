@@ -10,11 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.wiuh.databinding.ActivityMainBinding;
+import com.example.wiuh.model.WifiInformation;
+import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.Objects;
 
 /**
  *
@@ -22,32 +22,35 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class MainActivity extends AppCompatActivity {
     static final int RQ_NICKNAME = 111;
 
-    private FirebaseUser user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setBotNav();
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        if(user.getDisplayName() == null || user.getDisplayName().matches("")) {
-            ToastUtil.showText(this, "닉네임을 설정하세요");
-            startActivityForResult(new Intent(this, SetupActivity.class), RQ_NICKNAME);
-        }
-        else ToastUtil.showText(this, user.getDisplayName() + " 환영");
+        //wifi 정보 action bar 표시
+        Objects.requireNonNull(getSupportActionBar())
+                .setTitle(WifiInformation.getSSID());
 
+        //nickname 설정 및 표시
+        String nickname = FirebaseUtil.getCurUserNickname();
+        if(nickname == null || nickname.matches("")) startSetUp();
+        else ToastUtil.showText(this, nickname + " 환영");
+    }
+
+    private void setBotNav() {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(R.id.navigation_memo, R.id.navigation_community)
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_memo, R.id.navigation_community)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    private void startSetUp() {
+        ToastUtil.showText(this, "닉네임을 설정하세요");
+        Intent intent = new Intent(this, SetupActivity.class);
+        startActivityForResult(intent, RQ_NICKNAME);
     }
 
     @Override
@@ -56,12 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == RQ_NICKNAME && resultCode == SetupActivity.RS_SUCCESS) {
             String nickname = data.getStringExtra(SetupActivity.NICKNAME);
-
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(nickname)
-                    .build();
-
-            user.updateProfile(profileUpdates);
+            FirebaseUtil.updateCurUserNickname(nickname);
         }
     }
 

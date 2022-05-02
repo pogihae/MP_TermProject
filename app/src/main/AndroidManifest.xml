@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH" >
         <activity
-            android:name=".BulletinActivity"
+            android:name=".nav.community.PostActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -35,10 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddPostActivity" />
+        <activity android:name=".nav.community.AddPostActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".AddMemoActivity" />
-        <activity android:name=".MemoActivity" />
+        <activity android:name=".nav.memo.AddMemoActivity" />
+        <activity android:name=".nav.memo.MemoActivity" />
 
     </application>
 

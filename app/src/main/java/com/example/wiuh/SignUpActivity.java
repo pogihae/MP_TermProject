@@ -1,103 +1,68 @@
 package com.example.wiuh;
 
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wiuh.model.User;
-import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
-/**
- *
- */
+import java.util.Objects;
+
 public class SignUpActivity extends AppCompatActivity {
-    static final String TAG = SignUpActivity.class.getSimpleName();
-
-    private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mUserRef;
-
-    private EditText mEtEmail;
-    private EditText mEtPwd;
-    private EditText mEtSecondPwd;
-    private ImageView setImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-        mFirebaseAuth   = FirebaseAuth.getInstance();
-        mUserRef        = FirebaseUtil.getUserRef();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        mEtEmail        = findViewById(R.id.signin_id);
-        mEtPwd          = findViewById(R.id.signin_password);
-        mEtSecondPwd    = findViewById(R.id.signin_check_password);
-        setImage        = findViewById(R.id.setImage);
+        findViewById(R.id.signup_register).setOnClickListener(v->register());
 
-        findViewById(R.id.sighin_submit).setOnClickListener(v -> register());
-
-        mEtSecondPwd.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (mEtPwd.getText().toString().equals(mEtSecondPwd.getText().toString())) {
-                    setImage.setImageResource(R.drawable.ic_true);
-                } else {
-                    setImage.setImageResource(R.drawable.ic_false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        //confirm password
+        ((EditText)findViewById(R.id.signup_pw)).addTextChangedListener(passwordWatcher());
+        ((EditText)findViewById(R.id.signup_pw2)).addTextChangedListener(passwordWatcher());
     }
 
-
     private void register() {
-        if (!mEtPwd.getText().toString().equals(mEtSecondPwd.getText().toString())) {
+        String email    = ((EditText)findViewById(R.id.signup_id)).getText().toString();
+        String pw       = ((EditText)findViewById(R.id.signup_pw)).getText().toString();
+        String secondPw = ((EditText)findViewById(R.id.signup_pw2)).getText().toString();
+
+        if (!pw.equals(secondPw)) {
             ToastUtil.showText(this, "비밀번호가 일치하지 않습니다.");
             return;
         }
 
-        String email    = mEtEmail.getText().toString();
-        String pw       = mEtPwd.getText().toString();
-
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(this, task -> {
-            if (!task.isSuccessful()) {
-                ToastUtil.showText(this, task.getException().getMessage());
-                return;
-            }
+            if (task.isSuccessful())
+                ToastUtil.showText(getApplicationContext(), "회원가입 성공");
+            else
+                ToastUtil.showText(getApplicationContext(), task.getException().getMessage());
 
-            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-            User user = new User();
-
-            assert firebaseUser != null;
-            mUserRef.child(firebaseUser.getUid()).setValue(user);
-
-            Log.d(TAG, "Sign up success");
             finish();
         });
+    }
+
+    private TextWatcher passwordWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String pw       = ((EditText)findViewById(R.id.signup_pw)).getText().toString();
+                String secondPw = ((EditText)findViewById(R.id.signup_pw2)).getText().toString();
+                int imageId = (pw.equals(secondPw))? R.drawable.ic_true : R.drawable.ic_false;
+
+                ((ImageView)findViewById(R.id.setImage)).setImageResource(imageId);
+            }
+        };
     }
 }

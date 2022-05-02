@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.community;
+package com.example.wiuh.nav.community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.AddPostActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
@@ -25,14 +25,12 @@ import java.util.List;
 
 public class CommunityFragment extends Fragment {
 
-    private PostAdapter recycleAdapter;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_community, container, false);
 
-        recycleAdapter = new PostAdapter(new ArrayList<>());
+        PostAdapter recycleAdapter = new PostAdapter(new ArrayList<>());
         recycleAdapter.setContext(getContext());
 
         RecyclerView recyclerView = root.findViewById(R.id.community_recyclerView);

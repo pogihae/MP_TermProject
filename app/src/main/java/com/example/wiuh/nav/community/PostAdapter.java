@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.community;
+package com.example.wiuh.nav.community;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wiuh.BulletinActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
 
@@ -62,14 +61,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.name);
+            textView = itemView.findViewById(R.id.name);
             this.context = context;
         }
 
         public void onBind(Post p) {
             textView.setText(p.title);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, BulletinActivity.class);
+                Intent intent = new Intent(context, PostActivity.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("title",p.title);
