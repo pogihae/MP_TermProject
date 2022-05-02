@@ -1,17 +1,25 @@
 package com.example.wiuh;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
+import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -22,14 +30,29 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import kotlin.Unit;
+import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
+
 public class LoginActivity extends AppCompatActivity {
     static final int RC_GOOGLE_SIGN_IN = 123;
+    static final String CHANNEL_ID = "WIFI_INFO";
 
     private FirebaseAuth auth;
     private GoogleSignInClient client;
 
     private EditText mEtEmail;
     private EditText mEtPwd;
+
+    @SuppressLint("SetTextI18n")
+    private final ActivityResultLauncher<Unit> mGetPermission = registerForActivityResult(
+            new PermissionsUiContracts.RequestBackgroundLocation(),
+            success -> {
+                //createNotificationChannel();
+                startWifiInfoSubscription();
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.btn_signin).setOnClickListener(
                 v -> startActivity(new Intent(this, SignUpActivity.class))
         );
+
+        mGetPermission.launch(null);
     }
 
     @Override
@@ -78,6 +103,43 @@ public class LoginActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    @SuppressLint("CheckResult")
+    private void startWifiInfoSubscription() {
+        ReactiveWifi.observeWifiAccessPointChanges(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(res -> {
+                    String ssid = res.getSSID();
+                    String mac = res.getBSSID();
+                    //notifyContent(ssid + " " + mac);
+                });
+    }
+
+    /*
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void notifyContent(String content) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("WIFI INFO")
+                .setContentText(content)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
+    }
+    */
 
     private void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
