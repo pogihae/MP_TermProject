@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -24,10 +24,12 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void addPost() {
+        FirebaseUser curUser = FirebaseUtil.getCurUser();
+
         String title = ((EditText)findViewById(R.id.et_postTitle)).getText().toString();
         String body = ((EditText)findViewById(R.id.et_postBody)).getText().toString();
 
-        Post post = new Post(FirebaseUtil.getCurUserUid(), title, FirebaseUtil.getCurUserNickname(), body);
+        Post post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body);
         FirebaseUtil.getPostRef().push().setValue(post);
 
         finish();

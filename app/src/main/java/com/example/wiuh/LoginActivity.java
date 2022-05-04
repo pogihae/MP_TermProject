@@ -28,7 +28,7 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
 /**
  * LoginActivity
  *
- * 시작 활동
+ * 시작
  * 권한, 로그인 확인
  *
  * */
@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 success -> startWifiInfoSubscription()
         ).launch(null);
 
+        //start observation wifi
         startWifiInfoSubscription();
 
         //already login
