@@ -1,5 +1,9 @@
 package com.example.wiuh.util;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.wiuh.LoginActivity;
 import com.example.wiuh.model.WifiInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -8,6 +12,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * FirebaseUtil
+ *
+ * Real time DB 접근
+ * FirebaseUser 접근
  *
  * */
 public class FirebaseUtil {
@@ -26,8 +33,13 @@ public class FirebaseUtil {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
-    public static void logout() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signOut();
+    public static void logout(Context context) {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(intent);
     }
 }

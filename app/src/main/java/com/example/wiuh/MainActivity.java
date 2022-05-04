@@ -20,7 +20,10 @@ import java.util.Objects;
  * MainActivity
  *
  * LoginActivity 에서 시작됨
- * 닉네임 설정 안되있는 경우 SetUpActivity 호출
+ *
+ * 닉네임 설정 안되있는 경우
+ * SetupActivity 호출
+ * Main 에서 하는 이유: 구글 로그인 등 외부 로그인 사용 시 SignUp 을 안 거침
  *
  * */
 public class MainActivity extends AppCompatActivity {
