@@ -13,6 +13,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
+/**
+ * SignUpActivity
+ *
+ * LoginActivity 에서 시작됨
+ * Firebase 에 user 등록까지만 책임
+ * (Firebase nickname 설정: MainActivity -> SetUpActivity)
+ *
+ * */
 public class SignUpActivity extends AppCompatActivity {
 
     @Override
