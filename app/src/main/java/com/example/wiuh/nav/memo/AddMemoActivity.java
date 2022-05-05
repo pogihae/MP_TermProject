@@ -28,7 +28,7 @@ public class AddMemoActivity extends AppCompatActivity {
         String title = ((EditText)findViewById(R.id.add_title_memo)).getText().toString();
         String body = ((EditText)findViewById(R.id.add_content_memo)).getText().toString();
 
-        Memo memo = new Memo(FirebaseUtil.getCurUserUid(), title, FirebaseUtil.getCurUserNickname(), body);
+        Memo memo = new Memo(FirebaseUtil.getCurUserUid(), title, FirebaseUtil.getCurUserNickname(), body,null);
         FirebaseUtil.getMemoRef().push().setValue(memo);
 
         finish();

@@ -46,10 +46,15 @@ public class MemoFragment extends Fragment {
 
                 List<Memo> list = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    list.add(ds.getValue(Memo.class));
-                }
+                    Memo m = ds.getValue(Memo.class);
+                    m.setKey(ds.getKey());
+
+                    list.add(m);
+
                 recycleAdapter.updateList(list);
             }
+
+        }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
