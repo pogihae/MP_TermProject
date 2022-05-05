@@ -71,6 +71,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
                 bundle.putString("title",m.title);
                 bundle.putString("body",m.body);
+                bundle.putString("key",m.key);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);
