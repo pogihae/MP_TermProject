@@ -1,14 +1,20 @@
 package com.example.wiuh.util;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.wiuh.LoginActivity;
 import com.example.wiuh.model.WifiInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/** FirebaseUtil
+/**
+ * FirebaseUtil
  *
+ * Real time DB 접근
+ * FirebaseUser 접근
  *
  * */
 public class FirebaseUtil {
@@ -23,26 +29,17 @@ public class FirebaseUtil {
                 .child(getCurUser().getUid())
                 .child(WifiInformation.getMAC());
     }
-
-
     public static FirebaseUser getCurUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
-    public static String getCurUserUid() {
-        return getCurUser().getUid();
-    }
-    public static String getCurUserNickname() {
-        return getCurUser().getDisplayName();
-    }
-    public static void updateCurUserNickname(String nickname) {
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(nickname)
-                .build();
 
-        getCurUser().updateProfile(profileUpdates);
-    }
-    public static void logout() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signOut();
+    public static void logout(Context context) {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(intent);
     }
 }

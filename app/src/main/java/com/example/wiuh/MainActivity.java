@@ -17,10 +17,16 @@ import com.example.wiuh.util.ToastUtil;
 import java.util.Objects;
 
 /**
+ * MainActivity
+ *
+ * LoginActivity 에서 시작됨
+ *
+ * 닉네임 설정 안되있는 경우
+ * SetupActivity 호출
+ * Main 에서 하는 이유: 구글 로그인 등 외부 로그인 사용 시 SignUp 을 안 거침
  *
  * */
 public class MainActivity extends AppCompatActivity {
-    static final int RQ_NICKNAME = 111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setBotNav();
 
         //wifi 정보 action bar 표시
-        Objects.requireNonNull(getSupportActionBar())
-                .setTitle(WifiInformation.getSSID());
+        Objects.requireNonNull(getSupportActionBar()).setTitle(WifiInformation.getSSID());
 
         //nickname 설정 및 표시
-        String nickname = FirebaseUtil.getCurUserNickname();
+        String nickname = FirebaseUtil.getCurUser().getDisplayName();
         if(nickname == null || nickname.matches("")) startSetUp();
         else ToastUtil.showText(this, nickname + " 환영");
     }
@@ -50,17 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void startSetUp() {
         ToastUtil.showText(this, "닉네임을 설정하세요");
         Intent intent = new Intent(this, SetupActivity.class);
-        startActivityForResult(intent, RQ_NICKNAME);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == RQ_NICKNAME && resultCode == SetupActivity.RS_SUCCESS) {
-            String nickname = data.getStringExtra(SetupActivity.NICKNAME);
-            FirebaseUtil.updateCurUserNickname(nickname);
-        }
+        startActivity(intent);
     }
 
 }

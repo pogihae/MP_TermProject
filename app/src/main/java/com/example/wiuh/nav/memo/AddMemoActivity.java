@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
-import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -25,11 +24,12 @@ public class AddMemoActivity extends AppCompatActivity {
     }
 
     private void addMemo() {
+        FirebaseUser curUser = FirebaseUtil.getCurUser();
+
         String title = ((EditText)findViewById(R.id.add_title_memo)).getText().toString();
         String body = ((EditText)findViewById(R.id.add_content_memo)).getText().toString();
 
-        Memo memo = new Memo(FirebaseUtil.getCurUserUid(), title, FirebaseUtil.getCurUserNickname(), body,null);
-        FirebaseUtil.getMemoRef().push().setValue(memo);
+        Memo memo = new Memo(curUser.getUid(), title, curUser.getDisplayName(), body,null);
 
         finish();
     }
