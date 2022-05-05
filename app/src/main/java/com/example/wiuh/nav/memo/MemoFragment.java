@@ -34,7 +34,7 @@ public class MemoFragment extends Fragment {
         recycleAdapter.setContext(getContext());
 
         RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
-        recyclerView.setAdapter(recycleAdapter);
+        recyclerView.setAdapter(recycleAdapter);sdfdsdfs
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
