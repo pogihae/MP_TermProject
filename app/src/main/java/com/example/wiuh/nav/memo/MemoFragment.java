@@ -47,10 +47,10 @@ public class MemoFragment extends Fragment {
 
                     list.add(m);
 
-                recycleAdapter.updateList(list);
-            }
+                    recycleAdapter.updateList(list);
+                }
 
-        }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

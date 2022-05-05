@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         if(auth.getCurrentUser() != null) startMain();
 
         findViewById(R.id.btn_login).setOnClickListener(v->emailLogin());
-        findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
+        //findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
         findViewById(R.id.btn_signup).setOnClickListener(v->startSignUp());
     }
 
@@ -85,19 +85,19 @@ public class LoginActivity extends AppCompatActivity {
         String strPwd   = ((EditText)findViewById(R.id.et_password)).getText().toString();
 
         auth.signInWithEmailAndPassword(strEmail,strPwd)
-                     .addOnCompleteListener(LoginActivity.this, task -> {
-                        if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, task.getException().getMessage());
-                        });
+                .addOnCompleteListener(LoginActivity.this, task -> {
+                    if(task.isSuccessful()) startMain();
+                    else ToastUtil.showText(this, task.getException().getMessage());
+                });
     }
-    private void googleLogin() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
-        startActivityForResult(client.getSignInIntent(), 123);
-    }
+//    private void googleLogin() {
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+//        startActivityForResult(client.getSignInIntent(), 123);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
