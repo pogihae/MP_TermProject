@@ -39,6 +39,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".nav.memo.AddMemoActivity" />
         <activity android:name=".nav.memo.MemoActivity" />
+        <activity android:name=".nav.memo.MemoModify" />
 
     </application>
 
