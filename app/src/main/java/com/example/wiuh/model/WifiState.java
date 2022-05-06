@@ -1,9 +1,9 @@
 package com.example.wiuh.model;
 
-public class WifiInformation {
-    private static final WifiInformation instance = new WifiInformation();
+public class WifiState {
+    private static final WifiState instance = new WifiState();
 
-    private WifiInformation() {}
+    private WifiState() {}
 
     private String SSID;
     private String MAC;

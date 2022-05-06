@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.wiuh.LoginActivity;
-import com.example.wiuh.model.WifiInformation;
+import com.example.wiuh.model.WifiState;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -22,12 +22,12 @@ public class FirebaseUtil {
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")
-                .child(WifiInformation.getMAC());
+                .child(WifiState.getMAC());
     }
     public static DatabaseReference getMemoRef() {
         return rootRef.child("MEMO")
                 .child(getCurUser().getUid())
-                .child(WifiInformation.getMAC());
+                .child(WifiState.getMAC());
     }
     public static FirebaseUser getCurUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
