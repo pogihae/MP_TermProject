@@ -7,7 +7,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wiuh.model.WifiInformation;
+import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.ToastUtil;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,6 +30,8 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
  *
  * 시작
  * 권한, 로그인 확인
+ *
+ * todo: Splash Activity 추가 후 권한, 네트워크 확인 등을 넘기기
  *
  * */
 public class LoginActivity extends AppCompatActivity {
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
                 .subscribeOn(Schedulers.io())
                 .subscribe(res -> {
-                    WifiInformation.setInfo(res.getSSID(), res.getBSSID());
+                    WifiState.setInfo(res.getSSID(), res.getBSSID());
                     //notifyContent(ssid + " " + mac);
                 }).isDisposed();
     }
