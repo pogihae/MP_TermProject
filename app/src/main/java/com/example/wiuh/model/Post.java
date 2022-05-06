@@ -10,9 +10,6 @@ public class Post {
     public String author;
     public String body;
 
-    @Exclude
-    public String key;
-
     public Post() {}
 
     public Post(String uid, String title, String author, String body) {
@@ -21,8 +18,22 @@ public class Post {
         this.author = author;
         this.body = body;
     }
+
+    @Exclude
+    public String key;
     @Exclude
     public void setKey(String key) {
         this.key = key;
+    }
+    @Exclude
+    public String getKey() {
+        return key;
+    }
+
+    @Exclude
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Post)) return false;
+        return key.equals(((Post) other).getKey());
     }
 }

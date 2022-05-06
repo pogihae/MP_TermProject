@@ -2,6 +2,7 @@ package com.example.wiuh.nav.community;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,11 +38,17 @@ public class PostActivity extends AppCompatActivity {
 
         Button delButton = findViewById(R.id.btn_delpost);
 
+        if(!isAuthor(uid)) delButton.setVisibility(View.INVISIBLE);
         delButton.setOnClickListener(view -> {
             FirebaseUtil.getPostRef()
                     .child(key)
                     .removeValue();
             finish();
         });
+    }
+
+    private boolean isAuthor(String uid) {
+        String curUserUid = FirebaseUtil.getCurUser().getUid();
+        return uid.equals(curUserUid);
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
@@ -17,12 +18,12 @@ import com.example.wiuh.model.Memo;
 import java.util.List;
 
 public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
-    private final List<Memo> localData;
+    private final List<Memo> localMemoList;
 
     private Context context;
 
-    MemoAdapter(List<Memo> localData) {
-        this.localData = localData;
+    MemoAdapter(List<Memo> localMemoList) {
+        this.localMemoList = localMemoList;
     }
 
     @NonNull
@@ -35,12 +36,12 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(localData.get(position));
+        holder.onBind(localMemoList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return localData.size();
+        return localMemoList.size();
     }
 
     public void setContext(Context context) {
@@ -48,9 +49,12 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
     }
 
     public void updateList(List<Memo> list) {
-        this.localData.clear();
-        localData.addAll(list);
-        notifyDataSetChanged();
+        final MemoDiffCallback diffCallback = new MemoDiffCallback(this.localMemoList, list);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        localMemoList.clear();
+        localMemoList.addAll(list);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
