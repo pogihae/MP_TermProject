@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
@@ -17,13 +16,13 @@ import com.example.wiuh.model.Memo;
 
 import java.util.List;
 
-public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
-    private final List<Memo> localMemoList;
+public class ModifyAdapter extends RecyclerView.Adapter<ModifyAdapter.ViewHolder>{
+    private final List<Memo> localData;
 
     private Context context;
 
-    MemoAdapter(List<Memo> localMemoList) {
-        this.localMemoList = localMemoList;
+    ModifyAdapter(List<Memo> localData) {
+        this.localData = localData;
     }
 
     @NonNull
@@ -36,12 +35,12 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(localMemoList.get(position));
+        holder.onBind(localData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return localMemoList.size();
+        return localData.size();
     }
 
     public void setContext(Context context) {
@@ -49,12 +48,9 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
     }
 
     public void updateList(List<Memo> list) {
-        final MemoDiffCallback diffCallback = new MemoDiffCallback(this.localMemoList, list);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
-        localMemoList.clear();
-        localMemoList.addAll(list);
-        diffResult.dispatchUpdatesTo(this);
+        this.localData.clear();
+        localData.addAll(list);
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,7 +66,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
         public void onBind(Memo m) {
             textView.setText(m.title);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, MemoActivity.class);
+                Intent intent = new Intent(context, MemoModify.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("title",m.title);
