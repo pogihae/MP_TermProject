@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
+import com.example.wiuh.model.Memo;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
@@ -41,7 +42,9 @@ public class CommunityFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Post> list = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    list.add(ds.getValue(Post.class));
+                    Post p = ds.getValue(Post.class);
+                    p.setKey(ds.getKey());
+                    list.add(p);
                 }
                 recycleAdapter.updateList(list);
             }

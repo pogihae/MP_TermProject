@@ -27,7 +27,7 @@ public class MemoActivity extends AppCompatActivity {
         TextView bulletinBody = findViewById(R.id.memoBody);
 
         bulletinTitle.setText(title);
-        bulletinBody.setText(body + key);
+        bulletinBody.setText(body);
 
         Button delButton = findViewById(R.id.del_Button);
 
