@@ -2,6 +2,7 @@ package com.example.wiuh.nav.memo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,16 +31,12 @@ public class MemoActivity extends AppCompatActivity {
         bulletinBody.setText(body);
 
         Button delButton = findViewById(R.id.del_Button);
-
         delButton.setOnClickListener(view -> {
             FirebaseUtil.getMemoRef()
                     .child(key)
                     .removeValue();
             finish();
         });
-
     }
-
-
 
 }

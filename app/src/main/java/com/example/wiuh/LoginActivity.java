@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(strEmail,strPwd)
                      .addOnCompleteListener(LoginActivity.this, task -> {
                         if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, task.getException().getMessage());
+                        else ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
                         });
     }
     private void googleLogin() {
