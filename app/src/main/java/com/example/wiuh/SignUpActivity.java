@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (task.isSuccessful())
                 ToastUtil.showText(getApplicationContext(), "회원가입 성공");
             else
-                ToastUtil.showText(getApplicationContext(), task.getException().getMessage());
+                ToastUtil.showText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage());
 
             finish();
         });

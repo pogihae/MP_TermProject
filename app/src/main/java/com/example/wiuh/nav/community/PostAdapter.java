@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
@@ -17,14 +18,12 @@ import com.example.wiuh.model.Post;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-    static final String POST = "post";
-
-    private final List<Post> localData;
+    private final List<Post> localPostList;
 
     private Context context;
 
     PostAdapter(List<Post> localData) {
-        this.localData = localData;
+        this.localPostList = localData;
     }
 
     @NonNull
@@ -37,12 +36,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(localData.get(position));
+        holder.onBind(localPostList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return localData.size();
+        return localPostList.size();
     }
 
     public void setContext(Context context) {
@@ -50,9 +49,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     public void updateList(List<Post> list) {
-        this.localData.clear();
-        localData.addAll(list);
-        notifyDataSetChanged();
+        final PostDiffCallback diffCallback = new PostDiffCallback(this.localPostList, list);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        localPostList.clear();
+        localPostList.addAll(list);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -75,6 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 bundle.putString("body",p.body);
                 bundle.putString("author",p.author);
                 bundle.putString("uid",p.uid);
+                bundle.putString("key",p.key);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

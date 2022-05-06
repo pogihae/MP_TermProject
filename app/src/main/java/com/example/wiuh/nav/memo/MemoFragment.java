@@ -34,7 +34,7 @@ public class MemoFragment extends Fragment {
         recycleAdapter.setContext(getContext());
 
         RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
-        recyclerView.setAdapter(recycleAdapter);sdfdsdfs
+        recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
@@ -47,10 +47,10 @@ public class MemoFragment extends Fragment {
 
                     list.add(m);
 
-                    recycleAdapter.updateList(list);
-                }
-
+                recycleAdapter.updateList(list);
             }
+
+        }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

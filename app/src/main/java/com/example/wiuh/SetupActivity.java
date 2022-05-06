@@ -46,4 +46,10 @@ public class SetupActivity extends AppCompatActivity {
             finish();
         });
     }
+
+    //뒤로가기 금지
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }

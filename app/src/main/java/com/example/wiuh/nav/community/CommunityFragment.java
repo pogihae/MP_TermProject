@@ -41,7 +41,9 @@ public class CommunityFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Post> list = new ArrayList<>();
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    list.add(ds.getValue(Post.class));
+                    Post p = ds.getValue(Post.class);
+                    p.setKey(ds.getKey());
+                    list.add(p);
                 }
                 recycleAdapter.updateList(list);
             }

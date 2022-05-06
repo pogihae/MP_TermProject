@@ -10,7 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.wiuh.databinding.ActivityMainBinding;
-import com.example.wiuh.model.WifiInformation;
+import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setBotNav();
 
         //wifi 정보 action bar 표시
-        Objects.requireNonNull(getSupportActionBar()).setTitle(WifiInformation.getSSID());
+        Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();

@@ -1,5 +1,6 @@
 package com.example.wiuh.model;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
@@ -16,5 +17,23 @@ public class Post {
         this.title = title;
         this.author = author;
         this.body = body;
+    }
+
+    @Exclude
+    public String key;
+    @Exclude
+    public void setKey(String key) {
+        this.key = key;
+    }
+    @Exclude
+    public String getKey() {
+        return key;
+    }
+
+    @Exclude
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Post)) return false;
+        return key.equals(((Post) other).getKey());
     }
 }
