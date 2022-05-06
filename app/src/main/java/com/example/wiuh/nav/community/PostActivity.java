@@ -31,6 +31,5 @@ public class PostActivity extends AppCompatActivity {
         bulletinBody.setText(body);
         bulletinAuth.setText(author);
         bulletinUid.setText(uid);
-
     }
 }
