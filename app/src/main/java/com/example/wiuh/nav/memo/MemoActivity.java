@@ -45,6 +45,7 @@ public class MemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUtil.getMemoRef().child(key).removeValue();
+                finish();
             }
         });
 
