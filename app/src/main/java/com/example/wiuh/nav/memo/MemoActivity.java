@@ -58,6 +58,7 @@ public class MemoActivity extends AppCompatActivity {
 
                 bundle.putString("title", title);
                 bundle.putString("body", body);
+                bundle.putString("key", key);
 
                 intent.putExtras(bundle);
                 startActivity(intent);
