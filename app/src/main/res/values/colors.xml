@@ -10,4 +10,14 @@
     <color name="grey">#E0E0E0</color>
     <color name="darkgrey">#616161</color>
     <color name="app_blue">#1566e0</color>
+
+    <color name="gray">#cdc9c3</color>
+    <color name="green">#a9d18e</color>
+    <color name="lightgreen">#cfffa5</color>
+    <color name="sand">#ffe699</color>
+    <color name="pink">#f3e6e3</color>
+    <color name="color1">#efbbcf</color>
+    <color name="color2">#ff6a47</color>
+    <color name="color4">#ffe0ac</color>
+    <color name="color5">#ffd700</color>
 </resources>
