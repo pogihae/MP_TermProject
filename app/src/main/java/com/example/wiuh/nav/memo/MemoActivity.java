@@ -37,6 +37,22 @@ public class MemoActivity extends AppCompatActivity {
                     .removeValue();
             finish();
         });
-    }
 
+        Button modButton = findViewById(R.id.mod_button);
+
+        modButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), MemoModify.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title", title);
+                bundle.putString("body", body);
+                bundle.putString("key", key);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
 }

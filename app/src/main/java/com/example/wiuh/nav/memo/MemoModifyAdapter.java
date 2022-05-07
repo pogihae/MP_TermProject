@@ -16,12 +16,12 @@ import com.example.wiuh.model.Memo;
 
 import java.util.List;
 
-public class ModifyAdapter extends RecyclerView.Adapter<ModifyAdapter.ViewHolder>{
+public class MemoModifyAdapter extends RecyclerView.Adapter<MemoModifyAdapter.ViewHolder>{
     private final List<Memo> localData;
 
     private Context context;
 
-    ModifyAdapter(List<Memo> localData) {
+    MemoModifyAdapter(List<Memo> localData) {
         this.localData = localData;
     }
 

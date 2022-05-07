@@ -40,6 +40,7 @@
         <activity android:name=".nav.memo.AddMemoActivity" />
         <activity android:name=".nav.memo.MemoActivity" />
         <activity android:name=".nav.memo.MemoModify" />
+        <activity android:name=".nav.community.PostModify" />
 
     </application>
 
