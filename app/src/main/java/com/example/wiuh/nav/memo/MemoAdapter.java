@@ -80,7 +80,6 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });
-
         }
     }
 }
