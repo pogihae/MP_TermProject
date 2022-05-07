@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
@@ -24,7 +25,6 @@ import java.util.List;
 
 public class MemoFragment extends Fragment {
     private MemoAdapter recycleAdapter;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +34,13 @@ public class MemoFragment extends Fragment {
         recycleAdapter.setContext(getContext());
 
         RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
+        recyclerView.setHasFixedSize(true);
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager;
+        staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+
         recyclerView.setAdapter(recycleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
         FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
             @Override
