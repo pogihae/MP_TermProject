@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
+import com.example.wiuh.nav.community.PostModify;
 import com.example.wiuh.util.FirebaseUtil;
 
 public class PostActivity extends AppCompatActivity {
@@ -37,13 +38,33 @@ public class PostActivity extends AppCompatActivity {
         bulletinUid.setText(uid);
 
         Button delButton = findViewById(R.id.btn_delpost);
+        Button modButton = findViewById(R.id.btn_modpost);
 
-        if(!isAuthor(uid)) delButton.setVisibility(View.INVISIBLE);
+        if(!isAuthor(uid)) {
+            delButton.setVisibility(View.INVISIBLE);
+            modButton.setVisibility(View.INVISIBLE);
+        }
+
         delButton.setOnClickListener(view -> {
             FirebaseUtil.getPostRef()
                     .child(key)
                     .removeValue();
             finish();
+        });
+
+        modButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), PostModify.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title", title);
+                bundle.putString("body", body);
+                bundle.putString("key", key);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
         });
     }
 

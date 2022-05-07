@@ -17,12 +17,12 @@ import com.example.wiuh.model.Post;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostModifyAdapter extends RecyclerView.Adapter<PostModifyAdapter.ViewHolder> {
     private final List<Post> localPostList;
 
     private Context context;
 
-    PostAdapter(List<Post> localData) {
+    PostModifyAdapter(List<Post> localData) {
         this.localPostList = localData;
     }
 
@@ -70,13 +70,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public void onBind(Post p) {
             textView.setText(p.title);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, PostActivity.class);
+                Intent intent = new Intent(context, PostModify.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("title",p.title);
                 bundle.putString("body",p.body);
-                bundle.putString("author",p.author);
-                bundle.putString("uid",p.uid);
                 bundle.putString("key",p.key);
 
                 intent.putExtras(bundle);

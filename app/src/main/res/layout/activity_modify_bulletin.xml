@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".nav.community.PostActivity">
 
-    <TextView
-        android:id="@+id/bulletinTitle"
+    <EditText
+        android:id="@+id/mod_bulletinTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="223dp"
@@ -15,13 +15,12 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/bulletinAuth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/bulletinBody"
+    <EditText
+        android:id="@+id/mod_bulletinBody"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="475dp"
@@ -32,57 +31,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bulletinTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/mod_bulletinTitle" />
 
-    <TextView
-        android:id="@+id/bulletinAuth"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Auth"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/bulletinUid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bulletinTitle" />
-
-    <TextView
-        android:id="@+id/bulletinUid"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="176dp"
-        android:text="Uid"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bulletinAuth" />
 
     <Button
-        android:id="@+id/btn_delpost"
+        android:id="@+id/btn_cancel_mod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
-        android:text="Delete"
+        android:text="취소"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.264"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bulletinUid"
         app:layout_constraintVertical_bias="0.542" />
 
     <Button
-        android:id="@+id/btn_modpost"
+        android:id="@+id/btn_ok_mod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Modify"
+        android:layout_marginBottom="268dp"
+        android:text="수정"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_delpost" />
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel_mod" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
