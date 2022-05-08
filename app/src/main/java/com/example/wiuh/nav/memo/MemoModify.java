@@ -25,8 +25,6 @@ public class MemoModify extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_memo);
 
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String title = bundle.getString("title");
@@ -40,34 +38,25 @@ public class MemoModify extends AppCompatActivity {
         bulletinBody.setText(body);
 
         Button ok = findViewById(R.id.ok_mod_button);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUser curUser = FirebaseUtil.getCurUser();
+        ok.setOnClickListener(view -> {
+            FirebaseUser curUser = FirebaseUtil.getCurUser();
 
-                String modTitle = bulletinTitle.getText().toString();
-                String modBody = bulletinBody.getText().toString();
+            String modTitle = bulletinTitle.getText().toString();
+            String modBody = bulletinBody.getText().toString();
 
-                Memo memo = new Memo(curUser.getUid(), modTitle, curUser.getDisplayName(), modBody);
-                FirebaseUtil.getMemoRef().child(key).setValue(memo);
+            Memo memo = new Memo(curUser.getUid(), modTitle, curUser.getDisplayName(), modBody);
+            FirebaseUtil.getMemoRef().child(key).setValue(memo);
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("resultTitle", modTitle);
-                resultIntent.putExtra("resultBody", modBody);
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("resultTitle", modTitle);
+            resultIntent.putExtra("resultBody", modBody);
+            setResult(RESULT_OK, resultIntent);
+            finish();
         });
 
         Button cancel = findViewById(R.id.cancel_mod_button);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        cancel.setOnClickListener(v -> finish());
     }
-
 
 }

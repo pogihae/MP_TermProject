@@ -15,7 +15,7 @@ import com.example.wiuh.util.FirebaseUtil;
 
 public class PostActivity extends AppCompatActivity {
 
-    private int REQUEST_CODE = 10;
+    private final int REQUEST_CODE = 10;
     private int RESULT_OK = 10;
 
     @Override
