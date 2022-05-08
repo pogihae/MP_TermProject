@@ -52,19 +52,16 @@ public class PostActivity extends AppCompatActivity {
             finish();
         });
 
-        modButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), PostModify.class);
-                Bundle bundle = new Bundle();
+        modButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(getBaseContext(), PostModify.class);
+            Bundle bundle1 = new Bundle();
 
-                bundle.putString("title", title);
-                bundle.putString("body", body);
-                bundle.putString("key", key);
+            bundle1.putString("title", title);
+            bundle1.putString("body", body);
+            bundle1.putString("key", key);
 
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
         });
     }
 

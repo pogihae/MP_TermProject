@@ -16,6 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MemoModify extends AppCompatActivity {
 
     @Override
@@ -38,28 +41,21 @@ public class MemoModify extends AppCompatActivity {
         bulletinBody.setText(body);
 
         Button ok = findViewById(R.id.ok_mod_button);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUser curUser = FirebaseUtil.getCurUser();
+        ok.setOnClickListener(v -> {
+            String title1 = bulletinTitle.getText().toString();
+            String body1 = bulletinBody.getText().toString();
 
-                String title = bulletinTitle.getText().toString();
-                String body = bulletinBody.getText().toString();
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("title", title1);
+            map.put("body", body1);
 
-                Memo memo = new Memo(curUser.getUid(), title, curUser.getDisplayName(), body);
-                FirebaseUtil.getMemoRef().child(key).setValue(memo);
-                finish();
-            }
+            FirebaseUtil.getMemoRef().child(key).updateChildren(map);
+            finish();
         });
 
         Button cancel = findViewById(R.id.cancel_mod_button);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        cancel.setOnClickListener(v -> finish());
     }
 
 
