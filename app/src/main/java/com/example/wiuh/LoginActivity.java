@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(client.getSignInIntent(), 123);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

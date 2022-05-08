@@ -2,6 +2,7 @@ package com.example.wiuh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.goNotification:
                 Toast.makeText(this,"알림설정 선택",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), SetupListActivity.class);
+                startActivity(intent);
                 break;
 
         }
