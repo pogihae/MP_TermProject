@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,6 +33,7 @@ import java.util.Objects;
  * */
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +70,16 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.logout:
                 Toast.makeText(this,"로그아웃 선택",Toast.LENGTH_SHORT).show();
+//                firebaseAuth.signOut();
+//                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
             case R.id.goNotification:
-                Toast.makeText(this,"알림설정 선택",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), SetupListActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.personalSettings:
+                startActivity(new Intent(this, SetupActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

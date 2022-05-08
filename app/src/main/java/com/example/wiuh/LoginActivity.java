@@ -1,5 +1,6 @@
 package com.example.wiuh;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -37,7 +38,7 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG         = LoginActivity.class.getSimpleName();
     private static final String CHANNEL_ID  = "WIFI_INFO";
-
+    public static Context mContext;
     private FirebaseAuth auth;
 
     @Override
@@ -100,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
         startActivityForResult(client.getSignInIntent(), 123);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
