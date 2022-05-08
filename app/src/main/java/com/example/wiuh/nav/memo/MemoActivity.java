@@ -2,21 +2,17 @@ package com.example.wiuh.nav.memo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wiuh.MainActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 
 public class MemoActivity extends AppCompatActivity {
-
-    private int REQUEST_CODE = 10;
-    private int RESULT_OK = 10;
+    static final int RQ_MOD = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +41,16 @@ public class MemoActivity extends AppCompatActivity {
 
         Button modButton = findViewById(R.id.mod_button);
 
-        modButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MemoModify.class);
-                Bundle bundle = new Bundle();
+        modButton.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getBaseContext(), MemoModify.class);
+            Bundle bundle1 = new Bundle();
 
-                bundle.putString("title", title);
-                bundle.putString("body", body);
-                bundle.putString("key", key);
+            bundle1.putString("title", title);
+            bundle1.putString("body", body);
+            bundle1.putString("key", key);
 
-                intent.putExtras(bundle);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
+            intent1.putExtras(bundle1);
+            startActivityForResult(intent1, RQ_MOD);
         });
 
 
@@ -67,7 +60,7 @@ public class MemoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == MemoModify.RS_SUC) {
             if (resultCode == RESULT_OK) {
 
                 Bundle resultBundle = data.getExtras();

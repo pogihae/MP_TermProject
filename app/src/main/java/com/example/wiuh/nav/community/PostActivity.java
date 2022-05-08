@@ -10,13 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
-import com.example.wiuh.nav.community.PostModify;
 import com.example.wiuh.util.FirebaseUtil;
 
 public class PostActivity extends AppCompatActivity {
-
-    private final int REQUEST_CODE = 10;
-    private int RESULT_OK = 10;
+    static final int RQ_MOD = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +53,24 @@ public class PostActivity extends AppCompatActivity {
             finish();
         });
 
-        modButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), PostModify.class);
-                Bundle bundle = new Bundle();
+        modButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(getBaseContext(), PostModify.class);
+            Bundle bundle1 = new Bundle();
 
-                bundle.putString("title", title);
-                bundle.putString("body", body);
-                bundle.putString("key", key);
+            bundle1.putString("title", title);
+            bundle1.putString("body", body);
+            bundle1.putString("key", key);
 
-                intent.putExtras(bundle);
-                startActivityForResult(intent, REQUEST_CODE);            }
+            intent1.putExtras(bundle1);
+            startActivityForResult(intent1, RQ_MOD);
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
+        if (requestCode == RQ_MOD) {
+            if (resultCode == PostModify.RS_SUC) {
 
                 Bundle resultBundle = data.getExtras();
                 String resultTitle = resultBundle.getString("resultTitle");
