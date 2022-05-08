@@ -17,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PostModify extends AppCompatActivity {
 
+    private int RESULT_OK = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,11 @@ public class PostModify extends AppCompatActivity {
 
                 Post post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body);
                 FirebaseUtil.getPostRef().child(key).setValue(post);
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("resultTitle", title);
+                resultIntent.putExtra("resultBody", body);
+                setResult(RESULT_OK, resultIntent);
                 finish();
             }
         });

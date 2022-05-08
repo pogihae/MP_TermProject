@@ -16,10 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MemoModify extends AppCompatActivity {
+
+    private int RESULT_OK = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +40,33 @@ public class MemoModify extends AppCompatActivity {
         bulletinBody.setText(body);
 
         Button ok = findViewById(R.id.ok_mod_button);
-        ok.setOnClickListener(v -> {
-            String title1 = bulletinTitle.getText().toString();
-            String body1 = bulletinBody.getText().toString();
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser curUser = FirebaseUtil.getCurUser();
 
-            Map<String, Object> map = new HashMap<>(2);
-            map.put("title", title1);
-            map.put("body", body1);
+                String modTitle = bulletinTitle.getText().toString();
+                String modBody = bulletinBody.getText().toString();
 
-            FirebaseUtil.getMemoRef().child(key).updateChildren(map);
-            finish();
+                Memo memo = new Memo(curUser.getUid(), modTitle, curUser.getDisplayName(), modBody);
+                FirebaseUtil.getMemoRef().child(key).setValue(memo);
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("resultTitle", modTitle);
+                resultIntent.putExtra("resultBody", modBody);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
         });
 
         Button cancel = findViewById(R.id.cancel_mod_button);
 
-        cancel.setOnClickListener(v -> finish());
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
