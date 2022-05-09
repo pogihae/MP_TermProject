@@ -17,4 +17,9 @@
         android:title="개인설정"
         app:showAsAction="never"></item>
 
+    <item
+        android:id="@+id/WiFiRegister"
+        android:title="와이파이 등록하기"
+        app:showAsAction="never"></item>
+
 </menu>
