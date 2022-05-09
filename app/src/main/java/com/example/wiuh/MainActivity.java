@@ -79,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SetupActivity.class));
         }
 
+        else if(itemId == R.id.personalSettings) {
+            startActivity(new Intent(this, SetupActivity.class));
+        }
+
+        else if(itemId == R.id.WiFiRegister) {
+            Toast.makeText(this,"와이파이 등록 선택",Toast.LENGTH_SHORT).show();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
