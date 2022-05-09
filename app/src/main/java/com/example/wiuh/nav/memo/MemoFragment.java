@@ -45,13 +45,11 @@ public class MemoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Memo> list = new ArrayList<>();
-
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     Memo m = ds.getValue(Memo.class);
                     m.setKey(ds.getKey());
                     list.add(m);
                 }
-
                 recycleAdapter.updateList(list);
             }
 
