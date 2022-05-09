@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wiuh.MainActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 
 public class MemoActivity extends AppCompatActivity {
+
+    private int REQUEST_CODE = 10;
+    private int RESULT_OK = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +56,35 @@ public class MemoActivity extends AppCompatActivity {
                 bundle.putString("key", key);
 
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                Bundle resultBundle = data.getExtras();
+                String resultTitle = resultBundle.getString("resultTitle");
+                String resultBody = resultBundle.getString("resultBody");
+
+                TextView title = findViewById(R.id.memoTitle);
+                TextView body = findViewById(R.id.memoBody);
+
+                title.setText(resultTitle);
+                body.setText(resultBody);
+
+                Toast.makeText(getApplicationContext(), resultTitle + resultBody, Toast.LENGTH_SHORT).show();
+            }
+            else {   // RESULT_CANCEL
+                Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

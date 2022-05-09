@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MemoModify extends AppCompatActivity {
 
+    private int RESULT_OK = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +45,16 @@ public class MemoModify extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseUser curUser = FirebaseUtil.getCurUser();
 
-                String title = bulletinTitle.getText().toString();
-                String body = bulletinBody.getText().toString();
+                String modTitle = bulletinTitle.getText().toString();
+                String modBody = bulletinBody.getText().toString();
 
-                Memo memo = new Memo(curUser.getUid(), title, curUser.getDisplayName(), body);
+                Memo memo = new Memo(curUser.getUid(), modTitle, curUser.getDisplayName(), modBody);
                 FirebaseUtil.getMemoRef().child(key).setValue(memo);
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("resultTitle", modTitle);
+                resultIntent.putExtra("resultBody", modBody);
+                setResult(RESULT_OK, resultIntent);
                 finish();
             }
         });
