@@ -29,7 +29,7 @@
                 android:layout_marginTop="50dp"
                 android:text="Wi U here?"
                 android:textColor="#ffffff"
-                android:textSize="18dp" />
+                android:textSize="25sp" />
 
         </FrameLayout>
 
@@ -131,67 +131,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="12dp"
+            android:onClick="clickSignin"
             android:text="회원가입"
             android:textColor="#1566e0"
-            android:textSize="10.5sp"
-            android:onClick="clickSignin"
-            />
+            android:textSize="10.5sp" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="13.7dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:text="소셜 로그인으로 시작하기"
                 android:textColor="#aeaeae"
                 android:textSize="13.3sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+
 
             <Button
                 android:id="@+id/btn_google_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="google"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/color5"
+                android:text="google login"/>
 
-            <ImageView
-                android:id="@+id/fb_button"
-                android:layout_width="26.7dp"
-                android:layout_height="26.7dp"
-                android:src="@drawable/login_fb"/>
-            <ImageView
-                android:id="@+id/twitter_button"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="26.7dp"
-                android:layout_height="26.7dp"
-                android:src="@drawable/login_twitter"/>
-            <ImageView
-                android:layout_marginRight="20dp"
-                android:layout_width="26.7dp"
-                android:layout_height="26.7dp"
-                android:src="@drawable/login_linkedin"/>
-            <ImageView
-                android:layout_width="26.7dp"
-                android:layout_height="26.7dp"
-                android:src="@drawable/login_instagram"/>
-        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>
