@@ -2,6 +2,8 @@ package com.example.wiuh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, BoardActivity.class);
         startActivity(intent);
         finish();
     }

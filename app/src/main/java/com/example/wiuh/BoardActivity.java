@@ -31,7 +31,7 @@ import java.util.Objects;
  * Main 에서 하는 이유: 구글 로그인 등 외부 로그인 사용 시 SignUp 을 안 거침
  *
  * */
-public class MainActivity extends AppCompatActivity {
+public class BoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
