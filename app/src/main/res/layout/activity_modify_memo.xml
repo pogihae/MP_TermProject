@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nav.memo.MemoDetailActivity">
+    tools:context=".ui.memo.MemoDetailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <EditText
-        android:id="@+id/mod_memoTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:layout_marginLeft="20dp"
-         />
 
-    <EditText
-        android:id="@+id/mod_memoBody"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:text="Body"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-         />
+        <EditText
+            android:id="@+id/mod_memoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/mod_memoBody"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginLeft="20dp"
+            android:text="Body"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/ok_mod_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
-                android:text="수정"
-                 />
+                android:text="수정" />
 
             <Button
                 android:id="@+id/cancel_mod_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="취소"
-                 />
+                android:text="취소" />
         </LinearLayout>
     </LinearLayout>
 

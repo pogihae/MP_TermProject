@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.memo;
 
 import android.content.Context;
 import android.content.Intent;

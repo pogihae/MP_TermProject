@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetupActivity"
-    >
+    tools:context=".activities.SetupActivity">
 
 
     <ImageView
-        android:id="@+id/wave_background"
         android:layout_width="415dp"
         android:layout_height="310dp"
         android:translationZ="-10dp"

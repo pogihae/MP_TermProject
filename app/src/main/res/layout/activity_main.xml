@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BoardActivity">
+    tools:context=".activities.BoardActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
@@ -18,17 +17,16 @@
     </androidx.viewpager2.widget.ViewPager2>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        app:layout_anchor="@id/sliding_tabs"
-        app:layout_anchorGravity="right|end"
         app:fab_addButtonColorNormal="@color/white"
         app:fab_addButtonPlusIconColor="@color/black"
+        app:fab_labelsPosition="left"
+        app:layout_anchor="@id/sliding_tabs"
+        app:layout_anchorGravity="right|end"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:fab_labelsPosition="left">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_a"
@@ -43,7 +41,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/black"
             app:fab_icon="@drawable/ic_baseline_textsms_24"
-            app:fab_title="memo"/>
+            app:fab_title="memo" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
@@ -52,6 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fab_title="post"/>
+        app:fab_title="post" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

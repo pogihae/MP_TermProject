@@ -1,4 +1,4 @@
-package com.example.wiuh;
+package com.example.wiuh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.wiuh.R;
 import com.example.wiuh.model.WifiState;
-import com.example.wiuh.nav.community.AddPostActivity;
-import com.example.wiuh.nav.community.CommunityFragment;
-import com.example.wiuh.nav.memo.AddMemoActivity;
-import com.example.wiuh.nav.memo.MemoFragment;
+import com.example.wiuh.ui.community.AddPostActivity;
+import com.example.wiuh.ui.community.CommunityFragment;
+import com.example.wiuh.ui.memo.AddMemoActivity;
+import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.google.android.material.tabs.TabLayout;
@@ -72,20 +73,25 @@ public class BoardActivity extends AppCompatActivity {
             @Override
             public Fragment createFragment(int position) {
                 if (position == 0) return new MemoFragment();
-                else return new CommunityFragment();
+                else if (position == 1) return new CommunityFragment();
+                return new Fragment();
             }
 
             @Override
             public int getItemCount() {
-                return 2;
+                return 3;
             }
         });
 
-        final String[] tabNames = new String[]{"Memo", "Community"};
-        final int[] tabIcons = new int[]{R.drawable.ic_baseline_list_alt_24, R.drawable.ic_baseline_textsms_24};
+        //final String[] tabNames = new String[]{"Memo", "Community"};
+        final int[] tabIcons = new int[]{
+                R.drawable.ic_baseline_list_alt_24,
+                R.drawable.ic_baseline_textsms_24,
+                R.drawable.ic_home_black_24dp
+        };
 
         new TabLayoutMediator(mTabLayout, viewPager2, (tab, position) -> {
-            tab.setText(tabNames[position]);
+            //tab.setText(tabNames[position]);
             tab.setIcon(tabIcons[position]);
         }).attach();
     }
@@ -103,7 +109,6 @@ public class BoardActivity extends AppCompatActivity {
         int itemId = item.getItemId();
 
         if (itemId == R.id.logout) {
-            Toast.makeText(this, "로그아웃 선택", Toast.LENGTH_SHORT).show();
             FirebaseUtil.logout(this);
         } else if (itemId == R.id.goNotification) {
             Intent intent = new Intent(getApplicationContext(), SetupListActivity.class);

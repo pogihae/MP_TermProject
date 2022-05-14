@@ -1,4 +1,4 @@
-package com.example.wiuh;
+package com.example.wiuh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.auth.UserProfileChangeRequest;

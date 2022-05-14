@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BoardActivity">
+    tools:context=".activities.BoardActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/community_recyclerView"
@@ -23,7 +23,6 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

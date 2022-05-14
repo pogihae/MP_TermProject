@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="#1566e0">
@@ -59,7 +58,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -108,29 +106,28 @@
                 android:layout_height="wrap_content">
 
 
+                <EditText
+                    android:id="@+id/signup_pw2"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@android:color/transparent"
+                    android:hint="비밀번호를 재입력해주세요"
+                    android:inputType="textPassword"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/login_cursor_color"
+                    android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/signup_pw2"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="15dp"
-                android:background="@android:color/transparent"
-                android:hint="비밀번호를 재입력해주세요"
-                android:inputType="textPassword"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:textCursorDrawable="@drawable/login_cursor_color"
-                android:textSize="15sp" />
                 <ImageView
                     android:id="@+id/setImage"
                     android:layout_width="67dp"
                     android:layout_height="45dp"
-                    android:layout_weight="1.5"
                     android:layout_marginLeft="200dp"
+                    android:layout_weight="1.5"
                     android:scaleType="fitStart" />
             </FrameLayout>
         </RelativeLayout>
-
 
 
         <TextView
@@ -148,7 +145,6 @@
             android:textSize="15sp" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

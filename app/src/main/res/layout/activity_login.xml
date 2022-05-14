@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,7 +115,30 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/forgot_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="or"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <com.developer.gbuttons.GoogleSignInButton
+            android:id="@+id/btn_google_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="62dp"
+            android:layout_marginRight="62dp"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -133,26 +156,6 @@
             android:text="회원가입"
             android:textColor="#1566e0"
             android:textSize="10.5sp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="소셜 로그인으로 시작하기"
-                android:textColor="#aeaeae"
-                android:textSize="13.3sp"/>
-
-            <Button
-                android:id="@+id/btn_google_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/color5"
-                android:text="google login"/>
 
 
     </LinearLayout>

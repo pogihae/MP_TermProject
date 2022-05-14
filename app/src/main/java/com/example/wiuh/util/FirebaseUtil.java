@@ -3,7 +3,7 @@ package com.example.wiuh.util;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.wiuh.LoginActivity;
+import com.example.wiuh.activities.LoginActivity;
 import com.example.wiuh.model.WifiState;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

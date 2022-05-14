@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.community;
+package com.example.wiuh.ui.community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 
-public class PostActivity extends AppCompatActivity {
+public class PostDetailActivity extends AppCompatActivity {
     static final int RQ_MOD = 10;
 
     @Override

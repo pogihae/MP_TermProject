@@ -4,6 +4,7 @@ public class WifiState {
     private static final WifiState instance = new WifiState();
     private String SSID;
     private String MAC;
+
     private WifiState() {
     }
 

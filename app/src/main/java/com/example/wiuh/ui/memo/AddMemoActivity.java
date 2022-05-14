@@ -1,8 +1,10 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.memo;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
@@ -18,7 +20,7 @@ public class AddMemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        getSupportActionBar().setTitle("메모작성");
 
         findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());
     }
@@ -33,5 +35,14 @@ public class AddMemoActivity extends AppCompatActivity {
         FirebaseUtil.getMemoRef().push().setValue(memo);
 
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

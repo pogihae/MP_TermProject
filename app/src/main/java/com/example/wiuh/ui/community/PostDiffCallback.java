@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.community;
+package com.example.wiuh.ui.community;
 
 import androidx.recyclerview.widget.DiffUtil;
 

@@ -9,35 +9,41 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH">
-        <activity android:name=".SetupListActivity" />
+        <activity android:name=".activities.SetupListActivity" />
 
 
-        <activity android:name=".SetupActivity" />
-        <activity android:name=".BoardActivity" />
+        <activity android:name=".activities.SetupActivity" />
+        <activity android:name=".activities.BoardActivity" />
 
-        <activity android:name=".nav.memo.AddMemoActivity"
-            android:parentActivityName=".BoardActivity"/>
-        <activity android:name=".nav.community.AddPostActivity"
-            android:parentActivityName=".BoardActivity"/>
-        <activity android:name=".nav.memo.MemoModify"
-            android:parentActivityName=".BoardActivity"/>
-        <activity android:name=".nav.community.PostModify"
-            android:parentActivityName=".BoardActivity"/>
-        <activity android:name=".nav.community.PostActivity"
-            android:parentActivityName=".BoardActivity"/>
-        <activity android:name=".nav.memo.MemoDetailActivity"
-            android:parentActivityName=".BoardActivity"/>
-
-        <activity android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"/>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.memo.AddMemoActivity"
+            android:parentActivityName=".activities.BoardActivity" />
+        <activity
+            android:name=".ui.community.AddPostActivity"
+            android:parentActivityName=".activities.BoardActivity" />
+        <activity
+            android:name=".ui.memo.MemoModify"
+            android:parentActivityName=".activities.BoardActivity" />
+        <activity
+            android:name=".ui.community.PostModify"
+            android:parentActivityName=".activities.BoardActivity" />
+        <activity
+            android:name=".ui.community.PostDetailActivity"
+            android:parentActivityName=".activities.BoardActivity" />
+        <activity
+            android:name=".ui.memo.MemoDetailActivity"
+            android:parentActivityName=".activities.BoardActivity" />
+
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:parentActivityName=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.wiuh;
+package com.example.wiuh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,10 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.example.wiuh.R;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.ToastUtil;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
@@ -46,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.app_blue));
         getSupportActionBar().hide();
 
         //permission & wifi info observation
