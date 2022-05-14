@@ -39,6 +39,8 @@ dependencies {
     implementation("se.warting.permissionsui:permissionsui:0.1.13")
     implementation 'com.github.pwittchen:reactivewifi-rx2:0.3.0'
 
+    implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
+
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
     implementation 'androidx.cardview:cardview:1.0.0'
