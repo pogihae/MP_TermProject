@@ -4,27 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f3edd8"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".nav.memo.MemoFragment">
+    tools:context=".ui.memo.MemoFragment">
 
-   <TextView
-       android:id="@+id/toptextview"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:padding="10dp"
-       android:text="이곳에서\n작성한 메모에요!"
-       android:textColor="@color/black"
-       android:textSize="25sp"
-       android:textStyle="bold" />
+    <TextView
+        android:id="@+id/toptextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="이곳에서\n작성한 메모에요!"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/memo_recyclerview"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/toptextview"
-       android:scrollbars="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/memo_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toptextview"
+        android:scrollbars="vertical">
 
-   </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

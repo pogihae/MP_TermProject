@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.community;
+package com.example.wiuh.ui.community;
 
 import android.content.Context;
 import android.content.Intent;
@@ -70,14 +70,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public void onBind(Post p) {
             textView.setText(p.title);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, PostActivity.class);
+                Intent intent = new Intent(context, PostDetailActivity.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("title",p.title);
-                bundle.putString("body",p.body);
-                bundle.putString("author",p.author);
-                bundle.putString("uid",p.uid);
-                bundle.putString("key",p.key);
+                bundle.putString("title", p.title);
+                bundle.putString("body", p.body);
+                bundle.putString("author", p.author);
+                bundle.putString("uid", p.uid);
+                bundle.putString("key", p.key);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

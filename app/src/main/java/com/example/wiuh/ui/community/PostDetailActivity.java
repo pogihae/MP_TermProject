@@ -1,8 +1,9 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.community;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,38 +14,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 
-public class MemoDetailActivity extends AppCompatActivity {
+public class PostDetailActivity extends AppCompatActivity {
     static final int RQ_MOD = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memo);
+        setContentView(R.layout.activity_bulletin);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String title = bundle.getString("title");
         String body = bundle.getString("body");
+        String author = bundle.getString("author");
+        String uid = bundle.getString("uid");
         String key = bundle.getString("key");
 
-        TextView bulletinTitle = findViewById(R.id.memoTitle);
-        TextView bulletinBody = findViewById(R.id.memoBody);
+        TextView bulletinTitle = findViewById(R.id.bulletinTitle);
+        TextView bulletinBody = findViewById(R.id.bulletinBody);
+        TextView bulletinAuth = findViewById(R.id.bulletinAuth);
+        TextView bulletinUid = findViewById(R.id.bulletinUid);
 
         bulletinTitle.setText(title);
         bulletinBody.setText(body);
+        bulletinAuth.setText(author);
+        bulletinUid.setText(uid);
 
-        Button delButton = findViewById(R.id.del_Button);
+        Button delButton = findViewById(R.id.btn_delpost);
+        Button modButton = findViewById(R.id.btn_modpost);
+
+        if (!isAuthor(uid)) {
+            delButton.setVisibility(View.INVISIBLE);
+            modButton.setVisibility(View.INVISIBLE);
+        }
+
         delButton.setOnClickListener(view -> {
-            FirebaseUtil.getMemoRef()
+            FirebaseUtil.getPostRef()
                     .child(key)
                     .removeValue();
             finish();
         });
 
-        Button modButton = findViewById(R.id.mod_button);
-
-        modButton.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getBaseContext(), MemoModify.class);
+        modButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(getBaseContext(), PostModify.class);
             Bundle bundle1 = new Bundle();
 
             bundle1.putString("title", title);
@@ -54,38 +66,38 @@ public class MemoDetailActivity extends AppCompatActivity {
             intent1.putExtras(bundle1);
             startActivityForResult(intent1, RQ_MOD);
         });
-
-
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MemoModify.RS_SUC) {
-            if (resultCode == RQ_MOD) {
+        if (requestCode == RQ_MOD) {
+            if (resultCode == PostModify.RS_SUC) {
 
                 Bundle resultBundle = data.getExtras();
                 String resultTitle = resultBundle.getString("resultTitle");
                 String resultBody = resultBundle.getString("resultBody");
 
-                TextView title = findViewById(R.id.memoTitle);
-                TextView body = findViewById(R.id.memoBody);
+                TextView title = findViewById(R.id.bulletinTitle);
+                TextView body = findViewById(R.id.bulletinBody);
 
                 title.setText(resultTitle);
                 body.setText(resultBody);
 
-                Toast.makeText(getApplicationContext(), resultTitle + resultBody, Toast.LENGTH_SHORT).show();
-            }
-            else {   // RESULT_CANCEL
+            } else {   // RESULT_CANCEL
                 Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    private boolean isAuthor(String uid) {
+        String curUserUid = FirebaseUtil.getCurUser().getUid();
+        return uid.equals(curUserUid);
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }

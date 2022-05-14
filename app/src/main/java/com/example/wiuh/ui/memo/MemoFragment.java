@@ -1,6 +1,5 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.memo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ import java.util.List;
 
 public class MemoFragment extends Fragment {
     private MemoAdapter recycleAdapter;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MemoFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         StaggeredGridLayoutManager staggeredGridLayoutManager;
-        staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -45,7 +45,7 @@ public class MemoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Memo> list = new ArrayList<>();
-                for(DataSnapshot ds : snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Memo m = ds.getValue(Memo.class);
                     m.setKey(ds.getKey());
                     list.add(m);
@@ -59,11 +59,8 @@ public class MemoFragment extends Fragment {
             }
         });
 
-
-
         return root;
     }
-
 
 
 }

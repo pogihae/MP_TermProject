@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nav.community.PostActivity">
+    tools:context=".ui.community.PostDetailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,15 +20,15 @@
             android:text="Title"
             android:textColor="@color/black"
             android:textSize="40dp" />
+
         <TextView
             android:id="@+id/bulletinAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="15dp"
             android:text="Auth"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:padding="15dp"
-            />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/bulletinBody"
@@ -41,7 +41,6 @@
             android:textSize="20dp" />
 
 
-
         <TextView
             android:id="@+id/bulletinUid"
             android:layout_width="match_parent"
@@ -49,30 +48,28 @@
             android:layout_marginLeft="20dp"
             android:text="Uid"
             android:textColor="@color/black"
-            android:textSize="20dp"
-             />
+            android:textSize="20dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_delpost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="110dp"
-            android:text="Delete"
-             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_modpost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Modify"
-             />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_delpost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="10dp"
+                android:text="Delete" />
+
+            <Button
+                android:id="@+id/btn_modpost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Modify" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

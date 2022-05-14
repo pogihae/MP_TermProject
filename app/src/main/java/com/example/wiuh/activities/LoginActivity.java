@@ -1,15 +1,15 @@
-package com.example.wiuh;
+package com.example.wiuh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.example.wiuh.R;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.ToastUtil;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
@@ -30,16 +30,15 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
 
 /**
  * LoginActivity
- *
+ * <p>
  * 시작
  * 권한, 로그인 확인
- *
+ * <p>
  * todo: Splash Activity 추가 후 권한, 네트워크 확인 등을 넘기기
- *
- * */
+ */
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG         = LoginActivity.class.getSimpleName();
-    private static final String CHANNEL_ID  = "WIFI_INFO";
+    private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final String CHANNEL_ID = "WIFI_INFO";
 
     private FirebaseAuth auth;
 
@@ -49,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.app_blue));
         getSupportActionBar().hide();
 
         //permission & wifi info observation
@@ -62,15 +63,15 @@ public class LoginActivity extends AppCompatActivity {
 
         //already login
         auth = FirebaseAuth.getInstance();
-        if(auth.getCurrentUser() != null) startMain();
+        if (auth.getCurrentUser() != null) startMain();
 
         btnSignIn = findViewById(R.id.btn_login);
         btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
         btnSignIn.setProgress(0);
 
-        btnSignIn.setOnClickListener(v->emailLogin());
-        findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
-        findViewById(R.id.btn_signup).setOnClickListener(v->startSignUp());
+        btnSignIn.setOnClickListener(v -> emailLogin());
+        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
+        findViewById(R.id.btn_signup).setOnClickListener(v -> startSignUp());
     }
 
     private void startWifiInfoSubscription() {
@@ -87,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void startSignUp() {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
@@ -96,16 +98,18 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setEnabled(false);
         btnSignIn.setProgress(1);
 
-        String strEmail = ((EditText)findViewById(R.id.et_userID)).getText().toString();
-        String strPwd   = ((EditText)findViewById(R.id.et_password)).getText().toString();
+        String strEmail = ((EditText) findViewById(R.id.et_userID)).getText().toString();
+        String strPwd = ((EditText) findViewById(R.id.et_password)).getText().toString();
 
-        auth.signInWithEmailAndPassword(strEmail,strPwd)
-                     .addOnCompleteListener(LoginActivity.this, task -> {
-                         btnSignIn.setProgress(100);
-                        if(task.isSuccessful()) startMain();
-                        else ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
-                        });
+        auth.signInWithEmailAndPassword(strEmail, strPwd)
+                .addOnCompleteListener(LoginActivity.this, task -> {
+                    btnSignIn.setProgress(100);
+                    if (task.isSuccessful()) startMain();
+                    else
+                        ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
+                });
     }
+
     private void googleLogin() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -119,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 123) {
+        if (requestCode == 123) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             GoogleSignInAccount account;
             try {
@@ -128,7 +132,8 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithCredential(credential)
                         .addOnCompleteListener(this, t -> {
                             if (t.isSuccessful()) startMain();
-                            else ToastUtil.showText(this, Objects.requireNonNull(t.getException()).getMessage());
+                            else
+                                ToastUtil.showText(this, Objects.requireNonNull(t.getException()).getMessage());
                         });
             } catch (ApiException e) {
                 e.printStackTrace();

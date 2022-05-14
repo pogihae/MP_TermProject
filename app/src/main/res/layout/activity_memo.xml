@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nav.memo.MemoDetailActivity">
+    tools:context=".ui.memo.MemoDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,22 +30,24 @@
             android:text="Body"
             android:textColor="@color/black"
             android:textSize="20dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/del_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
-            android:layout_marginRight="20dp"
-            android:text="삭제" />
 
-        <Button
-            android:id="@+id/mod_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정" />
+            <Button
+                android:id="@+id/del_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginRight="20dp"
+                android:text="삭제" />
+
+            <Button
+                android:id="@+id/mod_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정" />
         </LinearLayout>
 
     </LinearLayout>

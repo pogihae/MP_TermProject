@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.memo;
 
 import androidx.recyclerview.widget.DiffUtil;
 
@@ -30,6 +30,7 @@ public class MemoDiffCallback extends DiffUtil.Callback {
         return mOldMemoList.get(oldItemPosition)
                 .equals(mNewMemoList.get(newItemPosition));
     }
+
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         return false;

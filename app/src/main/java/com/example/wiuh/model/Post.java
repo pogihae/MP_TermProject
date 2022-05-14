@@ -15,7 +15,8 @@ public class Post {
     @Exclude
     public String key;
 
-    public Post() {}
+    public Post() {
+    }
 
     public Post(String uid, String title, String author, String body) {
         this.uid = uid;
@@ -24,20 +25,20 @@ public class Post {
         this.body = body;
     }
 
-
-    @Exclude
-    public void setKey(String key) {
-        this.key = key;
-    }
     @Exclude
     public String getKey() {
         return key;
     }
 
     @Exclude
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    @Exclude
     @Override
     public boolean equals(Object other) {
-        if(!(other instanceof Post)) return false;
+        if (!(other instanceof Post)) return false;
         return key.equals(((Post) other).getKey());
     }
 }

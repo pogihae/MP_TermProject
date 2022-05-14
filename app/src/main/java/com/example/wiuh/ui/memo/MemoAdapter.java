@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.memo;
+package com.example.wiuh.ui.memo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
+public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
 
     private final List<Memo> localMemoList;
     private Context context;
@@ -35,7 +35,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.memo_layout, parent, false);
 
-        return new ViewHolder(view,context);
+        return new ViewHolder(view, context);
     }
 
 
@@ -44,8 +44,8 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
         holder.onBind(localMemoList.get(position));
 
         //set random color for every memo
-        int colorcode=getRandomColor();
-        holder.mnote.setBackgroundColor(holder.itemView.getResources().getColor(colorcode,null));
+        int colorcode = getRandomColor();
+        holder.mnote.setBackgroundColor(holder.itemView.getResources().getColor(colorcode, null));
     }
 
     @Override
@@ -66,18 +66,34 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
         diffResult.dispatchUpdatesTo(this);
     }
 
+    private int getRandomColor() {
+        List<Integer> colorcode = new ArrayList<>();
+        colorcode.add(R.color.gray);
+        colorcode.add(R.color.pink);
+        colorcode.add(R.color.green);
+        colorcode.add(R.color.sand);
+        colorcode.add(R.color.color1);
+        colorcode.add(R.color.color2);
+        colorcode.add(R.color.color4);
+
+        Random random = new Random();
+        int number = random.nextInt(colorcode.size());
+        return colorcode.get(number);
+
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
         private final TextView notetitle;
         private final TextView notecontent;
         LinearLayout mnote;
 
-        public ViewHolder(@NonNull View itemView,Context context) {
+        public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             notetitle = itemView.findViewById(R.id.memo_title);
-            notecontent=itemView.findViewById(R.id.memo_content);
-            mnote=itemView.findViewById(R.id.memo);
-            this.context=context;
+            notecontent = itemView.findViewById(R.id.memo_content);
+            mnote = itemView.findViewById(R.id.memo);
+            this.context = context;
 
         }
 
@@ -88,29 +104,13 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
                 Intent intent = new Intent(context, MemoDetailActivity.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("title",m.title);
-                bundle.putString("body",m.body);
-                bundle.putString("key",m.key);
+                bundle.putString("title", m.title);
+                bundle.putString("body", m.body);
+                bundle.putString("key", m.key);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             });
         }
-    }
-    private int getRandomColor()
-    {
-        List<Integer> colorcode=new ArrayList<>();
-       colorcode.add(R.color.gray);
-       colorcode.add(R.color.pink);
-       colorcode.add(R.color.green);
-       colorcode.add(R.color.sand);
-       colorcode.add(R.color.color1);
-       colorcode.add(R.color.color2);
-       colorcode.add(R.color.color4);
-
-        Random random=new Random();
-        int number=random.nextInt(colorcode.size());
-        return colorcode.get(number);
-
     }
 }

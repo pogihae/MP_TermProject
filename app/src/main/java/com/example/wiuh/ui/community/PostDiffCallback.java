@@ -1,4 +1,4 @@
-package com.example.wiuh.nav.community;
+package com.example.wiuh.ui.community;
 
 import androidx.recyclerview.widget.DiffUtil;
 
@@ -30,6 +30,7 @@ public class PostDiffCallback extends DiffUtil.Callback {
         return mOldPostList.get(oldItemPosition)
                 .equals(mNewPostList.get(newItemPosition));
     }
+
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         return false;
