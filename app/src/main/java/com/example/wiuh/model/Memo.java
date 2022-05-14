@@ -9,8 +9,11 @@ public class Memo {
     public String title;
     public String author;
     public String body;
+    @Exclude
+    public String key;
 
-    public Memo() {}
+    public Memo() {
+    }
 
     public Memo(String uid, String title, String author, String body) {
         this.uid = uid;
@@ -20,19 +23,19 @@ public class Memo {
     }
 
     @Exclude
-    public String key;
+    public String getKey() {
+        return key;
+    }
+
     @Exclude
     public void setKey(String key) {
         this.key = key;
     }
-    @Exclude
-    public String getKey() {
-        return key;
-    }
+
     @Exclude
     @Override
     public boolean equals(Object other) {
-        if(!(other instanceof Memo)) return false;
+        if (!(other instanceof Memo)) return false;
         return key.equals(((Memo) other).getKey());
     }
 }

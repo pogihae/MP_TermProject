@@ -12,11 +12,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * FirebaseUtil
- *
+ * <p>
  * Real time DB 접근
  * FirebaseUser 접근
- *
- * */
+ */
 public class FirebaseUtil {
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -24,11 +23,13 @@ public class FirebaseUtil {
         return rootRef.child("POST")
                 .child(WifiState.getMAC());
     }
+
     public static DatabaseReference getMemoRef() {
         return rootRef.child("MEMO")
                 .child(getCurUser().getUid())
                 .child(WifiState.getMAC());
     }
+
     public static FirebaseUser getCurUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }

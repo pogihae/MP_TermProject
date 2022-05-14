@@ -73,11 +73,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 Intent intent = new Intent(context, PostActivity.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("title",p.title);
-                bundle.putString("body",p.body);
-                bundle.putString("author",p.author);
-                bundle.putString("uid",p.uid);
-                bundle.putString("key",p.key);
+                bundle.putString("title", p.title);
+                bundle.putString("body", p.body);
+                bundle.putString("author", p.author);
+                bundle.putString("uid", p.uid);
+                bundle.putString("key", p.key);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

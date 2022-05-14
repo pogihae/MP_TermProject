@@ -15,11 +15,10 @@ import java.util.Objects;
 
 /**
  * SetUpActivity
- *
+ * <p>
  * MainActivity 에서 시작됨
  * Nickname 및 세부 설정
- *
- * */
+ */
 public class SetupActivity extends AppCompatActivity {
 
     @Override
@@ -28,13 +27,13 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        Button btnNicknameSubmit    = findViewById(R.id.GoToMain);
+        Button btnNicknameSubmit = findViewById(R.id.GoToMain);
         Button NotificationList = findViewById(R.id.notification_list);
-        EditText etNickname         = findViewById(R.id.nickname_edit);
+        EditText etNickname = findViewById(R.id.nickname_edit);
 
         btnNicknameSubmit.setOnClickListener(v -> {
             String nick = etNickname.getText().toString();
-            if(nick.matches("")){
+            if (nick.matches("")) {
                 ToastUtil.showText(getApplicationContext(), "닉네임을 입력하세요");
                 return;
             }

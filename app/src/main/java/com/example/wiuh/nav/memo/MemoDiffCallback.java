@@ -30,6 +30,7 @@ public class MemoDiffCallback extends DiffUtil.Callback {
         return mOldMemoList.get(oldItemPosition)
                 .equals(mNewMemoList.get(newItemPosition));
     }
+
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         return false;

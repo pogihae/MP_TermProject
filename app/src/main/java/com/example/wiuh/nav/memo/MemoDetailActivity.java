@@ -56,7 +56,6 @@ public class MemoDetailActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     @Override
@@ -76,8 +75,7 @@ public class MemoDetailActivity extends AppCompatActivity {
                 body.setText(resultBody);
 
                 Toast.makeText(getApplicationContext(), resultTitle + resultBody, Toast.LENGTH_SHORT).show();
-            }
-            else {   // RESULT_CANCEL
+            } else {   // RESULT_CANCEL
                 Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
             }
         }
@@ -85,7 +83,7 @@ public class MemoDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }

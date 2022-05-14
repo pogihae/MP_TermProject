@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
         Button delButton = findViewById(R.id.btn_delpost);
         Button modButton = findViewById(R.id.btn_modpost);
 
-        if(!isAuthor(uid)) {
+        if (!isAuthor(uid)) {
             delButton.setVisibility(View.INVISIBLE);
             modButton.setVisibility(View.INVISIBLE);
         }
@@ -84,8 +84,7 @@ public class PostActivity extends AppCompatActivity {
                 title.setText(resultTitle);
                 body.setText(resultBody);
 
-            }
-            else {   // RESULT_CANCEL
+            } else {   // RESULT_CANCEL
                 Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
             }
         }
@@ -98,7 +97,7 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }
