@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SetupActivity">
+
+
+    <TextView
+        android:id="@+id/app_infomation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="14dp"
+        android:text="앱 정보"
+        android:textColor="@color/darkgrey"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/ourTeamInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/push_switch" />
+
+    <EditText
+        android:id="@+id/nicknameEdit"
+        android:layout_width="186dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/edittext_border"
+        android:gravity="center"
+        android:hint="@string/nickname"
+        android:textColor='@color/black'
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/line1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <TextView
+        android:id="@+id/set_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="21dp"
+        android:text="알림설정"
+        android:textColor="@color/darkgrey"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/push_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="11dp"
+        android:background="@color/app_blue"
+        app:layout_constraintBottom_toTopOf="@+id/set_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nicknameEdit" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="415dp"
+        android:layout_height="65dp"
+        android:background="@color/app_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ourTeamInfo" />
+
+    <TextView
+        android:id="@+id/push_notification"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="240dp"
+        android:text="푸시알림"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/push_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_notification" />
+
+    <Switch
+        android:id="@+id/push_switch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="96dp"
+        android:checked="false"
+        android:theme="@style/PushSwitch"
+        app:layout_constraintBottom_toTopOf="@+id/app_infomation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/push_notification"
+        app:layout_constraintTop_toBottomOf="@+id/set_notification" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/app_blue"
+        app:layout_constraintBottom_toTopOf="@+id/nicknameEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wiAreUHere" />
+
+    <TextView
+        android:id="@+id/wiAreUHere"
+        android:layout_width="314dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="35dp"
+        android:text="Wi \nAre U\nHere?"
+        android:textColor="@color/app_blue"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/line2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ourTeamInfo"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:text="Developed by 김예찬, 김윤호, 민지원, 박민석, 조연겸\n\nMajoring in software at Gachon University"
+        app:layout_constraintBottom_toTopOf="@+id/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_infomation" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

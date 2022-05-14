@@ -14,12 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH">
+        <activity
+            android:name=".activities.PersonalSetupActivity"
+            android:exported="false" />
         <activity android:name=".activities.SetupListActivity" />
-
-
         <activity android:name=".activities.SetupActivity" />
         <activity android:name=".activities.BoardActivity" />
-
         <activity
             android:name=".ui.memo.AddMemoActivity"
             android:parentActivityName=".activities.BoardActivity" />
@@ -38,7 +38,6 @@
         <activity
             android:name=".ui.memo.MemoDetailActivity"
             android:parentActivityName=".activities.BoardActivity" />
-
         <activity
             android:name=".activities.SignUpActivity"
             android:parentActivityName=".activities.LoginActivity" />
@@ -47,9 +46,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
+
 </manifest>
