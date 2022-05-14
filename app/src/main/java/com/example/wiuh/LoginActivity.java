@@ -2,11 +2,14 @@ package com.example.wiuh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.ToastUtil;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
@@ -40,10 +43,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    private ActionProcessButton btnSignIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         //permission & wifi info observation
         registerForActivityResult(
@@ -58,7 +64,11 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) startMain();
 
-        findViewById(R.id.btn_login).setOnClickListener(v->emailLogin());
+        btnSignIn = findViewById(R.id.btn_login);
+        btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
+        btnSignIn.setProgress(0);
+
+        btnSignIn.setOnClickListener(v->emailLogin());
         findViewById(R.id.btn_google_login).setOnClickListener(v->googleLogin());
         findViewById(R.id.btn_signup).setOnClickListener(v->startSignUp());
     }
@@ -73,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, BoardActivity.class);
         startActivity(intent);
         finish();
     }
@@ -83,11 +93,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void emailLogin() {
+        btnSignIn.setEnabled(false);
+        btnSignIn.setProgress(1);
+
         String strEmail = ((EditText)findViewById(R.id.et_userID)).getText().toString();
         String strPwd   = ((EditText)findViewById(R.id.et_password)).getText().toString();
 
         auth.signInWithEmailAndPassword(strEmail,strPwd)
                      .addOnCompleteListener(LoginActivity.this, task -> {
+                         btnSignIn.setProgress(100);
                         if(task.isSuccessful()) startMain();
                         else ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
                         });

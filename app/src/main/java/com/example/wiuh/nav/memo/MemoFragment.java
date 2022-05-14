@@ -45,13 +45,11 @@ public class MemoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Memo> list = new ArrayList<>();
-
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     Memo m = ds.getValue(Memo.class);
                     m.setKey(ds.getKey());
                     list.add(m);
                 }
-
                 recycleAdapter.updateList(list);
             }
 
@@ -61,13 +59,11 @@ public class MemoFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startAddMemo());
+
 
         return root;
     }
 
-    private void startAddMemo() {
-        Intent intent = new Intent(getContext(), AddMemoActivity.class);
-        startActivity(intent);
-    }
+
+
 }

@@ -2,16 +2,18 @@ package com.example.wiuh.nav.memo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 
-public class MemoActivity extends AppCompatActivity {
+public class MemoDetailActivity extends AppCompatActivity {
     static final int RQ_MOD = 10;
 
     @Override
@@ -79,5 +81,14 @@ public class MemoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

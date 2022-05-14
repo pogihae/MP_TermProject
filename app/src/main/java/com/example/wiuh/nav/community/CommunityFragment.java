@@ -3,6 +3,7 @@ package com.example.wiuh.nav.community;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -53,15 +54,7 @@ public class CommunityFragment extends Fragment {
                 ToastUtil.showText(getContext(), error.getMessage());
             }
         });
-
-        root.findViewById(R.id.btn_addPost).setOnClickListener(v -> startAddPost());
-
         return root;
-    }
-
-    private void startAddPost() {
-        Intent intent = new Intent(getContext(), AddPostActivity.class);
-        startActivity(intent);
     }
 }
 

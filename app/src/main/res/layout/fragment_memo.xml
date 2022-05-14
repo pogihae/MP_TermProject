@@ -7,21 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".nav.memo.MemoFragment">
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/addMemo_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_marginBottom="90dp"
-    android:layout_marginRight="30dp"
-    android:translationZ="10dp"
-    android:layout_gravity="bottom|end"
-    android:src="@drawable/plus"
-    app:backgroundTint="@color/grey"
-    >
-</com.google.android.material.floatingactionbutton.FloatingActionButton>
-
    <TextView
        android:id="@+id/toptextview"
        android:layout_width="match_parent"
