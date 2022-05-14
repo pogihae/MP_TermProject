@@ -59,13 +59,11 @@ public class MemoFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.addMemo_btn).setOnClickListener(v -> startAddMemo());
+
 
         return root;
     }
 
-    private void startAddMemo() {
-        Intent intent = new Intent(getContext(), AddMemoActivity.class);
-        startActivity(intent);
-    }
+
+
 }

@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.WiUH" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/darkgrey</item> <!-- 헤더 -->
-        <item name="colorPrimaryVariant">@color/darkgrey</item> <!-- 위 시간 표시줄 -->
+        <item name="colorPrimary">@color/sky_blue</item> <!-- 헤더 -->
+        <item name="colorPrimaryVariant">@color/sky_blue</item> <!-- 위 시간 표시줄 -->
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

@@ -85,7 +85,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder>{
             notetitle.setText(m.title);
             notecontent.setText(m.body);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, MemoActivity.class);
+                Intent intent = new Intent(context, MemoDetailActivity.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("title",m.title);

@@ -19,15 +19,23 @@
 
 
         <activity android:name=".SetupActivity" />
-        <activity android:name=".nav.community.AddPostActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".nav.memo.AddMemoActivity" />
-        <activity android:name=".nav.memo.MemoModify" />
-        <activity android:name=".nav.community.PostModify" />
-
-        <activity android:name=".nav.memo.MemoActivity"/>
-        <activity android:name=".nav.community.PostActivity"/>
         <activity android:name=".BoardActivity" />
+
+        <activity android:name=".nav.memo.AddMemoActivity"
+            android:parentActivityName=".BoardActivity"/>
+        <activity android:name=".nav.community.AddPostActivity"
+            android:parentActivityName=".BoardActivity"/>
+        <activity android:name=".nav.memo.MemoModify"
+            android:parentActivityName=".BoardActivity"/>
+        <activity android:name=".nav.community.PostModify"
+            android:parentActivityName=".BoardActivity"/>
+        <activity android:name=".nav.community.PostActivity"
+            android:parentActivityName=".BoardActivity"/>
+        <activity android:name=".nav.memo.MemoDetailActivity"
+            android:parentActivityName=".BoardActivity"/>
+
+        <activity android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

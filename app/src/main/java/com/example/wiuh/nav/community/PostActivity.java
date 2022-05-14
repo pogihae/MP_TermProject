@@ -2,11 +2,13 @@ package com.example.wiuh.nav.community;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
@@ -92,5 +94,14 @@ public class PostActivity extends AppCompatActivity {
     private boolean isAuthor(String uid) {
         String curUserUid = FirebaseUtil.getCurUser().getUid();
         return uid.equals(curUserUid);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
