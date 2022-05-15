@@ -39,13 +39,11 @@ public class PostDetailActivity extends AppCompatActivity {
         TextView bulletinTitle = findViewById(R.id.bulletinTitle);
         TextView bulletinBody = findViewById(R.id.bulletinBody);
         TextView bulletinAuth = findViewById(R.id.bulletinAuth);
-        TextView bulletinUid = findViewById(R.id.bulletinUid);
         TextView bulletinLike = findViewById(R.id.bulletinLike);
 
         bulletinTitle.setText(title);
         bulletinBody.setText(body);
         bulletinAuth.setText(author);
-        bulletinUid.setText(uid);
         bulletinLike.setText(like.toString());
 
         Button likeButton = findViewById(R.id.btn_LikePost);

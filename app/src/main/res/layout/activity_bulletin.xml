@@ -41,15 +41,6 @@
             android:textSize="20dp" />
 
 
-        <TextView
-            android:id="@+id/bulletinUid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Uid"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +50,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
-                android:layout_marginTop="10dp"
                 android:text="12345" />
 
             <Button
@@ -67,10 +57,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:text="Like" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
