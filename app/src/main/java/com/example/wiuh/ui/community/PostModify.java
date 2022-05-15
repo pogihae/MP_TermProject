@@ -25,6 +25,7 @@ public class PostModify extends AppCompatActivity {
         String title = bundle.getString("title");
         String body = bundle.getString("body");
         String key = bundle.getString("key");
+        Integer like = bundle.getInt("like");
 
         EditText bulletinTitle = findViewById(R.id.mod_bulletinTitle);
         EditText bulletinBody = findViewById(R.id.mod_bulletinBody);
@@ -39,7 +40,7 @@ public class PostModify extends AppCompatActivity {
             String title1 = bulletinTitle.getText().toString();
             String body1 = bulletinBody.getText().toString();
 
-            Post post = new Post(curUser.getUid(), title1, curUser.getDisplayName(), body1);
+            Post post = new Post(curUser.getUid(), title1, curUser.getDisplayName(), body1, like);
             FirebaseUtil.getPostRef().child(key).setValue(post);
 
             Intent resultIntent = new Intent();

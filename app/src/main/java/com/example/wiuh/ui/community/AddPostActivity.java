@@ -29,7 +29,7 @@ public class AddPostActivity extends AppCompatActivity {
         String title = ((EditText) findViewById(R.id.et_postTitle)).getText().toString();
         String body = ((EditText) findViewById(R.id.et_postBody)).getText().toString();
 
-        Post post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body);
+        Post post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, 0);
         FirebaseUtil.getPostRef().push().setValue(post);
 
         finish();

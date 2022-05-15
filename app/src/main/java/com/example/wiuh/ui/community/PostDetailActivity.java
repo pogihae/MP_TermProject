@@ -12,7 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
+import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.util.ToastUtil;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PostDetailActivity extends AppCompatActivity {
     static final int RQ_MOD = 10;
@@ -29,24 +34,52 @@ public class PostDetailActivity extends AppCompatActivity {
         String author = bundle.getString("author");
         String uid = bundle.getString("uid");
         String key = bundle.getString("key");
+        AtomicReference<Integer> like = new AtomicReference<>(bundle.getInt("like"));
 
         TextView bulletinTitle = findViewById(R.id.bulletinTitle);
         TextView bulletinBody = findViewById(R.id.bulletinBody);
         TextView bulletinAuth = findViewById(R.id.bulletinAuth);
         TextView bulletinUid = findViewById(R.id.bulletinUid);
+        TextView bulletinLike = findViewById(R.id.bulletinLike);
 
         bulletinTitle.setText(title);
         bulletinBody.setText(body);
         bulletinAuth.setText(author);
         bulletinUid.setText(uid);
+        bulletinLike.setText(like.toString());
 
+        Button likeButton = findViewById(R.id.btn_LikePost);
+        likeButton.setVisibility(View.INVISIBLE);
+        likeButton.setSelected(false);
         Button delButton = findViewById(R.id.btn_delpost);
         Button modButton = findViewById(R.id.btn_modpost);
 
         if (!isAuthor(uid)) {
+            likeButton.setVisibility(View.VISIBLE);
             delButton.setVisibility(View.INVISIBLE);
             modButton.setVisibility(View.INVISIBLE);
         }
+
+        likeButton.setOnClickListener(view -> {
+            FirebaseUser curUser = FirebaseUtil.getCurUser();
+            Post post;
+            if(!likeButton.isSelected()){
+                like.set(like.get() + 1);
+                post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
+                FirebaseUtil.getPostRef().child(key).setValue(post);
+                bulletinLike.setText(like.get().toString());
+                ToastUtil.showText(this, "좋아요");
+                likeButton.setSelected(true);
+            }
+            else {
+                like.set(like.get() - 1);
+                post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
+                FirebaseUtil.getPostRef().child(key).setValue(post);
+                bulletinLike.setText(like.get().toString());
+                ToastUtil.showText(this, "좋아요 취소");
+                likeButton.setSelected(false);
+            }
+        });
 
         delButton.setOnClickListener(view -> {
             FirebaseUtil.getPostRef()
@@ -62,6 +95,7 @@ public class PostDetailActivity extends AppCompatActivity {
             bundle1.putString("title", title);
             bundle1.putString("body", body);
             bundle1.putString("key", key);
+            bundle1.putInt("like", like.get());
 
             intent1.putExtras(bundle1);
             startActivityForResult(intent1, RQ_MOD);
