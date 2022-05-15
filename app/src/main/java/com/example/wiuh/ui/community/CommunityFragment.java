@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
@@ -33,7 +33,7 @@ public class CommunityFragment extends Fragment {
 
         RecyclerView recyclerView = root.findViewById(R.id.community_recyclerView);
         recyclerView.setAdapter(recycleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         FirebaseUtil.getPostRef().addValueEventListener(new ValueEventListener() {
             @Override

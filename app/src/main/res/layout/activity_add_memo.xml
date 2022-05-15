@@ -6,15 +6,15 @@
     tools:context=".ui.memo.AddMemoActivity">
 
 
-        <EditText
-            android:id="@+id/add_title_memo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이곳에 제목을 입력해주세요"
-            android:paddingTop="12dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <EditText
+        android:id="@+id/add_title_memo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이곳에 제목을 입력해주세요"
+        android:paddingTop="12dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/add_content_memo"

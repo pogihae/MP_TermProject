@@ -12,8 +12,6 @@ import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class AddPostActivity extends AppCompatActivity {
 
     @Override

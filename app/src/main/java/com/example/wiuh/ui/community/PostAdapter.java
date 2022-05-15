@@ -59,16 +59,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
-        private final TextView textView;
+        private final TextView title;
+        private final TextView body;
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
-            textView = itemView.findViewById(R.id.name);
+            title = itemView.findViewById(R.id.name);
+            body = itemView.findViewById(R.id.body);
             this.context = context;
         }
 
         public void onBind(Post p) {
-            textView.setText(p.title);
+            title.setText(p.title);
+            body.setText(p.body);
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(context, PostDetailActivity.class);
                 Bundle bundle = new Bundle();
