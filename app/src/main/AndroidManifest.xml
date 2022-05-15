@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wiuh">
+    package="com.example.wiuh" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,11 +13,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WiUH">
+        android:theme="@style/Theme.WiUH" >
+        <activity
+            android:name=".activities.NotificationHistoryActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.PersonalSetupActivity"
             android:exported="false" />
-        <activity android:name=".activities.SetupListActivity" />
         <activity android:name=".activities.SetupActivity" />
         <activity android:name=".activities.BoardActivity" />
         <activity
@@ -43,7 +45,7 @@
             android:parentActivityName=".activities.LoginActivity" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

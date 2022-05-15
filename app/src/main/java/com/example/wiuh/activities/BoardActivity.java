@@ -137,12 +137,12 @@ public class BoardActivity extends AppCompatActivity {
         if (itemId == R.id.logout) {
             FirebaseUtil.logout(this);
         } else if (itemId == R.id.goNotification) {
-            Intent intent = new Intent(getApplicationContext(), SetupListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NotificationHistoryActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
-            startActivity(new Intent(this, SetupActivity.class));
+            startActivity(new Intent(this, PersonalSetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            Toast.makeText(this, "와이파이 등록 선택", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, PersonalSetupActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

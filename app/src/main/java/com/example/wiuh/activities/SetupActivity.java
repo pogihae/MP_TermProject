@@ -29,7 +29,6 @@ public class SetupActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         Button btnNicknameSubmit = findViewById(R.id.GoToMain);
-        Button NotificationList = findViewById(R.id.notification_list);
         EditText etNickname = findViewById(R.id.nickname_edit);
 
         btnNicknameSubmit.setOnClickListener(v -> {
@@ -46,10 +45,6 @@ public class SetupActivity extends AppCompatActivity {
             FirebaseUtil.getCurUser().updateProfile(profileUpdates);
 
             finish();
-        });
-        NotificationList.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SetupListActivity.class);
-            startActivity(intent);
         });
     }
 
