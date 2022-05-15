@@ -12,8 +12,6 @@ import com.example.wiuh.model.Memo;
 import com.example.wiuh.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class AddMemoActivity extends AppCompatActivity {
 
     @Override

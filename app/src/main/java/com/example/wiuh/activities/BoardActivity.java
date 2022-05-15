@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,7 +68,10 @@ public class BoardActivity extends AppCompatActivity {
 
     private void setUpBot() {
         TabLayout mTabLayout = findViewById(R.id.sliding_tabs);
+
         ViewPager2 viewPager2 = findViewById(R.id.viewpager);
+        //스와이프 탭 전환
+        viewPager2.setUserInputEnabled(false);
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
@@ -85,15 +89,37 @@ public class BoardActivity extends AppCompatActivity {
 
         //final String[] tabNames = new String[]{"Memo", "Community"};
         final int[] tabIcons = new int[]{
-                R.drawable.ic_baseline_list_alt_24,
                 R.drawable.ic_baseline_textsms_24,
-                R.drawable.ic_home_black_24dp
+                R.drawable.ic_baseline_list_alt_24
+                , R.drawable.ic_home_black_24dp
         };
 
         new TabLayoutMediator(mTabLayout, viewPager2, (tab, position) -> {
             //tab.setText(tabNames[position]);
+            tab.setId(position);
             tab.setIcon(tabIcons[position]);
         }).attach();
+
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getId() == 2) {
+                    findViewById(R.id.fab_main).setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                if (tab.getId() == 2) {
+                    findViewById(R.id.fab_main).setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
 

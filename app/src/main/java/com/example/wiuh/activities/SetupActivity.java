@@ -56,6 +56,7 @@ public class SetupActivity extends AppCompatActivity {
     //뒤로가기 금지
     @Override
     public void onBackPressed() {
+        ToastUtil.showText(this, "Set nickname");
         //super.onBackPressed();
     }
 }

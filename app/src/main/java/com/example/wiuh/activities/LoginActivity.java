@@ -105,8 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(LoginActivity.this, task -> {
                     btnSignIn.setProgress(100);
                     if (task.isSuccessful()) startMain();
-                    else
+                    else {
                         ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
+                        btnSignIn.setEnabled(true);
+                    }
+
                 });
     }
 
