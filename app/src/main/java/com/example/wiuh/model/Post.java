@@ -11,6 +11,7 @@ public class Post {
     public String title;
     public String author;
     public String body;
+    public Integer like;
 
     @Exclude
     public String key;
@@ -18,11 +19,12 @@ public class Post {
     public Post() {
     }
 
-    public Post(String uid, String title, String author, String body) {
+    public Post(String uid, String title, String author, String body, Integer like) {
         this.uid = uid;
         this.title = title;
         this.author = author;
         this.body = body;
+        this.like = like;
     }
 
     @Exclude

@@ -81,6 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 bundle.putString("author", p.author);
                 bundle.putString("uid", p.uid);
                 bundle.putString("key", p.key);
+                bundle.putInt("like",p.like);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

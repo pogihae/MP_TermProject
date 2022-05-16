@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setProgress(0);
 
         btnSignIn.setOnClickListener(v -> emailLogin());
-        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
+//        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
         findViewById(R.id.btn_signup).setOnClickListener(v -> startSignUp());
     }
 
@@ -113,14 +113,14 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void googleLogin() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
-        startActivityForResult(client.getSignInIntent(), 123);
-    }
+//    private void googleLogin() {
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+//        startActivityForResult(client.getSignInIntent(), 123);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

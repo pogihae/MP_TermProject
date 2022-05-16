@@ -1,14 +1,23 @@
 package com.example.wiuh.activities;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -37,14 +46,107 @@ import java.util.Objects;
  * Main 에서 하는 이유: 구글 로그인 등 외부 로그인 사용 시 SignUp 을 안 거침
  */
 public class BoardActivity extends AppCompatActivity {
+    //spinner에 표시될 array
+    private String dropDownItemArr[]={"123","456","789"};
+    private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpBot();
-
+        actionBar=getSupportActionBar();
         //wifi 정보 action bar 표시
         Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+        SpinnerAdapter spinnerAdapter=new SpinnerAdapter() {
+            @Override
+            //spinner의 list를 보여주는 view
+            public View getDropDownView(int itemIndex, View view, ViewGroup viewGroup) {
+                LinearLayout linearLayout=new LinearLayout(BoardActivity.this);
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+                linearLayout.setLayoutParams((layoutParams));
+                TextView itemTextView = new TextView(BoardActivity.this);
+                String itemText = dropDownItemArr[itemIndex];
+                itemTextView.setText(itemText);
+                itemTextView.setTextSize(20);
+                itemTextView.setTextColor(Color.WHITE);
+                // Add TextView in return view
+                linearLayout.addView(itemTextView, 1);
+                return linearLayout;
+            }
+
+            @Override
+            public void registerDataSetObserver(DataSetObserver dataSetObserver) {
+
+            }
+
+            @Override
+            public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
+
+            }
+
+            @Override
+            public int getCount() {
+                return dropDownItemArr.length;
+            }
+
+            @Override
+            public Object getItem(int itemIndex) {
+                return dropDownItemArr[itemIndex];
+            }
+
+            @Override
+            public long getItemId(int itemIndex) {
+                return itemIndex;
+            }
+
+            @Override
+            public boolean hasStableIds() {
+                return false;
+            }
+
+            @Override
+            public View getView(int itemIndex, View view, ViewGroup viewGroup) {
+                TextView itemTextView = new TextView(BoardActivity.this);
+                String itemText = dropDownItemArr[itemIndex];
+                itemTextView.setText(itemText);
+                itemTextView.setTextSize(20);
+                itemTextView.setTextColor(Color.WHITE);
+                return itemTextView;
+            }
+
+            @Override
+            public int getItemViewType(int i) {
+                return 0;
+            }
+
+            @Override
+            public int getViewTypeCount() {
+                return 1;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+        };
+        // Set action bar navigation mode to list mode.
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        // Set action bar list navigation data and item click listener.
+        actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                        String menuItemText = dropDownItemArr[itemPosition];
+                        String message = "You clicked " + menuItemText;
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    }
+                });
+
+
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();
@@ -117,12 +219,12 @@ public class BoardActivity extends AppCompatActivity {
         if (itemId == R.id.logout) {
             FirebaseUtil.logout(this);
         } else if (itemId == R.id.goNotification) {
-            Intent intent = new Intent(getApplicationContext(), SetupListActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NotificationHistoryActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
-            startActivity(new Intent(this, SetupActivity.class));
+            startActivity(new Intent(this, PersonalSetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            Toast.makeText(this, "와이파이 등록 선택", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, PersonalSetupActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
