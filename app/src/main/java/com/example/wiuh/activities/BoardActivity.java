@@ -170,10 +170,11 @@ public class BoardActivity extends AppCompatActivity {
 
     private void setUpBot() {
         TabLayout mTabLayout = findViewById(R.id.sliding_tabs);
-
         ViewPager2 viewPager2 = findViewById(R.id.viewpager);
+
         //스와이프 탭 전환
         viewPager2.setUserInputEnabled(false);
+
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
