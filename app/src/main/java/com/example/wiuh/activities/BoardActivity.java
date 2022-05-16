@@ -178,7 +178,7 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void startWifiInfoSubscription() {
-        ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
+        ReactiveWifi.observeWifiAccessPointChanges(this)
                 .subscribeOn(Schedulers.io())
                 .subscribe(res -> {
                     WifiState.setInfo(res.getSSID(), res.getBSSID());
