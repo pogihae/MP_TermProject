@@ -23,7 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.wiuh.AddWifi;
 import com.example.wiuh.R;
+import com.example.wiuh.model.Wifi;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.ui.community.AddPostActivity;
 import com.example.wiuh.ui.community.CommunityFragment;
@@ -33,6 +35,7 @@ import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -49,6 +52,7 @@ public class BoardActivity extends AppCompatActivity {
     //spinner에 표시될 array
     private String dropDownItemArr[]={"123","456","789"};
     private ActionBar actionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,7 +248,8 @@ public class BoardActivity extends AppCompatActivity {
         } else if (itemId == R.id.personalSettings) {
             startActivity(new Intent(this, PersonalSetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            startActivity(new Intent(this, PersonalSetupActivity.class));
+            startActivity(new Intent(this, AddWifi.class));
+            //FirebaseUtil.getWifiRef().push().setValue(WifiState.getSSID());
         }
 
         return super.onOptionsItemSelected(item);
@@ -254,6 +259,11 @@ public class BoardActivity extends AppCompatActivity {
         ToastUtil.showText(this, "닉네임을 설정하세요");
         Intent intent = new Intent(this, SetupActivity.class);
         startActivity(intent);
+    }
+
+    private void wifiRegister(){
+        FirebaseUser curUser = FirebaseUtil.getCurUser();
+
     }
 
 }
