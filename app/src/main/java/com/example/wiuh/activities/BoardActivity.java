@@ -19,11 +19,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.wiuh.R;
+import com.example.wiuh.model.Memo;
+import com.example.wiuh.model.Post;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.ui.community.AddPostActivity;
 import com.example.wiuh.ui.community.CommunityFragment;
@@ -31,10 +35,16 @@ import com.example.wiuh.ui.memo.AddMemoActivity;
 import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
+import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
+
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * MainActivity
@@ -52,12 +62,12 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        startWifiInfoSubscription();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpBot();
         actionBar=getSupportActionBar();
-        //wifi 정보 action bar 표시
-        Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
         SpinnerAdapter spinnerAdapter=new SpinnerAdapter() {
             @Override
             //spinner의 list를 보여주는 view
@@ -165,6 +175,45 @@ public class BoardActivity extends AppCompatActivity {
     private void startAddMemo() {
         Intent intent = new Intent(this, AddMemoActivity.class);
         startActivity(intent);
+    }
+
+    private void startWifiInfoSubscription() {
+        ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(res -> {
+                    WifiState.setInfo(res.getSSID(), res.getBSSID());
+                    //wifi 정보 action bar 표시
+                    Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+
+                    FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()) {
+                                int memoCnt = 0;
+                                for(DataSnapshot ds : snapshot.getChildren())
+                                    memoCnt++;
+                                notifyContent(res.getSSID() + "에 " + memoCnt + "개의 메모가 존재해요");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }).isDisposed();
+    }
+
+    private void notifyContent(String content) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, LoginActivity.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("WIUH")
+                .setContentText(content)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
     }
 
 
