@@ -180,7 +180,6 @@ public class BoardActivity extends AppCompatActivity {
     private void startWifiInfoSubscription() {
         ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
                 .subscribe(res -> {
                     WifiState.setInfo(res.getSSID(), res.getBSSID());
                     //wifi 정보 action bar 표시
