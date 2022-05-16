@@ -100,26 +100,6 @@ public class BoardActivity extends AppCompatActivity {
             tab.setIcon(tabIcons[position]);
         }).attach();
 
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getId() == 2) {
-                    findViewById(R.id.fab_main).setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                if (tab.getId() == 2) {
-                    findViewById(R.id.fab_main).setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
 
