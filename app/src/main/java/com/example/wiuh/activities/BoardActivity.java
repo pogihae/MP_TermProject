@@ -180,8 +180,8 @@ public class BoardActivity extends AppCompatActivity {
     private void startWifiInfoSubscription() {
         ReactiveWifi.observeWifiAccessPointChanges(this)
                 .subscribeOn(Schedulers.io())
-                .subscribe(res -> {
-                    WifiState.setInfo(res.getSSID(), res.getBSSID());
+                .subscribe(wifiInfo -> {
+                    WifiState.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
                     //wifi 정보 action bar 표시
                     Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
 
@@ -190,9 +190,9 @@ public class BoardActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()) {
                                 int memoCnt = 0;
-                                for(DataSnapshot ds : snapshot.getChildren())
+                                for(Object ignored : snapshot.getChildren())
                                     memoCnt++;
-                                notifyContent(res.getSSID() + "에 " + memoCnt + "개의 메모가 존재해요");
+                                notifyContent(wifiInfo.getSSID() + "에 " + memoCnt + "개의 메모가 존재해요");
                             }
                         }
 
