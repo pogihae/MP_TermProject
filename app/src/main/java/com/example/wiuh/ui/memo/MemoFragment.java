@@ -11,18 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.wiuh.R;
-import com.example.wiuh.model.Memo;
-import com.example.wiuh.util.FirebaseUtil;
-import com.example.wiuh.util.ToastUtil;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MemoFragment extends Fragment {
-    private MemoAdapter recycleAdapter;
+    private final MemoAdapter recycleAdapter;
 
     public MemoFragment(MemoAdapter recycleAdapter) {
         this.recycleAdapter = recycleAdapter;
@@ -32,7 +23,6 @@ public class MemoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_memo, container, false);
-
 
 
         RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);

@@ -1,49 +1,47 @@
-package com.example.wiuh.activities;
+package com.example.wiuh.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import java.util.Objects;
-
-/**
- * SetUpActivity
- * <p>
- * MainActivity 에서 시작됨
- * Nickname 및 세부 설정
- */
 public class SetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        setContentView(R.layout.activity_personal_setup);
 
-        Button btnNicknameSubmit = findViewById(R.id.GoToMain);
-        EditText etNickname = findViewById(R.id.nickname_edit);
+        getSupportActionBar().hide();
 
-        btnNicknameSubmit.setOnClickListener(v -> {
-            String nick = etNickname.getText().toString();
-            if (nick.matches("")) {
+        FirebaseUser curUser = FirebaseUtil.getCurUser();
+        String nick = curUser.getDisplayName();
+
+        EditText nickname = findViewById(R.id.nickname);
+        nickname.setText(nick);
+
+        Button editNickname = findViewById(R.id.editNickname);
+
+        editNickname.setOnClickListener(v -> {
+            String nick1 = nickname.getText().toString();
+            if (nick1.matches("")) {
                 ToastUtil.showText(getApplicationContext(), "닉네임을 입력하세요");
                 return;
             }
-
-            // firebase authentication update
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(nick)
+                    .setDisplayName(nick1)
                     .build();
             FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-
+            ToastUtil.showText(getApplicationContext(), "닉네임 변경 완료");
             finish();
         });
     }

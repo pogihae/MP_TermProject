@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.memo;
+package com.example.wiuh.activity.memo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +44,7 @@ public class MemoDetailActivity extends AppCompatActivity {
         Button modButton = findViewById(R.id.mod_button);
 
         modButton.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getBaseContext(), MemoModify.class);
+            Intent intent1 = new Intent(getBaseContext(), ModifyMemoActivity.class);
             Bundle bundle1 = new Bundle();
 
             bundle1.putString("title", title);
@@ -61,7 +61,7 @@ public class MemoDetailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MemoModify.RS_SUC) {
+        if (requestCode == ModifyMemoActivity.RS_SUC) {
             if (resultCode == RQ_MOD) {
 
                 Bundle resultBundle = data.getExtras();

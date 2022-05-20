@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.memo;
+package com.example.wiuh.activity.memo;
 
 import android.os.Bundle;
 import android.view.MenuItem;

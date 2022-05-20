@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.community;
+package com.example.wiuh.activity.post;
 
 import android.os.Bundle;
 import android.view.MenuItem;

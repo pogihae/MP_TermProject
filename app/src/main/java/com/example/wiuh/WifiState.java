@@ -1,12 +1,11 @@
-package com.example.wiuh.model;
+package com.example.wiuh;
 
+//singleton class
 public class WifiState {
     private static final WifiState instance = new WifiState();
+
     private String SSID;
     private String MAC;
-
-    private WifiState() {
-    }
 
     public static void setInfo(String SSID, String MAC) {
         instance.SSID = SSID;

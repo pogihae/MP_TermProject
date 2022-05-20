@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
+import com.example.wiuh.activity.post.PostDetailActivity;
 import com.example.wiuh.model.Post;
+import com.example.wiuh.ui.BaseDiffCallback;
 
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private final List<Post> localPostList;
 
-    private Context context;
+    private final Context context;
 
-    public PostAdapter(List<Post> localData) {
+    public PostAdapter(List<Post> localData, Context context) {
         this.localPostList = localData;
+        this.context = context;
     }
 
     @NonNull
@@ -44,12 +47,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return localPostList.size();
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public void updateList(List<Post> list) {
-        final PostDiffCallback diffCallback = new PostDiffCallback(this.localPostList, list);
+        final BaseDiffCallback<Post> diffCallback = new BaseDiffCallback<>(this.localPostList, list);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
 
         localPostList.clear();
@@ -81,7 +80,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 bundle.putString("author", p.author);
                 bundle.putString("uid", p.uid);
                 bundle.putString("key", p.key);
-                bundle.putInt("like",p.like);
+                bundle.putInt("like", p.like);
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

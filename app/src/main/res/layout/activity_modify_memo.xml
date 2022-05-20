@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.memo.MemoDetailActivity">
+    tools:context=".activity.memo.MemoDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,9 +1,10 @@
-package com.example.wiuh.activities;
+package com.example.wiuh.activity;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,13 +26,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.wiuh.R;
+import com.example.wiuh.WifiState;
+import com.example.wiuh.activity.memo.AddMemoActivity;
+import com.example.wiuh.activity.post.AddPostActivity;
 import com.example.wiuh.model.Memo;
 import com.example.wiuh.model.Post;
-import com.example.wiuh.model.WifiState;
-import com.example.wiuh.ui.community.AddPostActivity;
 import com.example.wiuh.ui.community.CommunityFragment;
 import com.example.wiuh.ui.community.PostAdapter;
-import com.example.wiuh.ui.memo.AddMemoActivity;
 import com.example.wiuh.ui.memo.MemoAdapter;
 import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.util.FirebaseUtil;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -59,33 +61,53 @@ import io.reactivex.schedulers.Schedulers;
  * Main 에서 하는 이유: 구글 로그인 등 외부 로그인 사용 시 SignUp 을 안 거침
  */
 public class BoardActivity extends AppCompatActivity {
-    //spinner에 표시될 array
-    private String dropDownItemArr[]={"123","456","789"};
-    private ActionBar actionBar;
+
+    private static final String[] dropDownItemArr = {"123", "456", "789"}; //spinner에 표시될 array
+
     private MemoAdapter memoAdapter;
     private PostAdapter postAdapter;
+    private ValueEventListener memoListener;
+    private ValueEventListener postListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        init();
         startWifiInfoSubscription();
-
-        memoAdapter = new MemoAdapter(new ArrayList<>());
-        memoAdapter.setContext(this);
-
-        postAdapter = new PostAdapter(new ArrayList<>());
-        postAdapter.setContext(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setUpBot();
-        actionBar=getSupportActionBar();
-        SpinnerAdapter spinnerAdapter=new SpinnerAdapter() {
+        setUpListActionBar();
+
+        //nickname 설정 및 표시
+        String nickname = FirebaseUtil.getCurUser().getDisplayName();
+        if (nickname == null || nickname.matches("")) startSetUp();
+        else ToastUtil.showText(this, nickname + " 환영");
+
+        findViewById(R.id.action_a).setOnClickListener(v -> startAddPost());
+        findViewById(R.id.action_b).setOnClickListener(v -> startAddMemo());
+    }
+
+    private void startAddPost() {
+        Intent intent = new Intent(this, AddPostActivity.class);
+        startActivity(intent);
+    }
+
+    private void startAddMemo() {
+        Intent intent = new Intent(this, AddMemoActivity.class);
+        startActivity(intent);
+    }
+
+    private void setUpListActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter() {
             @Override
             //spinner의 list를 보여주는 view
             public View getDropDownView(int itemIndex, View view, ViewGroup viewGroup) {
-                LinearLayout linearLayout=new LinearLayout(BoardActivity.this);
+                LinearLayout linearLayout = new LinearLayout(BoardActivity.this);
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
                 linearLayout.setLayoutParams((layoutParams));
                 TextView itemTextView = new TextView(BoardActivity.this);
@@ -157,40 +179,20 @@ public class BoardActivity extends AppCompatActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         // Set action bar list navigation data and item click listener.
         actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                        String menuItemText = dropDownItemArr[itemPosition];
-                        String message = "You clicked " + menuItemText;
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        return true;
+            @Override
+            public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                String menuItemText = dropDownItemArr[itemPosition];
+                String message = "You clicked " + menuItemText;
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                return true;
 
-                    }
-                });
-
-
-
-        //nickname 설정 및 표시
-        String nickname = FirebaseUtil.getCurUser().getDisplayName();
-        if (nickname == null || nickname.matches("")) startSetUp();
-        else ToastUtil.showText(this, nickname + " 환영");
-
-        findViewById(R.id.action_a).setOnClickListener(v -> startAddPost());
-        findViewById(R.id.action_b).setOnClickListener(v -> startAddMemo());
-    }
-
-    private void startAddPost() {
-        Intent intent = new Intent(this, AddPostActivity.class);
-        startActivity(intent);
-    }
-
-    private void startAddMemo() {
-        Intent intent = new Intent(this, AddMemoActivity.class);
-        startActivity(intent);
+            }
+        });
     }
 
     private void startWifiInfoSubscription() {
         ReactiveWifi.observeWifiAccessPointChanges(this)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.from(Looper.myLooper()))
                 .subscribe(wifiInfo -> {
                     WifiState.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
                     //wifi 정보 action bar 표시
@@ -199,9 +201,9 @@ public class BoardActivity extends AppCompatActivity {
                     FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()) {
+                            if (snapshot.exists()) {
                                 int memoCnt = 0;
-                                for(Object ignored : snapshot.getChildren())
+                                for (Object ignored : snapshot.getChildren())
                                     memoCnt++;
                                 notifyContent(wifiInfo.getSSID() + "에 " + memoCnt + "개의 메모가 존재해요");
                             }
@@ -213,39 +215,7 @@ public class BoardActivity extends AppCompatActivity {
                         }
                     });
 
-                    FirebaseUtil.setListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            List<Post> list = new ArrayList<>();
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                Post p = ds.getValue(Post.class);
-                                p.setKey(ds.getKey());
-                                list.add(p);
-                            }
-                            postAdapter.updateList(list);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    }, new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            List<Memo> list = new ArrayList<>();
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                Memo m = ds.getValue(Memo.class);
-                                m.setKey(ds.getKey());
-                                list.add(m);
-                            }
-                            memoAdapter.updateList(list);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    FirebaseUtil.setListener(postListener, memoListener);
                 }).isDisposed();
     }
 
@@ -258,6 +228,45 @@ public class BoardActivity extends AppCompatActivity {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, builder.build());
+    }
+
+    private void init() {
+        memoAdapter = new MemoAdapter(new ArrayList<>(), this);
+        postAdapter = new PostAdapter(new ArrayList<>(), this);
+
+        postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Post> list = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Post p = ds.getValue(Post.class);
+                    p.setKey(ds.getKey());
+                    list.add(p);
+                }
+                postAdapter.updateList(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+
+        memoListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Memo> list = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Memo m = ds.getValue(Memo.class);
+                    m.setKey(ds.getKey());
+                    list.add(m);
+                }
+                memoAdapter.updateList(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
     }
 
 
@@ -316,9 +325,9 @@ public class BoardActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), NotificationHistoryActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
-            startActivity(new Intent(this, PersonalSetupActivity.class));
+            startActivity(new Intent(this, SetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            startActivity(new Intent(this, PersonalSetupActivity.class));
+            startActivity(new Intent(this, SetupActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
