@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -48,6 +50,7 @@ import java.util.Objects;
 public class BoardActivity extends AppCompatActivity {
     //spinner에 표시될 array
     private String dropDownItemArr[]={"123","456","789"};
+    String[] items={"123","456","789"};
     private ActionBar actionBar;
 
     @Override
@@ -58,6 +61,31 @@ public class BoardActivity extends AppCompatActivity {
         actionBar=getSupportActionBar();
         //wifi 정보 action bar 표시
         Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+
+        Spinner spinner =findViewById(R.id.spinner);
+        TextView textView= findViewById(R.id.textView);
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(
+                //안스에 미리 정의된 어답터 layout사용(스피너에 텍스트만 쓸경우 이게 간편)
+                this,android.R.layout.simple_spinner_item,items
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        //스피너 객체에다가 어댑터 넣어줌
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           //선택되면
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                textView.setText(items[position]);
+            }
+            //아무것도 선택되지 않은 상태일때
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                textView.setText("선택: ");
+            }
+        });
+        /*
         SpinnerAdapter spinnerAdapter=new SpinnerAdapter() {
             @Override
             //spinner의 list를 보여주는 view
@@ -132,6 +160,8 @@ public class BoardActivity extends AppCompatActivity {
                 return false;
             }
         };
+
+
         // Set action bar navigation mode to list mode.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         // Set action bar list navigation data and item click listener.
@@ -146,7 +176,7 @@ public class BoardActivity extends AppCompatActivity {
                     }
                 });
 
-
+*/
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();

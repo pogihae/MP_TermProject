@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BoardActivity">
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="300dp"
+        android:layout_height="50dp"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="yes"
+        android:textSize="32dp"
+        android:layout_marginTop="80dp"/>
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
