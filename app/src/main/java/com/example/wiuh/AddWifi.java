@@ -24,18 +24,14 @@ public class AddWifi extends AppCompatActivity {
         ssid_info.setText(WifiState.getSSID());
         mac_info.setText((WifiState.getMAC()));
 
-
         register.setOnClickListener(v -> addWifi());
-
-
     }
 
     private void addWifi() {
-        FirebaseUser curUser = FirebaseUtil.getCurUser();
         String SSID = WifiState.getSSID();
         String MAC = WifiState.getMAC();
 
-        Wifi wifi = new Wifi(curUser.getUid(), SSID, MAC);
-        FirebaseUtil.getWifiRef().setValue(wifi);
+        FirebaseUtil.getWifiRef().child(MAC).setValue(SSID);
+        finish();
     }
 }

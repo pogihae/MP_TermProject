@@ -7,9 +7,12 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Wifi {
+    @Exclude
     public String uid;
-    public String SSID;
+    @Exclude
     public String MAC;
+
+    public String SSID;
 
     public Wifi() { }
 

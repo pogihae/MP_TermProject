@@ -63,7 +63,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BoardActivity extends AppCompatActivity {
 
-    private static final String[] dropDownItemArr = {"123", "456", "789"}; //spinner에 표시될 array
+    private String[] dropDownItemArr; //spinner에 표시될 array
 
     private MemoAdapter memoAdapter;
     private PostAdapter postAdapter;
@@ -78,8 +78,8 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getStarredWifi();
         setUpBot();
-        setUpListActionBar();
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();
@@ -88,6 +88,27 @@ public class BoardActivity extends AppCompatActivity {
 
         findViewById(R.id.action_a).setOnClickListener(v -> startAddPost());
         findViewById(R.id.action_b).setOnClickListener(v -> startAddMemo());
+    }
+
+    private void getStarredWifi() {
+        List<String> starredL = new ArrayList<>();
+        FirebaseUtil.getWifiRef().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    starredL.add(ds.getValue(String.class));
+                }
+                if(!starredL.contains(WifiState.getSSID()))
+                    starredL.add(WifiState.getSSID());
+
+                dropDownItemArr = starredL.toArray(new String[0]);
+                setUpListActionBar();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void startAddPost() {
@@ -117,7 +138,7 @@ public class BoardActivity extends AppCompatActivity {
                 itemTextView.setTextSize(20);
                 itemTextView.setTextColor(Color.WHITE);
                 // Add TextView in return view
-                linearLayout.addView(itemTextView, 1);
+                linearLayout.addView(itemTextView, itemIndex);
                 return linearLayout;
             }
 
@@ -197,7 +218,8 @@ public class BoardActivity extends AppCompatActivity {
                 .subscribe(wifiInfo -> {
                     WifiState.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
                     //wifi 정보 action bar 표시
-                    Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+                    //Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+                    getSupportActionBar().setDisplayShowTitleEnabled(false);
 
                     FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
