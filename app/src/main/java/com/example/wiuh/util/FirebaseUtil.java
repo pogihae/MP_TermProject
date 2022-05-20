@@ -51,7 +51,8 @@ public class FirebaseUtil {
 
     public static DatabaseReference getWifiRef() {
         return rootRef.child("WIFI")
-                .child(getCurUser().getUid());
+                .child(getCurUser().getUid())
+                .child(WifiState.getMAC());
     }
 
     public static FirebaseUser getCurUser() {

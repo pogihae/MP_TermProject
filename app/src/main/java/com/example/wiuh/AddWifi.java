@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.model.Wifi;
 import com.example.wiuh.util.FirebaseUtil;
+import com.google.firebase.auth.FirebaseUser;
 
 public class AddWifi extends AppCompatActivity {
 
@@ -30,10 +31,11 @@ public class AddWifi extends AppCompatActivity {
     }
 
     private void addWifi() {
+        FirebaseUser curUser = FirebaseUtil.getCurUser();
         String SSID = WifiState.getSSID();
         String MAC = WifiState.getMAC();
 
-        Wifi wifi = new Wifi(SSID, MAC);
-        FirebaseUtil.getWifiRef().push().setValue(wifi);
+        Wifi wifi = new Wifi(curUser.getUid(), SSID, MAC);
+        FirebaseUtil.getWifiRef().setValue(wifi);
     }
 }

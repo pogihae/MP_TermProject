@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.wiuh.AddWifi;
 import com.example.wiuh.R;
 import com.example.wiuh.WifiState;
 import com.example.wiuh.activity.memo.AddMemoActivity;
@@ -327,7 +328,7 @@ public class BoardActivity extends AppCompatActivity {
         } else if (itemId == R.id.personalSettings) {
             startActivity(new Intent(this, SetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            startActivity(new Intent(this, SetupActivity.class));
+            startActivity(new Intent(this, AddWifi.class));
         }
 
         return super.onOptionsItemSelected(item);
