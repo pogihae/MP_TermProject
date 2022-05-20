@@ -25,7 +25,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
     private final List<Memo> localMemoList;
     private Context context;
 
-    MemoAdapter(List<Memo> localMemoList) {
+    public MemoAdapter(List<Memo> localMemoList) {
         this.localMemoList = localMemoList;
     }
 

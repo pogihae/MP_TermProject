@@ -24,13 +24,16 @@ import java.util.List;
 public class MemoFragment extends Fragment {
     private MemoAdapter recycleAdapter;
 
+    public MemoFragment(MemoAdapter recycleAdapter) {
+        this.recycleAdapter = recycleAdapter;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_memo, container, false);
 
-        recycleAdapter = new MemoAdapter(new ArrayList<>());
-        recycleAdapter.setContext(getContext());
+
 
         RecyclerView recyclerView = root.findViewById(R.id.memo_recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -41,23 +44,6 @@ public class MemoFragment extends Fragment {
         recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-        FirebaseUtil.getMemoRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Memo> list = new ArrayList<>();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Memo m = ds.getValue(Memo.class);
-                    m.setKey(ds.getKey());
-                    list.add(m);
-                }
-                recycleAdapter.updateList(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                ToastUtil.showText(getContext(), error.getMessage());
-            }
-        });
 
         return root;
     }

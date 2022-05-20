@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * FirebaseUtil
@@ -18,6 +19,24 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class FirebaseUtil {
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+
+    private static ValueEventListener postListener;
+    private static ValueEventListener memoListener;
+
+    public static void setListener(ValueEventListener postListener, ValueEventListener memoListener) {
+        if(FirebaseUtil.postListener != null)
+            FirebaseUtil.getPostRef()
+                    .removeEventListener(FirebaseUtil.postListener);
+        if(FirebaseUtil.memoListener != null)
+            FirebaseUtil.getMemoRef()
+                    .removeEventListener(FirebaseUtil.memoListener);
+
+        FirebaseUtil.postListener = postListener;
+        FirebaseUtil.memoListener = memoListener;
+
+        getPostRef().addValueEventListener(postListener);
+        getMemoRef().addValueEventListener(memoListener);
+    }
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")

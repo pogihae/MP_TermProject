@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +30,9 @@ import com.example.wiuh.model.Post;
 import com.example.wiuh.model.WifiState;
 import com.example.wiuh.ui.community.AddPostActivity;
 import com.example.wiuh.ui.community.CommunityFragment;
+import com.example.wiuh.ui.community.PostAdapter;
 import com.example.wiuh.ui.memo.AddMemoActivity;
+import com.example.wiuh.ui.memo.MemoAdapter;
 import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
@@ -42,6 +43,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import io.reactivex.schedulers.Schedulers;
@@ -59,10 +62,18 @@ public class BoardActivity extends AppCompatActivity {
     //spinner에 표시될 array
     private String dropDownItemArr[]={"123","456","789"};
     private ActionBar actionBar;
+    private MemoAdapter memoAdapter;
+    private PostAdapter postAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         startWifiInfoSubscription();
+
+        memoAdapter = new MemoAdapter(new ArrayList<>());
+        memoAdapter.setContext(this);
+
+        postAdapter = new PostAdapter(new ArrayList<>());
+        postAdapter.setContext(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -201,6 +212,40 @@ public class BoardActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    FirebaseUtil.setListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            List<Post> list = new ArrayList<>();
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                Post p = ds.getValue(Post.class);
+                                p.setKey(ds.getKey());
+                                list.add(p);
+                            }
+                            postAdapter.updateList(list);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    }, new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            List<Memo> list = new ArrayList<>();
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                Memo m = ds.getValue(Memo.class);
+                                m.setKey(ds.getKey());
+                                list.add(m);
+                            }
+                            memoAdapter.updateList(list);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }).isDisposed();
     }
 
@@ -227,8 +272,8 @@ public class BoardActivity extends AppCompatActivity {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
-                if (position == 0) return new MemoFragment();
-                else if (position == 1) return new CommunityFragment();
+                if (position == 0) return new MemoFragment(memoAdapter);
+                else if (position == 1) return new CommunityFragment(postAdapter);
                 return new Fragment();
             }
 

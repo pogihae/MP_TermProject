@@ -23,35 +23,23 @@ import java.util.List;
 
 public class CommunityFragment extends Fragment {
 
+    private PostAdapter recycleAdapter;
+
+    public CommunityFragment(PostAdapter recycleAdapter) {
+        this.recycleAdapter = recycleAdapter;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_community, container, false);
 
-        PostAdapter recycleAdapter = new PostAdapter(new ArrayList<>());
-        recycleAdapter.setContext(getContext());
+
 
         RecyclerView recyclerView = root.findViewById(R.id.community_recyclerView);
         recyclerView.setAdapter(recycleAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        FirebaseUtil.getPostRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Post> list = new ArrayList<>();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Post p = ds.getValue(Post.class);
-                    p.setKey(ds.getKey());
-                    list.add(p);
-                }
-                recycleAdapter.updateList(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                ToastUtil.showText(getContext(), error.getMessage());
-            }
-        });
         return root;
     }
 }

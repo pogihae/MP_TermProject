@@ -22,7 +22,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Context context;
 
-    PostAdapter(List<Post> localData) {
+    public PostAdapter(List<Post> localData) {
         this.localPostList = localData;
     }
 
