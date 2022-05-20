@@ -24,10 +24,11 @@
         <TextView
             android:id="@+id/memoBody"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="509dp"
             android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:text="Body"
+            android:background="@drawable/blue_border"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -37,17 +38,18 @@
 
             <Button
                 android:id="@+id/del_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
-                android:layout_marginRight="20dp"
-                android:text="삭제" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="4.5dp"
+                android:layout_marginRight="300dp"
+                android:background="@drawable/ic_baseline_restore_from_trash_24"
+                 />
 
             <Button
                 android:id="@+id/mod_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수정" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24" />
         </LinearLayout>
 
     </LinearLayout>
