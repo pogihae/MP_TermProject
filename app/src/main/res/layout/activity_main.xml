@@ -33,15 +33,13 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/black"
-            app:fab_icon="@drawable/ic_baseline_list_alt_24" />
+            app:fab_colorNormal="@color/black" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/black"
-            app:fab_icon="@drawable/ic_baseline_textsms_24"
             app:fab_title="memo" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

@@ -1,5 +1,6 @@
 package com.example.wiuh.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -38,6 +40,7 @@ import com.example.wiuh.ui.memo.MemoAdapter;
 import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -46,11 +49,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * MainActivity
@@ -63,6 +67,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BoardActivity extends AppCompatActivity {
 
+    private Map<String, String> ssidToMac = new HashMap<>();
     private String[] dropDownItemArr; //spinner에 표시될 array
 
     private MemoAdapter memoAdapter;
@@ -78,7 +83,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getStarredWifi();
+        //setUpActionBar();
         setUpBot();
 
         //nickname 설정 및 표시
@@ -86,17 +91,27 @@ public class BoardActivity extends AppCompatActivity {
         if (nickname == null || nickname.matches("")) startSetUp();
         else ToastUtil.showText(this, nickname + " 환영");
 
-        findViewById(R.id.action_a).setOnClickListener(v -> startAddPost());
-        findViewById(R.id.action_b).setOnClickListener(v -> startAddMemo());
+        FloatingActionButton btnAddPost = findViewById(R.id.action_a);
+        FloatingActionButton btnAddMemo = findViewById(R.id.action_b);
+
+        btnAddPost.setIcon(R.drawable.ic_baseline_list_alt_24);
+        btnAddMemo.setIcon(R.drawable.ic_baseline_textsms_24);
+
+        btnAddPost.setOnClickListener(v -> startAddPost());
+        btnAddMemo.setOnClickListener(v -> startAddMemo());
     }
 
-    private void getStarredWifi() {
+    private void setUpActionBar() {
         List<String> starredL = new ArrayList<>();
         FirebaseUtil.getWifiRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    starredL.add(ds.getValue(String.class));
+                    String ssid = ds.getValue(String.class);
+                    String mac = ds.getKey();
+
+                    starredL.add(ssid);
+                    ssidToMac.put(ssid, mac);
                 }
                 if(!starredL.contains(WifiState.getSSID()))
                     starredL.add(WifiState.getSSID());
@@ -200,15 +215,19 @@ public class BoardActivity extends AppCompatActivity {
         // Set action bar navigation mode to list mode.
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         // Set action bar list navigation data and item click listener.
-        actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
-            @Override
-            public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                String menuItemText = dropDownItemArr[itemPosition];
-                String message = "You clicked " + menuItemText;
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                return true;
+        actionBar.setListNavigationCallbacks(spinnerAdapter, (itemPosition, itemId) -> {
+            String SSID = dropDownItemArr[itemPosition];
+            //String MAC = ssidToMac.get(SSID);
 
-            }
+            //System.out.println(SSID + " " + MAC);
+
+            //WifiState.setInfo(SSID, MAC);
+            //FirebaseUtil.setListener(postListener, memoListener);
+
+            String message = "You clicked " + SSID;
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            return true;
+
         });
     }
 
@@ -218,8 +237,8 @@ public class BoardActivity extends AppCompatActivity {
                 .subscribe(wifiInfo -> {
                     WifiState.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
                     //wifi 정보 action bar 표시
-                    //Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
-                    getSupportActionBar().setDisplayShowTitleEnabled(false);
+                    Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+                    //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
                     FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -350,7 +369,22 @@ public class BoardActivity extends AppCompatActivity {
         } else if (itemId == R.id.personalSettings) {
             startActivity(new Intent(this, SetupActivity.class));
         } else if (itemId == R.id.WiFiRegister) {
-            startActivity(new Intent(this, AddWifi.class));
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("WIFI 등록?")
+                    .setTitle("WIUH")
+                    .setPositiveButton("OK", (dialogInterface, i) -> {
+                        String SSID = WifiState.getSSID();
+                        String MAC = WifiState.getMAC();
+
+                        FirebaseUtil.getWifiRef().child(MAC).setValue(SSID);
+                        ToastUtil.showText(this, "등록 성공");
+                    })
+                    .setNegativeButton("NO", (dialogInterface, i) -> {
+                        ToastUtil.showText(this, "등록 안함");
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            //startActivity(new Intent(this, AddWifi.class));
         }
 
         return super.onOptionsItemSelected(item);
