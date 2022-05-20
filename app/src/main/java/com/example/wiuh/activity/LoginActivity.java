@@ -1,5 +1,7 @@
-package com.example.wiuh.activities;
+package com.example.wiuh.activity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -10,9 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.example.wiuh.R;
-import com.example.wiuh.model.WifiState;
 import com.example.wiuh.util.ToastUtil;
-import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,7 +25,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Objects;
 
-import io.reactivex.schedulers.Schedulers;
 import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
 
 /**
@@ -37,11 +36,10 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
  * todo: Splash Activity 추가 후 권한, 네트워크 확인 등을 넘기기
  */
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final String CHANNEL_ID = "WIFI_INFO";
+    static final String TAG = LoginActivity.class.getSimpleName();
+    static final String CHANNEL_ID = "WIFI_INFO";
 
     private FirebaseAuth auth;
-
     private ActionProcessButton btnSignIn;
 
     @Override
@@ -55,11 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         //permission & wifi info observation
         registerForActivityResult(
                 new PermissionsUiContracts.RequestBackgroundLocation(),
-                success -> startWifiInfoSubscription()
+                success -> createNotificationChannel()
         ).launch(null);
-
-        //start observation wifi
-        startWifiInfoSubscription();
 
         //already login
         auth = FirebaseAuth.getInstance();
@@ -70,17 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setProgress(0);
 
         btnSignIn.setOnClickListener(v -> emailLogin());
-//        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
+        findViewById(R.id.btn_google_login).setOnClickListener(v -> googleLogin());
         findViewById(R.id.btn_signup).setOnClickListener(v -> startSignUp());
-    }
-
-    private void startWifiInfoSubscription() {
-        ReactiveWifi.observeWifiAccessPointChanges(getApplicationContext())
-                .subscribeOn(Schedulers.io())
-                .subscribe(res -> {
-                    WifiState.setInfo(res.getSSID(), res.getBSSID());
-                    //notifyContent(ssid + " " + mac);
-                }).isDisposed();
     }
 
     private void startMain() {
@@ -103,24 +89,22 @@ public class LoginActivity extends AppCompatActivity {
 
         auth.signInWithEmailAndPassword(strEmail, strPwd)
                 .addOnCompleteListener(LoginActivity.this, task -> {
-                    btnSignIn.setProgress(100);
                     if (task.isSuccessful()) startMain();
                     else {
                         ToastUtil.showText(this, Objects.requireNonNull(task.getException()).getMessage());
                         btnSignIn.setEnabled(true);
                     }
-
                 });
     }
 
-//    private void googleLogin() {
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
-//        startActivityForResult(client.getSignInIntent(), 123);
-//    }
+    private void googleLogin() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+        startActivityForResult(client.getSignInIntent(), 123);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -145,27 +129,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /* notification code */
-
-    /* private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
+    private void createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "name", importance);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-    private void notifyContent(String content) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("WIFI INFO")
-                .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
-    } */
 }

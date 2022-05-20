@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.community;
+package com.example.wiuh.activity.post;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,15 +61,14 @@ public class PostDetailActivity extends AppCompatActivity {
         likeButton.setOnClickListener(view -> {
             FirebaseUser curUser = FirebaseUtil.getCurUser();
             Post post;
-            if(!likeButton.isSelected()){
+            if (!likeButton.isSelected()) {
                 like.set(like.get() + 1);
                 post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
                 FirebaseUtil.getPostRef().child(key).setValue(post);
                 bulletinLike.setText(like.get().toString());
                 ToastUtil.showText(this, "좋아요");
                 likeButton.setSelected(true);
-            }
-            else {
+            } else {
                 like.set(like.get() - 1);
                 post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
                 FirebaseUtil.getPostRef().child(key).setValue(post);
@@ -87,7 +86,7 @@ public class PostDetailActivity extends AppCompatActivity {
         });
 
         modButton.setOnClickListener(view -> {
-            Intent intent1 = new Intent(getBaseContext(), PostModify.class);
+            Intent intent1 = new Intent(getBaseContext(), ModifyPostActivity.class);
             Bundle bundle1 = new Bundle();
 
             bundle1.putString("title", title);
@@ -104,7 +103,7 @@ public class PostDetailActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RQ_MOD) {
-            if (resultCode == PostModify.RS_SUC) {
+            if (resultCode == ModifyPostActivity.RS_SUC) {
 
                 Bundle resultBundle = data.getExtras();
                 String resultTitle = resultBundle.getString("resultTitle");

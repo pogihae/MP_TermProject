@@ -3,12 +3,13 @@ package com.example.wiuh.util;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.wiuh.activities.LoginActivity;
-import com.example.wiuh.model.WifiState;
+import com.example.wiuh.WifiState;
+import com.example.wiuh.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * FirebaseUtil
@@ -18,6 +19,24 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class FirebaseUtil {
     private static final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+
+    private static ValueEventListener postListener;
+    private static ValueEventListener memoListener;
+
+    public static void setListener(ValueEventListener postListener, ValueEventListener memoListener) {
+        if (FirebaseUtil.postListener != null)
+            FirebaseUtil.getPostRef()
+                    .removeEventListener(FirebaseUtil.postListener);
+        if (FirebaseUtil.memoListener != null)
+            FirebaseUtil.getMemoRef()
+                    .removeEventListener(FirebaseUtil.memoListener);
+
+        FirebaseUtil.postListener = postListener;
+        FirebaseUtil.memoListener = memoListener;
+
+        getPostRef().addValueEventListener(postListener);
+        getMemoRef().addValueEventListener(memoListener);
+    }
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")
@@ -30,9 +49,10 @@ public class FirebaseUtil {
                 .child(WifiState.getMAC());
     }
 
-    public static DatabaseReference getWifiRef(){
+    public static DatabaseReference getWifiRef() {
         return rootRef.child("WIFI")
-                .child(getCurUser().getUid());
+                .child(getCurUser().getUid())
+                .child(WifiState.getMAC());
     }
 
     public static FirebaseUser getCurUser() {
@@ -43,7 +63,7 @@ public class FirebaseUtil {
         FirebaseAuth.getInstance().signOut();
 
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         context.startActivity(intent);

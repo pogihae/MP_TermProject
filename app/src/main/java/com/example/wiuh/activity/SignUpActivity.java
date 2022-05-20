@@ -1,4 +1,4 @@
-package com.example.wiuh.activities;
+package com.example.wiuh.activity;
 
 import android.os.Bundle;
 import android.text.Editable;

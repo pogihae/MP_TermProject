@@ -15,40 +15,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH">
 
+        <activity android:name=".AddWifi" />
+        <activity android:name=".activity.NotificationHistoryActivity" />
+        <activity android:name=".activity.SetupActivity" />
+        <activity android:name=".activity.BoardActivity" />
+
         <activity
-            android:name=".AddWifi"
-            android:exported="false" />
+            android:name=".activity.memo.AddMemoActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".activities.NotificationHistoryActivity"
-            android:exported="false" />
+            android:name=".activity.post.AddPostActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".activities.PersonalSetupActivity"
-            android:exported="false" />
-        <activity android:name=".activities.SetupActivity" />
-        <activity android:name=".activities.BoardActivity" />
+            android:name=".activity.memo.ModifyMemoActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".ui.memo.AddMemoActivity"
-            android:parentActivityName=".activities.BoardActivity" />
+            android:name=".activity.post.ModifyPostActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".ui.community.AddPostActivity"
-            android:parentActivityName=".activities.BoardActivity" />
+            android:name=".activity.post.PostDetailActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".ui.memo.MemoModify"
-            android:parentActivityName=".activities.BoardActivity" />
+            android:name=".activity.memo.MemoDetailActivity"
+            android:parentActivityName=".activity.BoardActivity" />
         <activity
-            android:name=".ui.community.PostModify"
-            android:parentActivityName=".activities.BoardActivity" />
+            android:name=".activity.SignUpActivity"
+            android:parentActivityName=".activity.LoginActivity" />
         <activity
-            android:name=".ui.community.PostDetailActivity"
-            android:parentActivityName=".activities.BoardActivity" />
-        <activity
-            android:name=".ui.memo.MemoDetailActivity"
-            android:parentActivityName=".activities.BoardActivity" />
-        <activity
-            android:name=".activities.SignUpActivity"
-            android:parentActivityName=".activities.LoginActivity" />
-        <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.wiuh.ui.memo;
+package com.example.wiuh.activity.post;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,32 +9,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wiuh.R;
-import com.example.wiuh.model.Memo;
+import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AddMemoActivity extends AppCompatActivity {
+public class AddPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_memo);
+        setContentView(R.layout.activity_add_post);
         Toolbar toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//actionbar에 toolbar대입
-        getSupportActionBar().setTitle("메모작성");
+        getSupportActionBar().setTitle("게시글 작성");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());
+        findViewById(R.id.btn_submitPost).setOnClickListener(v -> addPost());
     }
 
-    private void addMemo() {
+    private void addPost() {
         FirebaseUser curUser = FirebaseUtil.getCurUser();
 
-        String title = ((EditText) findViewById(R.id.add_title_memo)).getText().toString();
-        String body = ((EditText) findViewById(R.id.add_content_memo)).getText().toString();
+        String title = ((EditText) findViewById(R.id.et_postTitle)).getText().toString();
+        String body = ((EditText) findViewById(R.id.et_postBody)).getText().toString();
 
-        Memo memo = new Memo(curUser.getUid(), title, curUser.getDisplayName(), body);
-        FirebaseUtil.getMemoRef().push().setValue(memo);
+        Post post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, 0);
+        FirebaseUtil.getPostRef().push().setValue(post);
 
         finish();
     }
