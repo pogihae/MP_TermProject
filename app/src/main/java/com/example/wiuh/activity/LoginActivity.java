@@ -2,7 +2,10 @@ package com.example.wiuh.activity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -70,9 +73,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startMain() {
+        if(!hasWifiConnection()) {
+            ToastUtil.showText(this, "NEED WIFI CONNECTION");
+            return;
+        }
+
         Intent intent = new Intent(this, BoardActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private boolean hasWifiConnection() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null &&
+                networkInfo.isConnectedOrConnecting() &&
+                networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     private void startSignUp() {
