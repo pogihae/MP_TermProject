@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -62,12 +63,17 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpBot();
+        //toolbar(커스텀)을 actionbar로 만듦
+        Toolbar toolbar= findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);//actionbar에 toolbar대입
         actionBar=getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+        //actionBar.setDisplayShowTitleEnabled(false);
         //wifi 정보 action bar 표시
-        Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+        Objects.requireNonNull(actionBar).setTitle(WifiState.getSSID());
 
-        Spinner spinner =findViewById(R.id.spinner);
         TextView textView= findViewById(R.id.textView);
+        Spinner spinner=findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(
                 //안스에 미리 정의된 어답터 layout사용(스피너에 텍스트만 쓸경우 이게 간편)
@@ -89,98 +95,8 @@ public class BoardActivity extends AppCompatActivity {
                 textView.setText("선택: ");
             }
         });
-        /*
-        SpinnerAdapter spinnerAdapter=new SpinnerAdapter() {
-            @Override
-            //spinner의 list를 보여주는 view
-            public View getDropDownView(int itemIndex, View view, ViewGroup viewGroup) {
-                LinearLayout linearLayout=new LinearLayout(BoardActivity.this);
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-                linearLayout.setLayoutParams((layoutParams));
-                TextView itemTextView = new TextView(BoardActivity.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                itemTextView.setTextColor(Color.WHITE);
-                // Add TextView in return view
-                linearLayout.addView(itemTextView, 1);
-                return linearLayout;
-            }
-
-            @Override
-            public void registerDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public int getCount() {
-                return dropDownItemArr.length;
-            }
-
-            @Override
-            public Object getItem(int itemIndex) {
-                return dropDownItemArr[itemIndex];
-            }
-
-            @Override
-            public long getItemId(int itemIndex) {
-                return itemIndex;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            @Override
-            public View getView(int itemIndex, View view, ViewGroup viewGroup) {
-                TextView itemTextView = new TextView(BoardActivity.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                itemTextView.setTextColor(Color.WHITE);
-                return itemTextView;
-            }
-
-            @Override
-            public int getItemViewType(int i) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                return 1;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        };
 
 
-        // Set action bar navigation mode to list mode.
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        // Set action bar list navigation data and item click listener.
-        actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                        String menuItemText = dropDownItemArr[itemPosition];
-                        String message = "You clicked " + menuItemText;
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        return true;
-
-                    }
-                });
-
-*/
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();

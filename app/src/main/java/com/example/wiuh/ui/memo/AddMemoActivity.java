@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.wiuh.R;
 import com.example.wiuh.model.Memo;
@@ -18,7 +19,10 @@ public class AddMemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo);
+        Toolbar toolbar= findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);//actionbar에 toolbar대입
         getSupportActionBar().setTitle("메모작성");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());
     }

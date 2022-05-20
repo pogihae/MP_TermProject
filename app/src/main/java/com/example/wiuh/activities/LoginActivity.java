@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.app_blue));
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         //permission & wifi info observation
         registerForActivityResult(

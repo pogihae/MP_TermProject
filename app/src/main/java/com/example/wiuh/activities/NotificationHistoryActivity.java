@@ -2,6 +2,7 @@ package com.example.wiuh.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
@@ -14,8 +15,11 @@ public class NotificationHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_history);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("알림");
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getActionBar().setTitle("알림");
+        //ActionBar actionBar = getSupportActionBar();
+       // actionBar.setTitle("알림");
 
     }
 }
