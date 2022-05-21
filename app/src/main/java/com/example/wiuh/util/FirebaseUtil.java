@@ -3,7 +3,7 @@ package com.example.wiuh.util;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.wiuh.WifiState;
+import com.example.wiuh.WifiInfo;
 import com.example.wiuh.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,13 +40,13 @@ public class FirebaseUtil {
 
     public static DatabaseReference getPostRef() {
         return rootRef.child("POST")
-                .child(WifiState.getMAC());
+                .child(WifiInfo.getMAC());
     }
 
     public static DatabaseReference getMemoRef() {
         return rootRef.child("MEMO")
                 .child(getCurUser().getUid())
-                .child(WifiState.getMAC());
+                .child(WifiInfo.getMAC());
     }
 
     public static DatabaseReference getWifiRef() {

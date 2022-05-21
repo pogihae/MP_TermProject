@@ -1,6 +1,5 @@
 package com.example.wiuh.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -27,9 +26,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.wiuh.AddWifi;
 import com.example.wiuh.R;
-import com.example.wiuh.WifiState;
+import com.example.wiuh.WifiInfo;
 import com.example.wiuh.activity.memo.AddMemoActivity;
 import com.example.wiuh.activity.post.AddPostActivity;
 import com.example.wiuh.model.Memo;
@@ -101,6 +99,16 @@ public class BoardActivity extends AppCompatActivity {
         btnAddMemo.setOnClickListener(v -> startAddMemo());
     }
 
+    private void startAddPost() {
+        Intent intent = new Intent(this, AddPostActivity.class);
+        startActivity(intent);
+    }
+
+    private void startAddMemo() {
+        Intent intent = new Intent(this, AddMemoActivity.class);
+        startActivity(intent);
+    }
+
     private void setUpActionBar() {
         List<String> starredL = new ArrayList<>();
         FirebaseUtil.getWifiRef().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -113,8 +121,8 @@ public class BoardActivity extends AppCompatActivity {
                     starredL.add(ssid);
                     ssidToMac.put(ssid, mac);
                 }
-                if(!starredL.contains(WifiState.getSSID()))
-                    starredL.add(WifiState.getSSID());
+                if(!starredL.contains(WifiInfo.getSSID()))
+                    starredL.add(WifiInfo.getSSID());
 
                 dropDownItemArr = starredL.toArray(new String[0]);
                 setUpListActionBar();
@@ -124,16 +132,6 @@ public class BoardActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
-
-    private void startAddPost() {
-        Intent intent = new Intent(this, AddPostActivity.class);
-        startActivity(intent);
-    }
-
-    private void startAddMemo() {
-        Intent intent = new Intent(this, AddMemoActivity.class);
-        startActivity(intent);
     }
 
     private void setUpListActionBar() {
@@ -235,9 +233,9 @@ public class BoardActivity extends AppCompatActivity {
         ReactiveWifi.observeWifiAccessPointChanges(this)
                 .subscribeOn(AndroidSchedulers.from(Looper.myLooper()))
                 .subscribe(wifiInfo -> {
-                    WifiState.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
+                    WifiInfo.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
                     //wifi 정보 action bar 표시
-                    Objects.requireNonNull(getSupportActionBar()).setTitle(WifiState.getSSID());
+                    Objects.requireNonNull(getSupportActionBar()).setTitle(WifiInfo.getSSID());
                     //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
                     FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -263,7 +261,7 @@ public class BoardActivity extends AppCompatActivity {
 
     private void notifyContent(String content) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, LoginActivity.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.wifi_image)
                 .setContentTitle("WIUH")
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -373,8 +371,8 @@ public class BoardActivity extends AppCompatActivity {
             builder.setMessage("WIFI 등록?")
                     .setTitle("WIUH")
                     .setPositiveButton("OK", (dialogInterface, i) -> {
-                        String SSID = WifiState.getSSID();
-                        String MAC = WifiState.getMAC();
+                        String SSID = WifiInfo.getSSID();
+                        String MAC = WifiInfo.getMAC();
 
                         FirebaseUtil.getWifiRef().child(MAC).setValue(SSID);
                         ToastUtil.showText(this, "등록 성공");

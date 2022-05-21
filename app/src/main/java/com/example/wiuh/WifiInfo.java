@@ -1,8 +1,8 @@
 package com.example.wiuh;
 
 //singleton class
-public class WifiState {
-    private static final WifiState instance = new WifiState();
+public class WifiInfo {
+    private static final WifiInfo instance = new WifiInfo();
 
     private String SSID;
     private String MAC;
