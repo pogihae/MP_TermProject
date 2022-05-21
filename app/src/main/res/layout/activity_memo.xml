@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/memoBody"
             android:layout_width="match_parent"
-            android:layout_height="509dp"
+            android:layout_height="540dp"
             android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:text="Body"
@@ -42,6 +42,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="4.5dp"
                 android:layout_marginRight="300dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/ic_baseline_restore_from_trash_24"
                  />
 
@@ -49,6 +50,7 @@
                 android:id="@+id/mod_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/ic_baseline_edit_24" />
         </LinearLayout>
 

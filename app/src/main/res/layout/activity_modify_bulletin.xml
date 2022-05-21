@@ -22,7 +22,7 @@
         <EditText
             android:id="@+id/mod_bulletinBody"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="600dp"
             android:layout_marginLeft="20dp"
             android:text="Body"
             android:textColor="@color/black"

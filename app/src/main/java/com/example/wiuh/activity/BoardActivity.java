@@ -323,7 +323,8 @@ public class BoardActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), NotificationHistoryActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
-            startActivity(new Intent(this, SetupActivity.class));
+            Intent intent = new Intent(getApplicationContext(), PersonalSetupActivity.class);
+            startActivity(intent);
         } else if (itemId == R.id.WiFiRegister) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("WIFI 등록?")
