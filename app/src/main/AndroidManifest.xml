@@ -17,6 +17,7 @@
 
         <activity android:name=".AddWifi" />
         <activity android:name=".activity.NotificationHistoryActivity" />
+        <activity android:name=".activity.PersonalSetupActivity"/>
         <activity android:name=".activity.SetupActivity" />
         <activity android:name=".activity.BoardActivity" />
 

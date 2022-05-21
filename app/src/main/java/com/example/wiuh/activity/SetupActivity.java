@@ -19,16 +19,16 @@ public class SetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_setup);
+        setContentView(R.layout.activity_setup);
 
 
         FirebaseUser curUser = FirebaseUtil.getCurUser();
         String nick = curUser.getDisplayName();
 
-        EditText nickname = findViewById(R.id.nickname);
+        EditText nickname = findViewById(R.id.nickname_edit);
         nickname.setText(nick);
 
-        Button editNickname = findViewById(R.id.editNickname);
+        Button editNickname = findViewById(R.id.GoToMain);
 
         editNickname.setOnClickListener(v -> {
             String nick1 = nickname.getText().toString();
@@ -40,7 +40,7 @@ public class SetupActivity extends AppCompatActivity {
                     .setDisplayName(nick1)
                     .build();
             FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-            ToastUtil.showText(getApplicationContext(), "닉네임 변경 완료");
+            ToastUtil.showText(getApplicationContext(), "닉네임이 설정되었습니다");
             finish();
         });
     }
@@ -48,7 +48,7 @@ public class SetupActivity extends AppCompatActivity {
     //뒤로가기 금지
     @Override
     public void onBackPressed() {
-        ToastUtil.showText(this, "Set nickname");
+        ToastUtil.showText(this, "닉네임을 입력하세요");
         //super.onBackPressed();
     }
 }
