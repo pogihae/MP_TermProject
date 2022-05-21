@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/bulletinBody"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="470dp"
             android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:text="Body"
@@ -56,14 +56,16 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_baseline_favorite_24"
-            android:layout_marginLeft="127dp"
+            android:layout_marginLeft="110dp"
             />
         <TextView
             android:id="@+id/bulletinLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="likes"
+            android:textStyle="bold"
             android:textColor="@color/black"
+            android:layout_gravity="center"
             />
         <Button
             android:id="@+id/btn_modpost"
