@@ -60,7 +60,7 @@ import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
-/**
+/*
  * MainActivity
  * <p>
  * LoginActivity 에서 시작됨
@@ -290,8 +290,8 @@ public class BoardActivity extends AppCompatActivity {
         //final String[] tabNames = new String[]{"Memo", "Community"};
         final int[] tabIcons = new int[]{
                 R.drawable.ic_baseline_textsms_24,
-                R.drawable.ic_baseline_list_alt_24
-                , R.drawable.ic_home_black_24dp
+                R.drawable.ic_baseline_list_alt_24,
+                R.drawable.ic_home_black_24dp
         };
 
         new TabLayoutMediator(mTabLayout, viewPager2, (tab, position) -> {
@@ -317,10 +317,10 @@ public class BoardActivity extends AppCompatActivity {
         if (itemId == R.id.logout) {
             FirebaseUtil.logout(this);
         } else if (itemId == R.id.goNotification) {
-            Intent intent = new Intent(getApplicationContext(), NotificationHistoryActivity.class);
+            Intent intent = new Intent(this, NotificationHistoryActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
-            Intent intent = new Intent(getApplicationContext(), PersonalSetupActivity.class);
+            Intent intent = new Intent(this, PersonalSetupActivity.class);
             startActivity(intent);
         } else if (itemId == R.id.WiFiRegister) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
