@@ -23,6 +23,7 @@ public class AddMemoActivity extends AppCompatActivity {
         Toolbar toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//actionbar에 toolbar대입
         getSupportActionBar().setTitle("메모작성");
+        //toolbar에 뒤로가기 생성
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.submit_memo_btn).setOnClickListener(v -> addMemo());

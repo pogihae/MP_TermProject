@@ -22,6 +22,7 @@ public class AddPostActivity extends AppCompatActivity {
         Toolbar toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//actionbar에 toolbar대입
         getSupportActionBar().setTitle("게시글 작성");
+        //toolbar에 뒤로가기 생성
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.btn_submitPost).setOnClickListener(v -> addPost());

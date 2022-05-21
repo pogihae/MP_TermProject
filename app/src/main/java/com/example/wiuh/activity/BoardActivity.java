@@ -12,7 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -69,7 +73,9 @@ public class BoardActivity extends AppCompatActivity {
 
     private Map<String, String> ssidToMac = new HashMap<>();
     private String[] dropDownItemArr; //spinner에 표시될 array
-
+    //spinner에 표시될 array
+    private ArrayList<String> arrayList;
+    private ActionBar actionBar;
     private MemoAdapter memoAdapter;
     private PostAdapter postAdapter;
     private ValueEventListener memoListener;
@@ -85,6 +91,45 @@ public class BoardActivity extends AppCompatActivity {
 
         //setUpActionBar();
         setUpBot();
+
+        //toolbar(커스텀)를 actionbar로 만듦
+        Toolbar toolbar= findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);//actionbar에 toolbar대입
+        actionBar=getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+        //actionBar.setDisplayShowTitleEnabled(false);
+
+        //wifi정보 actionbar에 title로
+        Objects.requireNonNull(actionBar).setTitle(WifiState.getSSID());
+
+        Spinner spinner=findViewById(R.id.spinner);
+
+        arrayList=new ArrayList<>();
+        arrayList.add("123");
+        arrayList.add("456");
+        arrayList.add("789");
+        arrayList.add("111");
+        arrayList.add("222");
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(
+                //안스에 미리 정의된 어답터 layout사용(스피너에 텍스트만 쓸경우 이게 간편)
+                this,android.R.layout.simple_spinner_item,arrayList
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        //스피너 객체에다가 어댑터 넣어줌
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            //선택되면
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+               Toast.makeText(getApplicationContext(),arrayList.get(position)+" 선택",Toast.LENGTH_LONG).show();
+            }
+            //아무것도 선택되지 않은 상태일때
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();
@@ -116,8 +161,9 @@ public class BoardActivity extends AppCompatActivity {
                 if(!starredL.contains(WifiState.getSSID()))
                     starredL.add(WifiState.getSSID());
 
-                dropDownItemArr = starredL.toArray(new String[0]);
-                setUpListActionBar();
+                // 밑에 줄만 바꾸면 이함수 사용가능할듯
+                //arrayList.add(starredL.toArray(new String[0]));
+
             }
 
             @Override
@@ -136,100 +182,7 @@ public class BoardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUpListActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        SpinnerAdapter spinnerAdapter = new SpinnerAdapter() {
-            @Override
-            //spinner의 list를 보여주는 view
-            public View getDropDownView(int itemIndex, View view, ViewGroup viewGroup) {
-                LinearLayout linearLayout = new LinearLayout(BoardActivity.this);
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-                linearLayout.setLayoutParams((layoutParams));
-                TextView itemTextView = new TextView(BoardActivity.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                itemTextView.setTextColor(Color.WHITE);
-                // Add TextView in return view
-                linearLayout.addView(itemTextView, itemIndex);
-                return linearLayout;
-            }
 
-            @Override
-            public void registerDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public int getCount() {
-                return dropDownItemArr.length;
-            }
-
-            @Override
-            public Object getItem(int itemIndex) {
-                return dropDownItemArr[itemIndex];
-            }
-
-            @Override
-            public long getItemId(int itemIndex) {
-                return itemIndex;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            @Override
-            public View getView(int itemIndex, View view, ViewGroup viewGroup) {
-                TextView itemTextView = new TextView(BoardActivity.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                itemTextView.setTextColor(Color.WHITE);
-                return itemTextView;
-            }
-
-            @Override
-            public int getItemViewType(int i) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                return 1;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        };
-        // Set action bar navigation mode to list mode.
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        // Set action bar list navigation data and item click listener.
-        actionBar.setListNavigationCallbacks(spinnerAdapter, (itemPosition, itemId) -> {
-            String SSID = dropDownItemArr[itemPosition];
-            //String MAC = ssidToMac.get(SSID);
-
-            //System.out.println(SSID + " " + MAC);
-
-            //WifiState.setInfo(SSID, MAC);
-            //FirebaseUtil.setListener(postListener, memoListener);
-
-            String message = "You clicked " + SSID;
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-            return true;
-
-        });
-    }
 
     private void startWifiInfoSubscription() {
         ReactiveWifi.observeWifiAccessPointChanges(this)
