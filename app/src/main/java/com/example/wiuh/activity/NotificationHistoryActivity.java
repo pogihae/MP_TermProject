@@ -16,7 +16,7 @@ public class NotificationHistoryActivity extends AppCompatActivity {
 
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getActionBar().setTitle("알림");
+        //getActionBar().setTitle("알림");
         
 
     }
