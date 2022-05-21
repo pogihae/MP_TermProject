@@ -63,15 +63,14 @@ public class PostDetailActivity extends AppCompatActivity {
             Post post;
             if (!likeButton.isSelected()) {
                 like.set(like.get() + 1);
-                post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
+                post = new Post(uid, title, author, body, like.get());
                 FirebaseUtil.getPostRef().child(key).setValue(post);
                 bulletinLike.setText(like.get().toString());
                 ToastUtil.showText(this, "좋아요");
                 likeButton.setSelected(true);
             } else {
                 like.set(like.get() - 1);
-                post = new Post(curUser.getUid(), title, curUser.getDisplayName(), body, like.get());
-                FirebaseUtil.getPostRef().child(key).setValue(post);
+                post = new Post(uid, title, author, body, like.get());                FirebaseUtil.getPostRef().child(key).setValue(post);
                 bulletinLike.setText(like.get().toString());
                 ToastUtil.showText(this, "좋아요 취소");
                 likeButton.setSelected(false);

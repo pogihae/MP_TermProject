@@ -25,12 +25,13 @@
             android:id="@+id/userProfile"
             android:layout_width="135dp"
             android:layout_height="135dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
             android:background="@drawable/profile_image_border"
             android:padding="10dp"
-            android:layout_gravity="center"
             android:translationZ="10dp"
-            android:layout_marginTop="40dp"
             app:srcCompat="@drawable/login_blue_user" />
+
         <EditText
             android:id="@+id/nickname_edit"
             android:layout_width="186dp"
