@@ -6,9 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wiuh.model.Wifi;
 import com.example.wiuh.util.FirebaseUtil;
-import com.google.firebase.auth.FirebaseUser;
 
 public class AddWifi extends AppCompatActivity {
 
@@ -21,15 +19,15 @@ public class AddWifi extends AppCompatActivity {
         TextView mac_info = findViewById(R.id.MAC_Info);
         Button register = findViewById(R.id.btn_register);
 
-        ssid_info.setText(WifiState.getSSID());
-        mac_info.setText((WifiState.getMAC()));
+        ssid_info.setText(WifiInfo.getSSID());
+        mac_info.setText((WifiInfo.getMAC()));
 
         register.setOnClickListener(v -> addWifi());
     }
 
     private void addWifi() {
-        String SSID = WifiState.getSSID();
-        String MAC = WifiState.getMAC();
+        String SSID = WifiInfo.getSSID();
+        String MAC = WifiInfo.getMAC();
 
         FirebaseUtil.getWifiRef().child(MAC).setValue(SSID);
         finish();
