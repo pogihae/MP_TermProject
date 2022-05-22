@@ -24,8 +24,6 @@ public class PersonalSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_setup);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
 
 
         FirebaseUser curUser = FirebaseUtil.getCurUser();
