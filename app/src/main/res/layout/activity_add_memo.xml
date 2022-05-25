@@ -13,23 +13,33 @@
         android:layout_height="wrap_content"
         android:background="@color/sky_blue"
         app:titleTextColor="@color/white"/>
+
     <EditText
         android:id="@+id/add_title_memo"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:background="#faf7f7"
+        android:paddingBottom="7dp"
+        android:layout_marginBottom="6dp"
+        android:elevation="20dp"
         android:hint="이곳에 제목을 입력해주세요"
-        android:layout_marginTop="50dp"
+        android:paddingLeft="20dp"
         android:paddingTop="12dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
+
     <EditText
         android:id="@+id/add_content_memo"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="360dp"
+        android:layout_height="460dp"
         android:layout_below="@+id/add_title_memo"
+        android:layout_marginLeft="25dp"
         android:background="#faf7f7"
+        android:elevation="20dp"
         android:gravity="top|left"
         android:hint="이곳에 내용을 입력해주세요"
         android:paddingLeft="20dp"
@@ -41,9 +51,13 @@
         android:id="@+id/submit_memo_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/add_content_memo"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/sky_blue"
+        android:translationZ="5dp"
+        android:elevation="10dp"
+        android:stateListAnimator="@null"
         android:text="작성 완료" />
 
 

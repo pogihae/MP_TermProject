@@ -18,34 +18,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:orientation="vertical">
+        android:orientation="vertical"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="제목:"
-                android:textSize="20sp" />
 
-            <EditText
+        <EditText
+                android:layout_gravity="center"
                 android:id="@+id/et_postTitle"
-                android:layout_width="match_parent"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
+                android:background="#faf7f7"
+                android:elevation="20dp"
                 android:height="48dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="6dp"
+                android:paddingLeft="10dp"
                 android:hint="게시글 제목을 입력해주세요." />
-
-        </LinearLayout>
 
 
         <EditText
             android:id="@+id/et_postBody"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_width="360dp"
+            android:layout_height="460dp"
+            android:layout_gravity="center"
+            android:elevation="20dp"
             android:background="#faf7f7"
             android:gravity="top|left"
             android:hint="내용을 입력하세요"
@@ -56,18 +53,22 @@
 
         <Button
             android:id="@+id/btn_submitPost"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="62dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:layout_marginRight="62dp"
             android:backgroundTint="@color/sky_blue"
             android:gravity="center"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
-            android:text="완료"
+            android:translationZ="5dp"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
+            android:text="작성 완료"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            />
     </LinearLayout>
 
 

@@ -14,7 +14,7 @@
             android:id="@+id/mod_memoTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:paddingLeft="20dp"
             android:text="Title"
             android:textColor="@color/black"
             android:textSize="25dp" />
@@ -23,7 +23,7 @@
             android:id="@+id/mod_memoBody"
             android:layout_width="match_parent"
             android:layout_height="580dp"
-            android:layout_marginLeft="20dp"
+            android:paddingLeft="20dp"
             android:text="Body"
             android:textColor="@color/black"
             android:textSize="20dp" />
