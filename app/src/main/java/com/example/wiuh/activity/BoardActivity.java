@@ -36,6 +36,7 @@ import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.pwittchen.reactivewifi.ReactiveWifi;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -278,12 +279,12 @@ public class BoardActivity extends AppCompatActivity {
 
                 WifiInfo.setInfo(ssid, mac);
                 FirebaseUtil.setListener(postListener, memoListener);
-
-                menu.getItem(3).setIcon(getResources().getDrawable(R.drawable.ic_fill_star));
+                Snackbar.make(adapterView, "Changed " + ssid, Snackbar.LENGTH_LONG).show();
             }
             //아무것도 선택되지 않은 상태일때
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                Snackbar.make(adapterView, "No SSID selected", Snackbar.LENGTH_LONG).show();
             }
         });
     }
