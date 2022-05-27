@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +44,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.tiper.MaterialSpinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,17 +65,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 public class BoardActivity extends AppCompatActivity {
 
-    private List<String> starredList;
     private Map<String, String> ssidToMac;          //ssid로 mac 주소 획득
 
     private List<String> spinnerList;                  //spinner에 표시될 ssid array
     private ArrayAdapter<String> spinnerAdapter;
-    private Menu menu;
 
     private MemoAdapter memoAdapter;
     private PostAdapter postAdapter;
     private ValueEventListener memoListener;
     private ValueEventListener postListener;
+
+    MaterialSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,6 @@ public class BoardActivity extends AppCompatActivity {
         memoAdapter = new MemoAdapter(new ArrayList<>(), this);
         postAdapter = new PostAdapter(new ArrayList<>(), this);
         spinnerList = new ArrayList<>();
-        starredList = new ArrayList<>();
         ssidToMac = new HashMap<>();
         spinnerAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, spinnerList
@@ -206,13 +208,9 @@ public class BoardActivity extends AppCompatActivity {
                                 .filter(ssid -> !spinnerList.contains(ssid))
                                 .collect(Collectors.toList())
                 );
-                starredList.addAll(
-                        tmpList.stream()
-                                .filter(ssid -> !spinnerList.contains(ssid))
-                                .collect(Collectors.toList())
-                );
 
                 spinnerAdapter.notifyDataSetChanged();
+                spinner.setSelection(0);
             }
 
             @Override
@@ -265,26 +263,25 @@ public class BoardActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);  //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);  //원래 title 숨기기
 
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         //스피너 객체에다가 어댑터 넣어줌
         spinner.setAdapter(spinnerAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            //선택되면
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                String ssid = spinnerList.get(position);
+            public void onItemSelected(@NonNull MaterialSpinner materialSpinner, @Nullable View view, int i, long l) {
+                String ssid = spinnerList.get(i);
                 String mac = ssidToMac.get(ssid);
 
                 WifiInfo.setInfo(ssid, mac);
                 FirebaseUtil.setListener(postListener, memoListener);
-                Snackbar.make(adapterView, "Changed " + ssid, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(materialSpinner, "Select " + ssid, Snackbar.LENGTH_LONG).show();
             }
-            //아무것도 선택되지 않은 상태일때
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Snackbar.make(adapterView, "No SSID selected", Snackbar.LENGTH_LONG).show();
+            public void onNothingSelected(@NonNull MaterialSpinner materialSpinner) {
+                Snackbar.make(materialSpinner, "No SSID selected", Snackbar.LENGTH_LONG).show();
             }
         });
     }
@@ -308,7 +305,6 @@ public class BoardActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        this.menu = menu;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_option, menu);
         return true;

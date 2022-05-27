@@ -17,12 +17,13 @@
         android:textSize="20sp"
         />
 -->
-    <Spinner
+    <com.tiper.MaterialSpinner
         android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:spinnerMode="dropdown"
-        android:minHeight="48dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="48dp"
+        app:spinnerMode="bottomsheet"
+        app:boxBackgroundColor="@color/sky_blue"
+        app:boxBackgroundMode="filled" />
 
 </androidx.appcompat.widget.Toolbar>
