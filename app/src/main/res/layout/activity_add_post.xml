@@ -3,38 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.post.AddPostActivity">
+    tools:context=".activity.board.post.AddPostActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/sky_blue"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:orientation="vertical"
-
-        >
+        android:orientation="vertical">
 
 
         <EditText
-                android:layout_gravity="center"
-                android:id="@+id/et_postTitle"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:background="#faf7f7"
-                android:elevation="20dp"
-                android:height="48dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="6dp"
-                android:paddingLeft="10dp"
-                android:hint="게시글 제목을 입력해주세요." />
+            android:id="@+id/et_postTitle"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="6dp"
+            android:height="48dp"
+            android:background="#faf7f7"
+            android:elevation="20dp"
+            android:hint="게시글 제목을 입력해주세요."
+            android:importantForAutofill="no"
+            android:inputType="none"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
 
         <EditText
@@ -42,14 +41,16 @@
             android:layout_width="360dp"
             android:layout_height="460dp"
             android:layout_gravity="center"
-            android:elevation="20dp"
             android:background="#faf7f7"
-            android:gravity="top|left"
+            android:elevation="20dp"
+            android:gravity="top|start"
             android:hint="내용을 입력하세요"
+            android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:minHeight="48dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp" />
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp" />
 
         <Button
             android:id="@+id/btn_submitPost"
@@ -60,15 +61,14 @@
             android:layout_marginTop="25dp"
             android:layout_marginRight="62dp"
             android:backgroundTint="@color/sky_blue"
+            android:elevation="10dp"
             android:gravity="center"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
-            android:translationZ="5dp"
-            android:elevation="10dp"
             android:stateListAnimator="@null"
             android:text="작성 완료"
             android:textColor="#ffffff"
-            />
+            android:translationZ="5dp" />
     </LinearLayout>
 
 

@@ -1,162 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".activity.sign.LoginActivity">
 
-    <LinearLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:background="@drawable/login_blue_bg">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/login_testimage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Wi U here?"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="36.7dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/login_blue_border_rounded_cornwe">
+        <!--INPUT-->
+        <EditText
+            android:id="@+id/et_userID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/username_icon"
+            android:autofillHints="emailAddress"
+            android:background="@android:color/transparent"
+            android:hint="ID"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="17dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="15dp"
+            android:textCursorDrawable="@drawable/login_cursor_color"
+            android:textSize="13sp" />
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/username_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="17dp"
+            android:src="@drawable/login_blue_user" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="12.7dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/login_blue_border_rounded_cornwe">
+        <!--INPUT-->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icon"
+            android:autofillHints="password"
+            android:background="@android:color/transparent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingStart="17dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="17dp"
+            android:paddingBottom="15dp"
+            android:textCursorDrawable="@drawable/login_cursor_color"
+            android:textSize="12sp" />
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="20dp"
+            android:layout_height="13dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="17dp"
+            android:src="@drawable/login_password" />
+
+    </RelativeLayout>
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="18.7dp"
+        android:layout_marginRight="62dp"
+        android:gravity="center"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:text="Login"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="273dp"
-            android:background="@drawable/login_blue_bg">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="or"
+        android:textAlignment="center"
+        android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp"
-                android:src="@drawable/login_testimage" />
+    <com.developer.gbuttons.GoogleSignInButton
+        android:id="@+id/btn_google_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="62dp"
+        android:layout_marginRight="62dp"
+        android:gravity="center"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:text="Wi U here?"
-                android:textColor="#ffffff"
-                android:textSize="25sp" />
-
-        </FrameLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="36.7dp"
-            android:layout_marginRight="62dp"
-            android:background="@drawable/login_blue_border_rounded_cornwe">
-            <!--INPUT-->
-            <EditText
-                android:id="@+id/et_userID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/username_icon"
-                android:background="@android:color/transparent"
-                android:hint="ID"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingLeft="17dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:textCursorDrawable="@drawable/login_cursor_color"
-                android:textSize="13sp" />
-            <!--ICON-->
-            <ImageView
-                android:id="@+id/username_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/login_blue_user" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="12.7dp"
-            android:layout_marginRight="62dp"
-            android:background="@drawable/login_blue_border_rounded_cornwe">
-            <!--INPUT-->
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/icon"
-                android:background="@android:color/transparent"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:paddingLeft="17dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:textCursorDrawable="@drawable/login_cursor_color"
-                android:textSize="12sp" />
-            <!--ICON-->
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="20dp"
-                android:layout_height="13dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/login_password" />
-
-        </RelativeLayout>
-
-        <com.dd.processbutton.iml.ActionProcessButton
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="18.7dp"
-            android:layout_marginRight="62dp"
-            android:gravity="center"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:text="Login"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:text="or"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <com.developer.gbuttons.GoogleSignInButton
-            android:id="@+id/btn_google_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="62dp"
-            android:layout_marginRight="62dp"
-            android:gravity="center"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="비밀번호 찾기"
-            android:textColor="#1566e0"
-            android:textSize="10.5sp" />
-
-        <TextView
-            android:id="@+id/btn_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="회원가입"
-            android:textColor="#1566e0"
-            android:textSize="10.5sp" />
+    <TextView
+        android:id="@+id/btn_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:text="회원가입"
+        android:textColor="#1566e0"
+        android:textSize="11sp" />
 
 
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

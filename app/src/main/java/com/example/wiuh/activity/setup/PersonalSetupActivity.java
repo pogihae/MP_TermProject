@@ -1,4 +1,4 @@
-package com.example.wiuh.activity;
+package com.example.wiuh.activity.setup;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,21 +12,21 @@ import com.example.wiuh.util.ToastUtil;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-public class SetupActivity extends AppCompatActivity {
+public class PersonalSetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup);
+        setContentView(R.layout.activity_personal_setup);
 
 
         FirebaseUser curUser = FirebaseUtil.getCurUser();
         String nick = curUser.getDisplayName();
 
-        EditText nickname = findViewById(R.id.nickname_edit);
+        EditText nickname = findViewById(R.id.nickname);
         nickname.setText(nick);
 
-        Button editNickname = findViewById(R.id.GoToMain);
+        Button editNickname = findViewById(R.id.editNickname);
 
         editNickname.setOnClickListener(v -> {
             String nick1 = nickname.getText().toString();
@@ -38,15 +38,8 @@ public class SetupActivity extends AppCompatActivity {
                     .setDisplayName(nick1)
                     .build();
             FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-            ToastUtil.showText(getApplicationContext(), "닉네임이 설정되었습니다");
-            finish();
+            ToastUtil.showText(getApplicationContext(), "닉네임 변경 완료");
         });
-    }
 
-    //뒤로가기 금지
-    @Override
-    public void onBackPressed() {
-        ToastUtil.showText(this, "닉네임을 입력하세요");
-        //super.onBackPressed();
     }
 }

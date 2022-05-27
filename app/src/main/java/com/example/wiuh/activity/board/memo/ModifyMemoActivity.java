@@ -1,4 +1,4 @@
-package com.example.wiuh.activity.memo;
+package com.example.wiuh.activity.board.memo;
 
 import android.content.Intent;
 import android.os.Bundle;

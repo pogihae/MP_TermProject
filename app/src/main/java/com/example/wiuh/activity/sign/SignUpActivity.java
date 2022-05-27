@@ -1,4 +1,4 @@
-package com.example.wiuh.activity;
+package com.example.wiuh.activity.sign;
 
 import android.os.Bundle;
 import android.text.Editable;

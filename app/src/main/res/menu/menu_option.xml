@@ -19,8 +19,8 @@
 
     <item
         android:id="@+id/WiFiRegister"
-        android:title="와이파이 등록하기"
         android:icon="@drawable/ic_star"
+        android:title="와이파이 등록하기"
         app:showAsAction="ifRoom" />
 
 </menu>

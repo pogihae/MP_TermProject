@@ -1,4 +1,4 @@
-package com.example.wiuh.activity.post;
+package com.example.wiuh.activity.board.post;
 
 import android.content.Intent;
 import android.os.Bundle;

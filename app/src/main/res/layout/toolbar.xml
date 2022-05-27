@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/sky_blue"
     app:titleTextColor="@color/white">
-<!--
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Toolbar Title"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        />
--->
+    <!--
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toolbar Title"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            />
+    -->
     <com.tiper.MaterialSpinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minHeight="48dp"
-        app:spinnerMode="bottomsheet"
         app:boxBackgroundColor="@color/sky_blue"
-        app:boxBackgroundMode="filled" />
+        app:boxBackgroundMode="filled"
+        app:spinnerMode="bottomsheet" />
 
 </androidx.appcompat.widget.Toolbar>

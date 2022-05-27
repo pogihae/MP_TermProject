@@ -15,35 +15,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH">
 
-        <activity android:name=".AddWifi" />
-        <activity android:name=".activity.NotificationHistoryActivity" />
-        <activity android:name=".activity.PersonalSetupActivity"/>
-        <activity android:name=".activity.SetupActivity" />
-        <activity android:name=".activity.BoardActivity" />
+        <activity android:name=".activity.setup.NotificationHistoryActivity" />
+        <activity android:name=".activity.setup.PersonalSetupActivity" />
+        <activity android:name=".activity.setup.SetupActivity" />
+        <activity android:name=".activity.board.BoardActivity" />
 
         <activity
-            android:name=".activity.memo.AddMemoActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.memo.AddMemoActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.post.AddPostActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.post.AddPostActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.memo.ModifyMemoActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.memo.ModifyMemoActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.post.ModifyPostActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.post.ModifyPostActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.post.PostDetailActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.post.PostDetailActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.memo.MemoDetailActivity"
-            android:parentActivityName=".activity.BoardActivity" />
+            android:name=".activity.board.memo.MemoDetailActivity"
+            android:parentActivityName=".activity.board.BoardActivity" />
         <activity
-            android:name=".activity.SignUpActivity"
-            android:parentActivityName=".activity.LoginActivity" />
+            android:name=".activity.sign.SignUpActivity"
+            android:parentActivityName=".activity.sign.LoginActivity" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.sign.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

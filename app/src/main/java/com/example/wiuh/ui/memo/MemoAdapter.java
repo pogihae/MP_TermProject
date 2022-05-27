@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
-import com.example.wiuh.activity.memo.MemoDetailActivity;
+import com.example.wiuh.activity.board.memo.MemoDetailActivity;
 import com.example.wiuh.model.Memo;
 import com.example.wiuh.ui.BaseDiffCallback;
 

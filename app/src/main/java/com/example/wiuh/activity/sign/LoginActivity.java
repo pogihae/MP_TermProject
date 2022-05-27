@@ -1,11 +1,12 @@
-package com.example.wiuh.activity;
+package com.example.wiuh.activity.sign;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.example.wiuh.R;
+import com.example.wiuh.activity.board.BoardActivity;
 import com.example.wiuh.util.ToastUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -39,9 +41,8 @@ import se.warting.permissionsui.backgroundlocation.PermissionsUiContracts;
  * todo: Splash Activity 추가 후 권한, 네트워크 확인 등을 넘기기
  */
 public class LoginActivity extends AppCompatActivity {
+    public static final String CHANNEL_ID = "WIFI_INFO";
     static final String TAG = LoginActivity.class.getSimpleName();
-    static final String CHANNEL_ID = "WIFI_INFO";
-
     private FirebaseAuth auth;
     private ActionProcessButton btnSignIn;
 
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startMain() {
-        if(!hasWifiConnection()) {
+        if (!hasWifiConnection()) {
             ToastUtil.showText(this, "NEED WIFI CONNECTION");
             return;
         }
@@ -85,11 +86,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean hasWifiConnection() {
         ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return networkInfo != null &&
-                networkInfo.isConnectedOrConnecting() &&
-                networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network network = cm.getActiveNetwork();
+        if (network == null) return false;
+
+        NetworkCapabilities capabilities = cm.getNetworkCapabilities(network);
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
     }
 
     private void startSignUp() {
@@ -147,11 +150,9 @@ public class LoginActivity extends AppCompatActivity {
 
     /* notification code */
     private void createNotificationChannel() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "name", importance);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "name", importance);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 }

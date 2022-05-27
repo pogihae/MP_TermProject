@@ -1,4 +1,4 @@
-package com.example.wiuh.activity;
+package com.example.wiuh.activity.board;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,8 +23,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.wiuh.R;
 import com.example.wiuh.WifiInfo;
-import com.example.wiuh.activity.memo.AddMemoActivity;
-import com.example.wiuh.activity.post.AddPostActivity;
+import com.example.wiuh.activity.board.memo.AddMemoActivity;
+import com.example.wiuh.activity.board.post.AddPostActivity;
+import com.example.wiuh.activity.setup.NotificationHistoryActivity;
+import com.example.wiuh.activity.setup.PersonalSetupActivity;
+import com.example.wiuh.activity.setup.SetupActivity;
+import com.example.wiuh.activity.sign.LoginActivity;
 import com.example.wiuh.model.Memo;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.ui.community.CommunityFragment;
@@ -65,17 +66,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 public class BoardActivity extends AppCompatActivity {
 
+    MaterialSpinner spinner;
     private Map<String, String> ssidToMac;          //ssid로 mac 주소 획득
-
     private List<String> spinnerList;                  //spinner에 표시될 ssid array
     private ArrayAdapter<String> spinnerAdapter;
-
     private MemoAdapter memoAdapter;
     private PostAdapter postAdapter;
     private ValueEventListener memoListener;
     private ValueEventListener postListener;
-
-    MaterialSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +120,7 @@ public class BoardActivity extends AppCompatActivity {
                 List<Post> list = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Post p = ds.getValue(Post.class);
+                    assert p != null;
                     p.setKey(ds.getKey());
                     list.add(p);
                 }
@@ -139,6 +138,7 @@ public class BoardActivity extends AppCompatActivity {
                 List<Memo> list = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Memo m = ds.getValue(Memo.class);
+                    assert m != null;
                     m.setKey(ds.getKey());
                     list.add(m);
                 }
@@ -199,7 +199,7 @@ public class BoardActivity extends AppCompatActivity {
         FirebaseUtil.getWifiRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     tmpList.add(ds.getValue(String.class));
                     ssidToMac.put(ds.getValue(String.class), ds.getKey());
                 }
@@ -214,7 +214,8 @@ public class BoardActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
 
@@ -256,10 +257,11 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void setUpSpinner() {
-        Toolbar toolbar= findViewById(R.id.toolbar);  //toolbar(커스텀)를 actionbar로 만듦
+        Toolbar toolbar = findViewById(R.id.toolbar);  //toolbar(커스텀)를 actionbar로 만듦
         setSupportActionBar(toolbar);                 //actionbar에 toolbar대입
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayShowCustomEnabled(true);  //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);  //원래 title 숨기기
 
@@ -293,10 +295,12 @@ public class BoardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddPostActivity.class);
         startActivity(intent);
     }
+
     private void startAddMemo() {
         Intent intent = new Intent(this, AddMemoActivity.class);
         startActivity(intent);
     }
+
     private void startSetUpActivity() {
         ToastUtil.showText(this, "닉네임을 설정하세요");
         Intent intent = new Intent(this, SetupActivity.class);
@@ -333,9 +337,8 @@ public class BoardActivity extends AppCompatActivity {
                         FirebaseUtil.getWifiRef().child(MAC).setValue(SSID);
                         ToastUtil.showText(this, "등록 성공");
                     })
-                    .setNegativeButton("NO", (dialogInterface, i) -> {
-                        ToastUtil.showText(this, "등록 안함");
-                    });
+                    .setNegativeButton("NO", (dialogInterface, i) ->
+                            ToastUtil.showText(this, "등록 안함"));
             AlertDialog dialog = builder.create();
             dialog.show();
             //startActivity(new Intent(this, AddWifi.class));

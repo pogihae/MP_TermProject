@@ -1,4 +1,4 @@
-package com.example.wiuh.activity.memo;
+package com.example.wiuh.activity.board.memo;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,8 +12,9 @@ import com.example.wiuh.R;
 import com.example.wiuh.WifiInfo;
 import com.example.wiuh.model.Memo;
 import com.example.wiuh.util.FirebaseUtil;
-import com.github.pwittchen.reactivewifi.WifiState;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class AddMemoActivity extends AppCompatActivity {
 
@@ -21,9 +22,9 @@ public class AddMemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo);
-        Toolbar toolbar= findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//actionbar에 toolbar대입
-        getSupportActionBar().setTitle("메모작성");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("메모작성");
         //toolbar에 뒤로가기 생성
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

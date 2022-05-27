@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
-import com.example.wiuh.activity.post.PostDetailActivity;
+import com.example.wiuh.activity.board.post.PostDetailActivity;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.ui.BaseDiffCallback;
 

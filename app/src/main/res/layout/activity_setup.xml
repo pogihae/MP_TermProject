@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.SetupActivity">
+    tools:context=".activity.setup.SetupActivity">
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        >
-    <ImageView
-        android:layout_width="415dp"
-        android:layout_height="310dp"
-        android:translationZ="-10dp"
-        app:srcCompat="@drawable/login_blue_bg"
-        />
+        android:layout_weight="1">
 
         <ImageView
-            android:id="@+id/userProfile"
+            android:layout_width="415dp"
+            android:layout_height="310dp"
+            android:translationZ="-10dp"
+            app:srcCompat="@drawable/login_blue_bg" />
+
+        <ImageView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:layout_gravity="center"
@@ -36,16 +33,16 @@
             android:id="@+id/nickname_edit"
             android:layout_width="186dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="135dp"
             android:background="@drawable/edittext_border"
             android:gravity="center"
-            android:layout_gravity="center"
             android:hint="@string/nickname"
-            android:layout_marginTop="135dp"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
             android:textColor='@color/black'
-            android:textSize="15dp" />
+            android:textSize="15sp" />
     </FrameLayout>
-
-
 
 
     <RelativeLayout
@@ -58,17 +55,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="알림설정"
-            android:layout_marginLeft="20dp"
             android:textColor="@color/darkgrey"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/app_blue" />
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/app_blue" />
 
 
         <TextView
@@ -76,41 +72,41 @@
             android:layout_width="64dp"
             android:layout_height="32dp"
             android:layout_alignBottom="@id/set_notification"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginBottom="-44dp"
             android:text="푸시알림"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="15sp"
             tools:layout_editor_absoluteX="30dp"
             tools:layout_editor_absoluteY="423dp" />
 
-        <Switch
-            android:id="@+id/push_switch"
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:layout_width="0dp"
             android:layout_height="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="0dp"
-            android:layout_toRightOf="@id/push_notification"
+            android:layout_toEndOf="@id/push_notification"
             android:checked="false"
             android:theme="@style/PushSwitch" />
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/GoToMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/app_blue"
-        android:layout_marginBottom="-30dp"
-        android:text="다음"
-        android:layout_gravity="center" />
+        <Button
+            android:id="@+id/GoToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-30dp"
+            android:backgroundTint="@color/app_blue"
+            android:text="다음" />
     </LinearLayout>
 
 </LinearLayout>

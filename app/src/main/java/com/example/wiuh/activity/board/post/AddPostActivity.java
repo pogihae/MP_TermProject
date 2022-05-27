@@ -1,4 +1,4 @@
-package com.example.wiuh.activity.post;
+package com.example.wiuh.activity.board.post;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,15 +13,17 @@ import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class AddPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
-        Toolbar toolbar= findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//actionbar에 toolbar대입
-        getSupportActionBar().setTitle("게시글 작성");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("게시글 작성");
         //toolbar에 뒤로가기 생성
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
