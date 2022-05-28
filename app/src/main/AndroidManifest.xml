@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WiUH">
 
-        <activity android:name=".activity.setup.NotificationHistoryActivity" />
         <activity android:name=".activity.setup.PersonalSetupActivity" />
         <activity android:name=".activity.setup.SetupActivity" />
         <activity android:name=".activity.board.BoardActivity" />

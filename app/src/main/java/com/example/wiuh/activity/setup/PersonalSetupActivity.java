@@ -1,8 +1,10 @@
 package com.example.wiuh.activity.setup;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,18 +29,31 @@ public class PersonalSetupActivity extends AppCompatActivity {
         nickname.setText(nick);
 
         Button editNickname = findViewById(R.id.editNickname);
+        TextView textView=findViewById(R.id.logoutTextview);
 
-        editNickname.setOnClickListener(v -> {
-            String nick1 = nickname.getText().toString();
-            if (nick1.matches("")) {
-                ToastUtil.showText(getApplicationContext(), "닉네임을 입력하세요");
-                return;
+        editNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String nick = nickname.getText().toString();
+                if (nick.matches("")) {
+                    ToastUtil.showText(getApplicationContext(), "닉네임을 입력하세요");
+                    return;
+                }
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(nick)
+                        .build();
+                FirebaseUtil.getCurUser().updateProfile(profileUpdates);
+                ToastUtil.showText(getApplicationContext(),"닉네임 변경 완료");
             }
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(nick1)
-                    .build();
-            FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-            ToastUtil.showText(getApplicationContext(), "닉네임 변경 완료");
+        });
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtil.logout(getApplicationContext());
+                ToastUtil.showText(getApplicationContext(),"로그아웃");
+            }
         });
 
     }
