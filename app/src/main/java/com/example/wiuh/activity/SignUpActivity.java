@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.wiuh.R;
 import com.example.wiuh.util.ToastUtil;
@@ -27,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         //Objects.requireNonNull(getSupportActionBar()).hide();
-
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.app_blue));
         findViewById(R.id.signup_register).setOnClickListener(v -> register());
 
         //confirm password
