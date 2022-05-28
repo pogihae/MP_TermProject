@@ -4,6 +4,8 @@ package com.example.wiuh;
 public class WifiInfo {
     private static final WifiInfo instance = new WifiInfo();
 
+    private WifiInfo() {}
+
     private String SSID;
     private String MAC;
 

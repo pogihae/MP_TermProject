@@ -6,9 +6,6 @@
         android:id="@+id/logout"
         android:title="로그아웃"
         app:showAsAction="never" />
-
-
-
     <item
         android:id="@+id/personalSettings"
         android:title="개인설정"
@@ -16,13 +13,7 @@
 
     <item
         android:id="@+id/WiFiRegister"
-        android:icon="@drawable/ic_star"
         android:title="와이파이 등록하기"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/goNotification"
-        android:title="알림목록"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>

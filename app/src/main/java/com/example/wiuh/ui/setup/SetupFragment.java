@@ -45,14 +45,14 @@ public class SetupFragment extends Fragment {
                         .setDisplayName(nick)
                         .build();
                 FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-                ToastUtil.showText(getContext(),"닉네임 변경 완료");
+                ToastUtil.showText(getContext(), "닉네임 변경 완료");
             }
         });
         logoutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseUtil.logout(getContext());
-                ToastUtil.showText(getContext(),"로그아웃");
+                ToastUtil.showText(getContext(), "로그아웃");
             }
         });
         return root;

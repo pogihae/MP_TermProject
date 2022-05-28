@@ -4,153 +4,161 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.setup.PersonalSetupActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/wiAreUHere"
-        android:layout_width="314dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="25dp"
-        android:text="Wi \nAre U\nHere?"
-        android:textColor="@color/sky_blue"
-        android:textSize="50dp"
-        android:textStyle="bold" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="3dp"
-        android:text="Nickname"
-        android:textColor="@color/darkgrey" />
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/nickname"
-            android:layout_width="186dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edittext_border"
-            android:gravity="center"
-            android:textColor='@color/black'
-            android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/editNickname"
+        <TextView
+            android:id="@+id/wiAreUHere"
+            android:layout_width="314dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginBottom="25dp"
+            android:text="Wi \nAre U\nHere?"
+            android:textColor="@color/sky_blue"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/nickname"
-            android:backgroundTint="@color/sky_blue"
-            android:text="Change"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="3dp"
+            android:text="Nickname"
+            android:textColor="@color/darkgrey" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/nickname"
+                android:layout_width="186dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edittext_border"
+                android:gravity="center"
+                android:textColor='@color/black'
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/editNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/nickname"
+                android:backgroundTint="@color/sky_blue"
+                android:text="Change"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="16dp"
+            android:background="#B5E1F1" />
+
+
+        <TextView
+            android:id="@+id/set_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="21dp"
+            android:text="알림설정"
+            android:textColor="@color/darkgrey"
+            android:textSize="20dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/push_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+
+                android:text="푸시알림"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <Switch
+                android:id="@+id/push_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginEnd="16dp"
+                android:checked="false"
+                android:theme="@style/PushSwitch" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="#B5E1F1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="21dp"
+            android:text="기타"
+            android:textColor="@color/darkgrey"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/logoutTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:text="로그아웃"
+            android:textColor="@color/black"
             android:textSize="15dp" />
 
-    </RelativeLayout>
-    <View
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="16dp"
-        android:background="#B5E1F1" />
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="#B5E1F1" />
 
+        <TextView
+            android:id="@+id/app_infomation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="14dp"
+            android:text="앱 정보"
+            android:textColor="@color/darkgrey"
+            android:textSize="20dp" />
 
+        <TextView
+            android:id="@+id/ourTeamInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="25dp"
+            android:text="Developed by 김예찬, 김윤호, 민지원, 박민석, 조연겸\n\nMajoring in Software at Gachon University" />
 
-    <TextView
-        android:id="@+id/set_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="21dp"
-        android:text="알림설정"
-        android:textColor="@color/darkgrey"
-        android:textSize="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/push_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-
-        android:text="푸시알림"
-        android:textColor="@color/black"
-        android:textSize="15dp" />
-
-    <Switch
-        android:id="@+id/push_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="right"
-        android:checked="false"
-        android:theme="@style/PushSwitch" />
-    </FrameLayout>
-    <View
-        android:id="@+id/line3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="12dp"
-        android:background="#B5E1F1" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="21dp"
-        android:text="기타"
-        android:textColor="@color/darkgrey"
-        android:textSize="20dp" />
-    <TextView
-        android:id="@+id/logoutTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:text="로그아웃"
-        android:textColor="@color/black"
-        android:textSize="15dp" />
-    <View
-        android:id="@+id/line4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="12dp"
-        android:background="#B5E1F1" />
-
-    <TextView
-        android:id="@+id/app_infomation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="14dp"
-        android:text="앱 정보"
-        android:textColor="@color/darkgrey"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/ourTeamInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="25dp"
-        android:text="Developed by 김예찬, 김윤호, 민지원, 박민석, 조연겸\n\nMajoring in Software at Gachon University" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

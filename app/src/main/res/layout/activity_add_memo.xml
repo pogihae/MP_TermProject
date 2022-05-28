@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".activity.board.memo.AddMemoActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/sky_blue"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white" />
 
     <EditText
         android:id="@+id/add_title_memo"
@@ -51,14 +50,14 @@
         android:id="@+id/submit_memo_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_below="@+id/add_content_memo"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/sky_blue"
-        android:translationZ="5dp"
         android:elevation="10dp"
         android:stateListAnimator="@null"
-        android:text="작성 완료" />
+        android:text="작성 완료"
+        android:translationZ="5dp" />
 
 
 </RelativeLayout>

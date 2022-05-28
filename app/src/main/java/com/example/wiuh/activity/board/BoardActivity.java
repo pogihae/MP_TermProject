@@ -25,7 +25,6 @@ import com.example.wiuh.R;
 import com.example.wiuh.WifiInfo;
 import com.example.wiuh.activity.board.memo.AddMemoActivity;
 import com.example.wiuh.activity.board.post.AddPostActivity;
-import com.example.wiuh.activity.setup.NotificationHistoryActivity;
 import com.example.wiuh.activity.setup.PersonalSetupActivity;
 import com.example.wiuh.activity.setup.SetupActivity;
 import com.example.wiuh.activity.sign.LoginActivity;
@@ -321,9 +320,6 @@ public class BoardActivity extends AppCompatActivity {
 
         if (itemId == R.id.logout) {
             FirebaseUtil.logout(this);
-        } else if (itemId == R.id.goNotification) {
-            Intent intent = new Intent(this, NotificationHistoryActivity.class);
-            startActivity(intent);
         } else if (itemId == R.id.personalSettings) {
             Intent intent = new Intent(this, PersonalSetupActivity.class);
             startActivity(intent);

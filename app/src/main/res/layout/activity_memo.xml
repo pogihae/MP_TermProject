@@ -21,8 +21,8 @@
         android:id="@+id/memoBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/memoTitle"
         android:layout_above="@+id/bottomlayout"
+        android:layout_below="@+id/memoTitle"
         android:background="@drawable/blue_border"
         android:paddingLeft="15dp"
         android:paddingTop="20dp"
@@ -30,29 +30,29 @@
         android:textColor="@color/black"
         android:textSize="20dp" />
 
-        <LinearLayout
-            android:id="@+id/bottomlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp">
+    <LinearLayout
+        android:id="@+id/bottomlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp">
 
-            <Button
-                android:id="@+id/del_Button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="4.5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="300dp"
-                android:background="@drawable/ic_baseline_delete_24" />
+        <Button
+            android:id="@+id/del_Button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="4.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="300dp"
+            android:background="@drawable/ic_baseline_delete_24" />
 
-            <Button
-                android:id="@+id/mod_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_baseline_edit_24" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/mod_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_baseline_edit_24" />
+    </LinearLayout>
 
 
 </RelativeLayout>

@@ -29,7 +29,7 @@ public class PersonalSetupActivity extends AppCompatActivity {
         nickname.setText(nick);
 
         Button editNickname = findViewById(R.id.editNickname);
-        TextView textView=findViewById(R.id.logoutTextview);
+        TextView textView = findViewById(R.id.logoutTextview);
 
         editNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class PersonalSetupActivity extends AppCompatActivity {
                         .setDisplayName(nick)
                         .build();
                 FirebaseUtil.getCurUser().updateProfile(profileUpdates);
-                ToastUtil.showText(getApplicationContext(),"닉네임 변경 완료");
+                ToastUtil.showText(getApplicationContext(), "닉네임 변경 완료");
             }
         });
 
@@ -52,7 +52,7 @@ public class PersonalSetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUtil.logout(getApplicationContext());
-                ToastUtil.showText(getApplicationContext(),"로그아웃");
+                ToastUtil.showText(getApplicationContext(), "로그아웃");
             }
         });
 

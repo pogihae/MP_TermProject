@@ -13,7 +13,7 @@ import com.example.wiuh.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ModifyPostActivity extends AppCompatActivity {
-    static final int RS_SUC = 10;
+    public static final int RS_SUC = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

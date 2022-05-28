@@ -23,6 +23,6 @@
         android:minHeight="48dp"
         app:boxBackgroundColor="@color/sky_blue"
         app:boxBackgroundMode="filled"
-        app:spinnerMode="bottomsheet" />
+        app:spinnerMode="dialog" />
 
 </androidx.appcompat.widget.Toolbar>

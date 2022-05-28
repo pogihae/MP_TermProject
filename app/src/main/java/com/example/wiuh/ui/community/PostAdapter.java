@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wiuh.R;
-import com.example.wiuh.activity.board.post.PostDetailActivity;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.ui.BaseDiffCallback;
 
@@ -72,7 +71,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             title.setText(p.title);
             body.setText(p.body);
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(context, PostDetailActivity.class);
+                Intent intent = new Intent(context, com.example.wiuh.activity.board.post.PostDetailActivity.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("title", p.title);

@@ -12,8 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wiuh.R;
+import com.example.wiuh.activity.board.post.ModifyPostActivity;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.util.FirebaseUtil;
+import com.example.wiuh.util.ToastUtil;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -42,7 +45,7 @@ public class PostDetailActivity extends AppCompatActivity {
         bulletinTitle.setText(title);
         bulletinBody.setText(body);
         bulletinAuth.setText(author);
-        bulletinLike.setText(like.toString());
+        bulletinLike.setText("Liked: "+like.toString());
 
         Button likeButton = findViewById(R.id.btn_LikePost);
         likeButton.setVisibility(View.INVISIBLE);
@@ -57,15 +60,22 @@ public class PostDetailActivity extends AppCompatActivity {
         }
 
         likeButton.setOnClickListener(view -> {
-            if (!likeButton.isSelected())
+            FirebaseUser curUser = FirebaseUtil.getCurUser();
+            Post post;
+            if (!likeButton.isSelected()) {
                 like.set(like.get() + 1);
-            else
+                post = new Post(uid, title, author, body, like.get());
+                FirebaseUtil.getPostRef().child(key).setValue(post);
+                bulletinLike.setText("Liked: "+like.get().toString());
+                //ToastUtil.showText(this, "좋아요");
+                likeButton.setSelected(true);
+            } else {
                 like.set(like.get() - 1);
-
-            Post post = new Post(uid, title, author, body, like.get());
-            FirebaseUtil.getPostRef().child(key).setValue(post);
-            bulletinLike.setText(like.get());
-            likeButton.setSelected(false);
+                post = new Post(uid, title, author, body, like.get());                FirebaseUtil.getPostRef().child(key).setValue(post);
+                bulletinLike.setText("Liked: "+like.get().toString());
+                //ToastUtil.showText(this, "좋아요 취소");
+                likeButton.setSelected(false);
+            }
         });
 
         delButton.setOnClickListener(view -> {

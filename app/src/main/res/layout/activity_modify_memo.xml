@@ -23,9 +23,9 @@
             android:id="@+id/mod_memoBody"
             android:layout_width="match_parent"
             android:layout_height="580dp"
+            android:gravity="top"
             android:paddingLeft="20dp"
             android:text="Body"
-            android:gravity="top"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
