@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/sky_blue" />
+        android:background="#B5E1F1" />
 
 
 
@@ -92,16 +92,45 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
         android:layout_gravity="right"
         android:checked="false"
         android:theme="@style/PushSwitch" />
     </FrameLayout>
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="#B5E1F1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="21dp"
+        android:text="기타"
+        android:textColor="@color/darkgrey"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="로그아웃"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+    <View
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="#B5E1F1" />
 
     <TextView
         android:id="@+id/app_infomation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="14dp"
         android:text="앱 정보"

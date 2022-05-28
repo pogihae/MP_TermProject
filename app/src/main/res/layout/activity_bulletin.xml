@@ -5,10 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.post.PostDetailActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
 
         <TextView
             android:id="@+id/bulletinTitle"
@@ -25,6 +22,7 @@
             android:id="@+id/bulletinAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/bulletinTitle"
             android:padding="15dp"
             android:text="Auth"
             android:textColor="@color/black"
@@ -34,51 +32,55 @@
             android:id="@+id/bulletinBody"
             android:layout_width="match_parent"
             android:layout_height="490dp"
+            android:layout_below="@+id/bulletinAuth"
+            android:layout_above="@+id/bottomlayout"
+            android:background="@drawable/blue_border"
             android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:text="Body"
-            android:background="@drawable/blue_border"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
         <LinearLayout
+            android:id="@+id/bottomlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-        <Button
-            android:id="@+id/btn_delpost"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_baseline_restore_from_trash_24"
-            />
-        <Button
-            android:id="@+id/btn_LikePost"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_baseline_favorite_24"
-            android:layout_marginLeft="110dp"
-            />
-        <TextView
-            android:id="@+id/bulletinLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="likes"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            />
-        <Button
-            android:id="@+id/btn_modpost"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_baseline_edit_24"
-            android:layout_marginLeft="100dp"
-            />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp">
+
+            <Button
+                android:id="@+id/btn_delpost"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_delete_24" />
+
+            <Button
+                android:id="@+id/btn_LikePost"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_favorite_24" />
+
+            <TextView
+                android:id="@+id/bulletinLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="likes"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_modpost"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_baseline_edit_24" />
 
         </LinearLayout>
 
-    </LinearLayout>
+
 </RelativeLayout>
