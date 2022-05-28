@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,7 @@ public class SetupFragment extends Fragment {
         nickname.setText(nick);
 
         Button editNickname = root.findViewById(R.id.editNickname);
+        TextView logoutTextView = root.findViewById(R.id.logoutTextview);
 
         editNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,13 @@ public class SetupFragment extends Fragment {
                         .build();
                 FirebaseUtil.getCurUser().updateProfile(profileUpdates);
                 ToastUtil.showText(getContext(),"닉네임 변경 완료");
+            }
+        });
+        logoutTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtil.logout(getContext());
+                ToastUtil.showText(getContext(),"로그아웃");
             }
         });
         return root;
