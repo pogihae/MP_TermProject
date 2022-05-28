@@ -1,5 +1,6 @@
 package com.example.wiuh.activity.board;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -101,7 +103,7 @@ public class BoardActivity extends AppCompatActivity {
         //nickname 설정 및 표시
         String nickname = FirebaseUtil.getCurUser().getDisplayName();
         if (nickname == null || nickname.matches("")) startSetUpActivity();
-        else ToastUtil.showText(this, nickname + " 환영");
+        else ToastUtil.showText(this, nickname + " 님 환영합니다");
 
         FloatingActionButton btnAddPost = findViewById(R.id.action_a);
         FloatingActionButton btnAddMemo = findViewById(R.id.action_b);
@@ -182,11 +184,15 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void notifyContent(String content) {
+
+        Context context = getApplicationContext();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, LoginActivity.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle("WIUH")
                 .setContentText(content)
+                .setColor(ContextCompat.getColor(context, R.color.black))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, builder.build());

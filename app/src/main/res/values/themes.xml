@@ -13,9 +13,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowSplashScreenBackground">@color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/avd_anim</item>
-        <item name="android:windowSplashScreenAnimationDuration">2000</item>
     </style>
 
 
@@ -23,6 +20,10 @@
         <item name="colorControlActivated">@color/app_blue</item>
         <item name="colorSwitchThumbNormal">#f1f1f1</item>
         <item name="android:colorForeground">#42221f1f</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.WiUH">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
 
