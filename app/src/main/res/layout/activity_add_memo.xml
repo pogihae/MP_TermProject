@@ -3,30 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.board.memo.AddMemoActivity">
+    tools:context=".activity.memo.AddMemoActivity">
 
-    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/sky_blue"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white"/>
 
     <EditText
         android:id="@+id/add_title_memo"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="6dp"
         android:background="#faf7f7"
         android:elevation="20dp"
         android:hint="이곳에 제목을 입력해주세요"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
         android:paddingTop="12dp"
-        android:paddingEnd="20dp"
         android:paddingBottom="7dp"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -38,16 +37,13 @@
         android:layout_width="360dp"
         android:layout_height="460dp"
         android:layout_below="@+id/add_title_memo"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:background="#faf7f7"
         android:elevation="20dp"
-        android:gravity="top|start"
+        android:gravity="top|left"
         android:hint="이곳에 내용을 입력해주세요"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
         android:paddingTop="15dp"
-        android:paddingEnd="20dp"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
@@ -55,14 +51,14 @@
         android:id="@+id/submit_memo_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/add_content_memo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
         android:backgroundTint="@color/sky_blue"
+        android:translationZ="5dp"
         android:elevation="10dp"
         android:stateListAnimator="@null"
-        android:text="작성 완료"
-        android:translationZ="5dp" />
+        android:text="작성 완료" />
 
 
 </RelativeLayout>

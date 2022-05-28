@@ -35,6 +35,7 @@ import com.example.wiuh.ui.community.CommunityFragment;
 import com.example.wiuh.ui.community.PostAdapter;
 import com.example.wiuh.ui.memo.MemoAdapter;
 import com.example.wiuh.ui.memo.MemoFragment;
+import com.example.wiuh.ui.setup.SetupFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -232,7 +233,7 @@ public class BoardActivity extends AppCompatActivity {
             public Fragment createFragment(int position) {
                 if (position == 0) return new MemoFragment(memoAdapter);
                 else if (position == 1) return new CommunityFragment(postAdapter);
-                return new Fragment();
+                else return new SetupFragment();
             }
 
             @Override
