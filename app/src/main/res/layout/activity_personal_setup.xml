@@ -13,12 +13,18 @@
         android:layout_height="200dp"
         android:layout_marginStart="27dp"
         android:layout_marginTop="27dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="25dp"
         android:text="Wi \nAre U\nHere?"
-        android:textColor="@color/app_blue"
+        android:textColor="@color/sky_blue"
         android:textSize="50dp"
         android:textStyle="bold" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="3dp"
+        android:text="Nickname"
+        android:textColor="@color/darkgrey" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +35,7 @@
             android:layout_width="186dp"
             android:layout_height="40dp"
             android:layout_marginLeft="25dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/edittext_border"
             android:gravity="center"
             android:textColor='@color/black'
@@ -43,7 +49,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/nickname"
-            android:backgroundTint="@color/app_blue"
+            android:backgroundTint="@color/sky_blue"
             android:text="Change"
             android:textSize="15dp" />
 
@@ -53,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/app_blue" />
+        android:background="@color/sky_blue" />
 
 
 
@@ -86,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="60dp"
         android:layout_gravity="right"
         android:checked="false"
         android:theme="@style/PushSwitch" />
