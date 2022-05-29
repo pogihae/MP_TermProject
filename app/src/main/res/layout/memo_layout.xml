@@ -42,14 +42,14 @@
                 android:id="@+id/memo_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nanum"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="20dp"
                 android:text="This is content"
-                android:fontFamily="@font/cafe"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="25sp" />
         </LinearLayout>
 
 

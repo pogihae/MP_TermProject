@@ -5,5 +5,9 @@
         android:fontWeight="400"
         android:font="@font/cafe"/>
 
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/nanum"/>
+
 
 </font-family>

@@ -17,17 +17,17 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe"
             android:textColor="#000"
             android:textSize="24sp"
-            android:fontFamily="@font/cafe"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
             android:fontFamily="@font/cafe"
+            android:textColor="@color/gray"
             android:textSize="16sp" />
 
 
