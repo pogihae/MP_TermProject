@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:textSize="24sp"
+            android:fontFamily="@font/cafe"
             android:textStyle="bold" />
 
         <TextView
@@ -26,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray"
+            android:fontFamily="@font/cafe"
             android:textSize="16sp" />
 
 

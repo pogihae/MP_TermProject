@@ -29,6 +29,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginBottom="3dp"
             android:text="Nickname"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/darkgrey" />
 
         <RelativeLayout
@@ -41,6 +42,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginBottom="20dp"
+                android:fontFamily="@font/cafe"
                 android:background="@drawable/edittext_border"
                 android:gravity="center"
                 android:textColor='@color/black'
@@ -56,6 +58,7 @@
                 android:layout_toRightOf="@id/nickname"
                 android:backgroundTint="@color/sky_blue"
                 android:text="Change"
+                android:fontFamily="@font/cafe"
                 android:textSize="15dp" />
 
         </RelativeLayout>
@@ -75,6 +78,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="21dp"
             android:text="알림설정"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
@@ -89,6 +93,7 @@
                 android:layout_marginStart="27dp"
 
                 android:text="푸시알림"
+                android:fontFamily="@font/cafe"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
@@ -117,6 +122,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="21dp"
             android:text="기타"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
@@ -126,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:text="로그아웃"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -144,6 +151,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="14dp"
             android:text="앱 정보"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
@@ -154,6 +162,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="25dp"
+            android:fontFamily="@font/cafe"
             android:text="Developed by 김예찬, 김윤호, 민지원, 박민석, 조연겸\n\nMajoring in Software at Gachon University" />
 
         <TextView

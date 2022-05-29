@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:text="Title"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black"
             android:textSize="25dp" />
 
@@ -26,6 +27,7 @@
             android:gravity="top"
             android:paddingLeft="20dp"
             android:text="Body"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -38,14 +40,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
-                android:text="수정" />
+                android:text="수정"
+                android:fontFamily="@font/cafe"/>
 
             <Button
                 android:id="@+id/btn_cancel_mod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="취소" />
+                android:text="취소"
+                android:fontFamily="@font/cafe"/>
         </LinearLayout>
 
     </LinearLayout>

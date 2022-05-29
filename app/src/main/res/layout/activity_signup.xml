@@ -13,6 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="회원가입"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </FrameLayout>
@@ -29,6 +30,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:text="이메일"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black" />
 
         <LinearLayout
@@ -63,6 +65,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:text="비밀번호"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black" />
 
         <RelativeLayout
@@ -93,6 +96,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:text="비밀번호 확인"
+            android:fontFamily="@font/cafe"
             android:textColor="@color/black" />
 
         <RelativeLayout
@@ -141,6 +145,7 @@
             android:onClick="clickSignin_confirm"
             android:padding="10dp"
             android:text="회원가입 확인"
+            android:fontFamily="@font/cafe"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 
