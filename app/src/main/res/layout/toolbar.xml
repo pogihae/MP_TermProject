@@ -22,7 +22,8 @@
         android:fontFamily="@font/cafe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="48dp"
+        android:theme="@style/SpinnerTheme"
+
         app:boxBackgroundColor="@color/sky_blue"
         app:boxBackgroundMode="filled"
         app:spinnerMode="dialog" />
