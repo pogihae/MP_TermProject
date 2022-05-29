@@ -74,7 +74,7 @@ public class MemoDetailActivity extends AppCompatActivity {
                 title.setText(resultTitle);
                 body.setText(resultBody);
 
-                Toast.makeText(getApplicationContext(), resultTitle + resultBody, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), resultTitle + resultBody, Toast.LENGTH_SHORT).show();
             } else {   // RESULT_CANCEL
                 Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
             }

@@ -80,7 +80,7 @@
             android:id="@+id/btn_modpost"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_baseline_edit_24" />
 
