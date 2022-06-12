@@ -29,7 +29,7 @@ Use WIUH to organize the stuff you need to get done:
 
 ## Screens
 
-<img alt='Screen 1' src='https://raw.githubusercontent.com/abicelis/Remindy/master/graphics/play_store/FeatureGraphic.png'/>
+
 
 ## Code dependencies
 
