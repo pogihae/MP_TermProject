@@ -51,4 +51,4 @@ This Project uses external dependencies and SDK's
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE]() file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ua1it/MP_TermProject/master/LICENSE) file for details
