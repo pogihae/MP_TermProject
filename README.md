@@ -29,6 +29,13 @@ Use WIUH to organize the stuff you need to get done:
 
 ## Screens
 
+![screenWIUH2](https://user-images.githubusercontent.com/76048647/173221085-7130d5bf-4ca7-43c2-8f0a-fb1f3eeba5a3.png)
+
+
+
+## Demo Video
+[video link]()
+
 
 
 ## Code dependencies
@@ -40,9 +47,6 @@ This Project uses external dependencies and SDK's
 * [permissions-ui](https://github.com/warting/permissions-ui) - Permission ui for background location
 * [Meterial-spinner](https://github.com/tiper/MaterialSpinner) - Spinner for wifi list
 
-## Software used
-
-* [Android Studio IDE](https://developer.android.com/studio/index.html) - IDE
 
 ## Authors
 
