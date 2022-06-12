@@ -1,11 +1,14 @@
 # WIUH #
 
-Set and track as many tasks as you want, be them long term or short. Organize your life goals and TODO lists with WIUH! Add memos and more to your Tasks. WIUH has you covered with -for now- three types of features:
+Set and track as many tasks as you want, be them long term or short. Organize your life goals and TODO lists with WIUH! Add memos and more to your Tasks. 
+
+
+WIUH has you covered with -for now- three types of features:
 
 - Community. For talking with others.
-- Location-based reminders. WIUH will notify you about these whenever you get a set place -like your Home, or your Work- anywhere can use wifi!
+- Location-based reminders. WIUH will notify you whenever you get a set place anywhere can use wifi!
 
-Remindy allows for rich multimedia to be attached to any Task. Some of the available attachments include: Lists, Text, Images, Recordings and Links!
+
 
 Use WIUH to organize the stuff you need to get done:
 
