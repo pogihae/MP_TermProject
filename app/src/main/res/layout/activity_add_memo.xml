@@ -22,8 +22,8 @@
         android:layout_marginBottom="6dp"
         android:background="#faf7f7"
         android:elevation="20dp"
-        android:hint="이곳에 제목을 입력해주세요"
         android:fontFamily="@font/cafe"
+        android:hint="이곳에 제목을 입력해주세요"
         android:paddingLeft="20dp"
         android:paddingTop="12dp"
         android:paddingBottom="7dp"
@@ -40,9 +40,9 @@
         android:layout_marginLeft="25dp"
         android:background="#faf7f7"
         android:elevation="20dp"
+        android:fontFamily="@font/cafe"
         android:gravity="top|left"
         android:hint="이곳에 내용을 입력해주세요"
-        android:fontFamily="@font/cafe"
         android:paddingLeft="20dp"
         android:paddingTop="15dp"
         android:textColor="@color/black"
@@ -57,9 +57,9 @@
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/sky_blue"
         android:elevation="10dp"
+        android:fontFamily="@font/cafe"
         android:stateListAnimator="@null"
         android:text="작성 완료"
-        android:fontFamily="@font/cafe"
         android:translationZ="5dp" />
 
 

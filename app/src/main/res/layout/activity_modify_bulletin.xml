@@ -14,9 +14,9 @@
             android:id="@+id/mod_bulletinTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cafe"
             android:paddingLeft="20dp"
             android:text="Title"
-            android:fontFamily="@font/cafe"
             android:textColor="@color/black"
             android:textSize="25dp" />
 
@@ -24,10 +24,10 @@
             android:id="@+id/mod_bulletinBody"
             android:layout_width="match_parent"
             android:layout_height="580dp"
+            android:fontFamily="@font/cafe"
             android:gravity="top"
             android:paddingLeft="20dp"
             android:text="Body"
-            android:fontFamily="@font/cafe"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -40,16 +40,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="110dp"
-                android:text="수정"
-                android:fontFamily="@font/cafe"/>
+                android:fontFamily="@font/cafe"
+                android:text="수정" />
 
             <Button
                 android:id="@+id/btn_cancel_mod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="취소"
-                android:fontFamily="@font/cafe"/>
+                android:fontFamily="@font/cafe"
+                android:text="취소" />
         </LinearLayout>
 
     </LinearLayout>

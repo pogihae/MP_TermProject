@@ -1,9 +1,7 @@
 package com.example.wiuh.activity.board;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,12 +14,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.wiuh.R;
 import com.example.wiuh.WifiInfo;
@@ -29,7 +30,6 @@ import com.example.wiuh.activity.board.memo.AddMemoActivity;
 import com.example.wiuh.activity.board.post.AddPostActivity;
 import com.example.wiuh.activity.setup.PersonalSetupActivity;
 import com.example.wiuh.activity.setup.SetupActivity;
-import com.example.wiuh.activity.sign.LoginActivity;
 import com.example.wiuh.model.Memo;
 import com.example.wiuh.model.Post;
 import com.example.wiuh.ui.community.CommunityFragment;
@@ -39,8 +39,8 @@ import com.example.wiuh.ui.memo.MemoFragment;
 import com.example.wiuh.ui.setup.SetupFragment;
 import com.example.wiuh.util.FirebaseUtil;
 import com.example.wiuh.util.ToastUtil;
+import com.example.wiuh.util.WifiWorker;
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.github.pwittchen.reactivewifi.ReactiveWifi;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -53,9 +53,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /*
  * MainActivity
@@ -91,13 +90,9 @@ public class BoardActivity extends AppCompatActivity {
         );
 
         initListener();                 //firebase listener init
-
         startWifiInfoSubscription();    //observe wifi information change
-
         setUpSSIDList();                //get starred SSID list from DB
-
         setUpBot();                     //set up navigation bar
-
         setUpSpinner();
 
         //nickname 설정 및 표시
@@ -154,48 +149,22 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     private void startWifiInfoSubscription() {
-        ReactiveWifi.observeWifiAccessPointChanges(this)
-                .subscribeOn(AndroidSchedulers.from(Looper.myLooper()))
-                .subscribe(wifiInfo -> {
-                    WifiInfo.setInfo(wifiInfo.getSSID(), wifiInfo.getBSSID());
-                    //wifi 정보 action bar 표시
-                    spinnerList.add(WifiInfo.getSSID());
-                    ssidToMac.put(wifiInfo.getSSID(), wifiInfo.getBSSID());
+        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
 
-                    FirebaseUtil.getMemoRef().addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                int memoCnt = 0;
-                                for (Object ignored : snapshot.getChildren())
-                                    memoCnt++;
-                                notifyContent(wifiInfo.getSSID() + "에 " + memoCnt + "개의 메모가 존재해요");
-                            }
-                        }
+        Data.Builder userInfo = new Data.Builder();
+        userInfo.putString("USER", FirebaseUtil.getCurUser().getUid());
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                    FirebaseUtil.setListener(postListener, memoListener);
-                }).isDisposed();
-    }
-
-    private void notifyContent(String content) {
-
-        Context context = getApplicationContext();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, LoginActivity.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_stat_name)
-                .setContentTitle("WIUH")
-                .setContentText(content)
-                .setColor(ContextCompat.getColor(context, R.color.black))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
+        PeriodicWorkRequest pr = new PeriodicWorkRequest
+                .Builder(WifiWorker.class, 15, TimeUnit.MINUTES)
+                .setInputData(userInfo.build())
+                .setConstraints(
+                        new Constraints.Builder()
+                                .setRequiredNetworkType(NetworkType.CONNECTED)
+                                .setRequiredNetworkType(NetworkType.UNMETERED)
+                                .build())
+                .build();
+        workManager.enqueueUniquePeriodicWork("WifiWorker",
+                ExistingPeriodicWorkPolicy.REPLACE, pr);
     }
 
     /*set up*/

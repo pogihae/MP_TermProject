@@ -43,6 +43,10 @@ public class FirebaseUtil {
                 .child(WifiInfo.getMAC());
     }
 
+    public static DatabaseReference getUserRef() {
+        return rootRef.child("POST");
+    }
+
     public static DatabaseReference getMemoRef() {
         return rootRef.child("MEMO")
                 .child(getCurUser().getUid())

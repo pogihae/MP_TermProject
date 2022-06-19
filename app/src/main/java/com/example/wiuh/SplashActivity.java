@@ -1,12 +1,10 @@
 package com.example.wiuh;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
-import com.example.wiuh.activity.board.BoardActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.wiuh.activity.sign.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {

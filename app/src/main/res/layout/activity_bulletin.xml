@@ -10,11 +10,11 @@
         android:id="@+id/bulletinTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cafe"
         android:paddingLeft="15dp"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
         android:text="Title"
-        android:fontFamily="@font/cafe"
         android:textColor="@color/black"
         android:textSize="40dp" />
 
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bulletinTitle"
+        android:fontFamily="@font/cafe"
         android:padding="15dp"
         android:text="Auth"
-        android:fontFamily="@font/cafe"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
@@ -36,10 +36,10 @@
         android:layout_above="@+id/bottomlayout"
         android:layout_below="@+id/bulletinAuth"
         android:background="@drawable/blue_border"
+        android:fontFamily="@font/cafe"
         android:paddingLeft="15dp"
         android:paddingTop="20dp"
         android:text="Body"
-        android:fontFamily="@font/cafe"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
@@ -71,8 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="likes"
             android:fontFamily="@font/cafe"
+            android:text="likes"
             android:textColor="@color/black"
             android:textStyle="bold" />
 

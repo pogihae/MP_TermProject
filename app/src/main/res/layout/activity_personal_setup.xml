@@ -28,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="3dp"
-            android:text="Nickname"
             android:fontFamily="@font/cafe"
+            android:text="Nickname"
             android:textColor="@color/darkgrey" />
 
         <RelativeLayout
@@ -42,8 +42,8 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/cafe"
                 android:background="@drawable/edittext_border"
+                android:fontFamily="@font/cafe"
                 android:gravity="center"
                 android:textColor='@color/black'
                 android:textSize="15dp" />
@@ -57,8 +57,8 @@
                 android:layout_marginTop="2dp"
                 android:layout_toRightOf="@id/nickname"
                 android:backgroundTint="@color/sky_blue"
-                android:text="Change"
                 android:fontFamily="@font/cafe"
+                android:text="Change"
                 android:textSize="15dp" />
 
         </RelativeLayout>
@@ -77,8 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="21dp"
-            android:text="알림설정"
             android:fontFamily="@font/cafe"
+            android:text="알림설정"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
@@ -92,8 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
 
-                android:text="푸시알림"
                 android:fontFamily="@font/cafe"
+                android:text="푸시알림"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
@@ -121,8 +121,8 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="21dp"
-            android:text="기타"
             android:fontFamily="@font/cafe"
+            android:text="기타"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
@@ -131,8 +131,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
-            android:text="로그아웃"
             android:fontFamily="@font/cafe"
+            android:text="로그아웃"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -150,8 +150,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="14dp"
-            android:text="앱 정보"
             android:fontFamily="@font/cafe"
+            android:text="앱 정보"
             android:textColor="@color/darkgrey"
             android:textSize="20dp" />
 
